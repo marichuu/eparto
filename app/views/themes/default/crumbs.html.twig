@@ -1,0 +1,23 @@
+<div class="crumbs">
+    <ul id="breadcrumbs" class="breadcrumb"> 
+        <li><a href="{{ site_url("home/home") }}">Home</a></li>
+        {% block breadcrumb %}
+            <li class="active"><a href="{{ site_url("home/home") }}" title="">Dashboard</a></li>
+        {% endblock %} 
+        
+    </ul>
+
+    <ul class="alt-buttons">
+        <li><a href="#" title=""><i class="icon-signal"></i><span>Stats</span></a></li>
+        <li><a href="#" title=""><i class="icon-comments"></i><span>Mailbox <strong>(+16)</strong></span></a></li>
+                    <li class="dropdown"><a href="#" title="" data-toggle="dropdown"><i class="icon-user"></i><span> 
+                                    Bonjour,  
+                </span> <strong>{{ session.userdata.user.firstName }}</strong></a>
+                <ul class="dropdown-menu pull-right"> 
+                    <li><a href="#" title=""><i class="icon-cog"></i>Settings</a></li>
+                    <li><a href="{{ site_url("system/auth/logout") }}" title=""><i class="icon-off"></i>Deconnexion</a></li>
+                    <li><a href="{{ site_url("system/auth/reset") }}" title=""><i class="icon-off"></i>Changement de mot de passe</a></li>
+                </ul>
+        </li>
+    </ul>
+</div>

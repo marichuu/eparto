@@ -1,0 +1,17 @@
+
+<div id="top">
+    <div class="fixed">
+        {% if session.userdata.user != null %} 
+        <a href="{{ site_url("home/home")}}" title="" class="logo"><img src="{{ img_url("logo.png") }}" alt="" /></a>
+        <ul class="top-menu"> 
+            <li><a class="fullview"></a></li>
+				<li><a class="showmenu"></a></li>
+                <li class="dropdown">
+                        <a href="{{ site_url("home/home") }}" class="user-menu" ><img src="{{ img_url("home.png") }}" alt="" /><span>{{ "Accueil"}} </span></a> 
+                </li>
+                
+        </ul>
+        {% endif %} 
+    </div>
+</div>
+

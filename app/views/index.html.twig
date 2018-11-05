@@ -1,0 +1,13 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+{{"Utilisateurs"}}  {{ parent() }}
+{% endblock %}
+{% block breadcrumb %}  
+        <li class="active"><a href="{{ site_url("users") }}" title="">{{"Utilisateurs"}}</a></li> 
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+  {{"welcome"}}
+</div>
+{% endblock %}

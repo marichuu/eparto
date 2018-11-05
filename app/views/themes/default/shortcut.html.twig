@@ -1,0 +1,41 @@
+<!-- Sidebar -->
+{% if session.userdata.user != null %}
+		<!-- Sidebar -->
+		<div id="sidebar">
+
+			<div class="sidebar-tabs">
+		        <ul class="tabs-nav two-items">
+		            <li><a href="#general" title=""><i class="icon-reorder"></i></a></li>
+		            <li><a href="#stuff" title=""><i class="icon-cogs"></i></a></li>
+		        </ul>
+
+		        <div id="general">
+
+			        
+				    <!-- Main navigation -->
+			        <ul class="navigation widget">
+			            <li><a href="{{site_url('home/home')}}" title=""><i class="icon-home"></i>Tableau de bord</a></li>
+			            <li class="active"><a href="#" title="" class="expand" id="current"><i class="icon-reorder"></i>Form elements<strong>3</strong></a>
+			                <ul>
+			                    <li><a href="#" title="">Femmes</a></li>
+			                    <li><a href="wysiwyg.html" title="" class="current">Risque</a></li>
+			                    <li><a href="form_wizards.html" title="">Examen</a></li>
+			                </ul>
+			            </li>
+                        </div>   
+
+		        <div id="stuff">
+
+			        <!-- Datepicker -->
+		        	<div class="widget">
+		        		<h6 class="widget-name"><i class="icon-calendar"></i>Datepicker</h6>
+		                <div class="inlinepicker datepicker-liquid"></div>
+		            </div>
+		            <!-- /datepicker -->
+		        </div>
+
+		    </div>
+		</div>
+		<!-- /sidebar -->
+		{% endif %}
+		<!-- /sidebar -->

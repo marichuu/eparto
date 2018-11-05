@@ -1,0 +1,43 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+{{"Utilisateurs"}}  {{ parent() }}
+{% endblock %}
+{% block breadcrumb %}  
+        <li class="active"><a href="{{ site_url("users") }}" title="">{{"Utilisateurs"}}</a></li> 
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <br>
+    <div class="row">
+        {{ getMessages()|raw }}
+        </div>
+    <div class="widget">
+        <div class="navbar"><div class="navbar-inner"><h6>{{"Utilisateurs"}}</h6>
+                <a href="{{ site_url("users/add") }}" title="">
+                    <button type="button" class="btn btn-primary pull-right"><b class="icon-plus"></b>Nouveau</button></a></div></div>
+        <div class="table-overflow">
+            <table class="table table-striped table-bordered" id="data-table">
+                <thead>
+                    <tr>
+                        <th>Nom et prenom</th>
+                        <th>Nom d'utlisateur</th>
+                        <th>Profil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                
+                    <tr>
+                        <td><a href="{{ site_url("users/edit") }}/?xl={{ user.id|crypter }}" title="">{{ user|title }}</a></td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.profilsArray }}</td>
+                    </tr>
+                
+                {% endfor %}  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

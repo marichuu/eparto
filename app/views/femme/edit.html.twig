@@ -1,0 +1,74 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+{{Etudiant}}  {{ parent() }}
+{% endblock %}
+{% block breadcrumb %}  
+        <li class="active"><a href="{{ site_url("etudiant") }}" title="">{{"Etudiant"}}</a></li> 
+{% endblock %}
+
+{% block content %}
+<div class="wrapper"> 
+    <br>
+    
+    <div class="row">
+        {{ getMessages()|raw }}
+    </div>
+    <div class="widget">
+        <div class="navbar"><div class="navbar-inner"><h6>{{"Etudiant"}} / {{"Nouveau"}}</h6></div></div>
+        <div class="well row-fluid">
+            <form id="validate" class="form-horizontal" action="{{ site_url("etudiant/update") }}" method="post"> 
+               
+                <div class="control-group">
+                    <label class="control-label">{{"Matricule"}}: <span class="text-error">*</span></label>
+                    <div class="controls">
+                        <input type="text" value="{{etudiant.matricule}}" class="validate[required] span4" name="matricule" id="matricule" readonly/>
+			<input type="hidden" value="{{ etudiant.id }}"  name="id" id="id"/>
+                        <input type="hidden" value="{{ etudiant.matricule }}"  name="matricule_old"/>
+                    </div>
+                </div>
+ 		<div class="control-group">
+                    <label class="control-label">{{"Nom"}}: <span class="text-error">*</span></label>
+                    <div class="controls">
+                        <input type="text" value="{{etudiant.nom}}" class="validate[required] span4" name="nom" id="nom"/>
+                    </div>
+                </div>
+ 		<div class="control-group">
+                    <label class="control-label">{{"Prenom"}}: <span class="text-error">*</span></label>
+                    <div class="controls">
+                        <input type="text" value="{{etudiant.prenom}}" class="validate[required] span4" name="prenom" id="prenom"/>
+                    </div>
+                </div>
+		<div class="control-group">
+                    <label class="control-label">Classe</label>
+                    <div class="controls">
+                        <select data-placeholder="Choose a classe..." id="clear-results" name="classe" class="">
+                            <option value=""></option> 
+                        {% for classe in classes %}
+                            <option value="{{ classe.id }}" {% if etudiant.classe.id == classe.id%} selected=selected{%endif%}>{{ classe.libelle }}</option>
+                        {% endfor %} 
+                        </select>
+                    </div>             
+                </div>
+		<div class="control-group">
+                    <label class="control-label">Filière</label>
+                    <div class="controls">
+                        <select data-placeholder="Choose a filiere..." id="clear-results" name="filiere" class="">
+                            <option value=""></option> 
+                        {% for filiere in filieres %}
+                            <option value="{{ filiere.id }}" {% if etudiant.filiere.id == filiere.id%} selected=selected{%endif%}>{{ filiere.libelle }}</option>
+                        {% endfor %} 
+                        </select>
+                    </div>             
+                </div>
+                <div class="form-actions align-right">
+                    <button type="submit" class="btn btn-info"><i class="fam-accept"></i>Enregistrer</button>
+                    <a class="btn btn-inverse" href="{{ site_url("etudiant") }}"><i class="fam-table"></i>{{"Liste des matières"}}</a>
+                </div>
+            </form>  
+        </div> 
+    </div>
+</div>     
+
+{% endblock %}
+                        
+                   

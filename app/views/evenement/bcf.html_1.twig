@@ -1,0 +1,65 @@
+<fieldset class="form-horizontal">
+    <div>
+        <div class="navbar"><div class="navbar-inner"><h6>BCF</h6><span style="float: right"><img id="form_gender_close" class="cursor" src="{{ img_url("delete.png") }}" />&nbsp;&nbsp;&nbsp;</span></div></div>
+        <div class="well row-fluid">
+            <div class="control-group">
+                <div class="row-fluid"> 
+                    <label class="control-label">BCF: <span class="text-error">*</span></label>
+                    <div class="controls">
+                        <div class="span4">
+                            <input type="text" name="male" class="gender male validate[required] span12" value = "" />
+                        </div>
+                        <div class="span8">
+                            <label class="control-label50">&nbsp;&nbsp;&nbsp;&nbsp; Female:<span class="text-error">*</span></label>
+                            <div>
+                                <input type="text" name="female" class= "gender female validate[required] span6" value = "{{activity.ValueFemale}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group" {% if indicator.unit.pourcentage == 1%} id="" {%else%} hidden {%endif%}>
+                <label class="control-label">Total :</label>
+                <div class="controls">
+                    <input type="text" value="{{activity.value}}" name="total" class="span4 total"/>
+                </div>
+            </div>
+            <input type="hidden" name="g_period" value="{{periodicity}}" id="g_period">
+            <input type="hidden" name="g_indic" value="{{indicator_id}}" id="g_indic">
+            <div class="form-actions align-right">
+                <span class="btn btn-success cursor" id="button_gender"><i class="fam-accept"></i> OK </span> 
+            </div>
+        </div> 
+    </div>
+</fieldset>
+<script src="{{ js_url('files/ajax.jquery.min') }}"></script>
+<script>
+    $('#form_gender_close').click(function() {
+        $('#popup').hide();
+    });
+     $('.gender').keyup(function(event) {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+        });
+         $('.total').keyup(function(event) {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+        });
+    $('#button_gender').click(function() {
+        var period = $('#g_period').val();
+        var indic = $('#g_indic').val();
+        var valeur = 0;
+        var total = 0;
+        {% if indicator.unit.pourcentage != 1%}
+        $('.gender').each(function() {
+            valeur = jQuery(this).val();
+            if (valeur != '')
+                total = parseInt(total) + parseInt(valeur);
+        });
+        {%else%}
+            total = $('.total').val();
+        {%endif%}
+        $('.gender_' + period + '_' + indic).val(total);
+        $('#male' + period + '_' + indic).val($('.male').val());
+        $('#female' + period + '_' + indic).val($('.female').val());
+        $('#popup').hide();
+    });
+</script>

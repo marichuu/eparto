@@ -1,0 +1,95 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+Utlisateurs  {{ parent() }}
+{% endblock %}
+{% block breadcrumb %} 
+        <li class="active"><a href="{{ site_url("users") }}" title="">Utilisateurs</a></li> 
+{% endblock %}
+{% block content %}
+<div class="wrapper"> 
+    <div class="wrapper_small"> 
+    <br>
+    <div class="row">
+        {{ getMessages()|raw }}
+    </div>
+    <div class="widget"> 
+        <div class="navbar"><div class="navbar-inner"><h6>Utilisateurs / Modification</h6></div></div>
+        <div class="well row-fluid">
+            <form id="validate" class="form-horizontal" action="{{ site_url("users/update") }}" method="post"> 
+                <div class="control-group">
+                    <label class="control-label">Non d'utilisateur: <span class="text-error">*</span></label>
+                    <div class="controls">
+                        <input type="text" value="{{ user.email }}"  {{disable}} class="validate span6" name="email" id="email" readonly/>
+                        <input type="hidden" value="{{ user.id }}"  name="id" id="id"/>
+                        <input type="hidden" value="{{ user.email }}"  name="email_old"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Mot de passe: <span class="text-error">*</span></label>
+                    <div class="controls">
+                        <input type="password" class="validate[minSize[6]] span6" name="password" id="password"  {{disable}} />
+                        <span class="help-block">Must contain at least 6 characters with at least 1 digit and 1 capital letter</span>
+                    </div>
+                </div> 
+                <div class="control-group">
+                    <label class="control-label">Confirmer mot de passe <span class="text-error">*</span></label>
+                    <div class="controls">
+                        <input type="password" class="validate[equals[password]] span6" name="password1" id="password1"  {{disable}} />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Prénoms: <span class="text-error">*</span></label>
+                    <div class="controls">
+                        <input type="text" value="{{ user.firstName }}" class="validate[required,minSize[2]] span6" name="firstName" id="firstName"  {{disable}}/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Nom: <span class="text-error">*</span></label>
+                    <div class="controls">
+                        <input type="text" value="{{ user.lastName }}" class="validate[required,minSize[2]] span6" name="lastName" id="lastName"  {{disable}}/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Téléphone: <span class="text-error"></span></label>
+                    <div class="controls"> 
+                        <div class="input-prepend">
+                                <span class="add-on">+223</span><input id="prependedInput" data-mask="99-99-99-99" name="phone" type="text" value="{{ user.phone }}"  {{disable}} class="validate[minSize[11],maxSize[11],custom[phone]] span6" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Profil:<span class="text-error">*</span></label>
+                    <div class="controls">
+                        <select  name="profil[]" multiple="multiple" class="multiple span3"  {{disable}} >
+                            <option value=""></option> 
+                        {% for p in profils %}
+                            <option value="{{ p.id }}" {% if p in profils_selected %} selected="selected" {% endif %}> {{ p }}</option>
+                        {% endfor %} 
+                        </select>  
+                    </div>   
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Actif:</label>
+                    <div class="controls">
+                        <label class="radio inline"><input type="radio" name="active" id="active1" value="1" class="styled" {% if user.valid =='1' %} checked {% endif %} {{disable}}{{actif}}>Oui</label>
+                        <label class="radio inline"><input type="radio" name="active" id="active2" value="0" class="styled" {% if user.valid =='0' %} checked {% endif %} {% if session.userdata.user.email == user.email %} disabled {% endif %} {{disable}}{{actif}}>Non</label> 
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Bloqué:</label>
+                    <div class="controls">
+                        <label class="radio inline"><input type="radio" name="banir" id="active1" value="1" class="styled" {% if user.banir =='1' %} checked {% endif %} {{disable}}>Oui</label>
+                        <label class="radio inline"><input type="radio" name="banir" id="active2" value="0" class="styled" {% if user.banir =='0' %} checked {% endif %} {{disable}}>Non</label> 
+                    </div>
+                </div>
+                <div class="form-actions align-right">
+                    <button type="reset" class="btn"><i class="fam-arrow-rotate-anticlockwise"></i>Annuler</button>
+                    <button type="submit" class="btn btn-success" id="save_button" name="save_button"><i class="fam-accept"></i>Enregistrer</button>
+                    <a class="btn btn-inverse" href="{{ site_url("users") }}"><i class="fam-table"></i>Liste des utilisateurs</a>
+                </div>
+            </form>  
+        </div> 
+    </div>
+</div>    
+{% endblock %}

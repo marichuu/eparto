@@ -1,0 +1,63 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+    Home  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% set pietable = '' %}
+
+    <div class="wrapper">
+        <br>
+    <div class="row">
+        {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div id="user-stats">
+                <ul class="round-buttons">
+                    <li><div class="depth"><a href="{{site_url('risque/add')}}" title="Ajouter une femme" class="tip"><i class="icon-plus"></i></a></div></li>
+                </ul>
+            </div>
+           <!-- <div id="user-stats">
+                <ul class="round-buttons">
+                    <li><div class="depth"><a href="" title="RSS feed" class="tip"><i class="icon-rss"></i></a></div></li>
+                    <li><div class="depth"><a href="" title="Create new task" class="tip"><i class="icon-tasks"></i></a></div></li>
+                    <li><div class="depth"><a href="" title="Layout settings" class="tip"><i class="icon-cogs"></i></a></div></li>
+                </ul>
+            </div>-->
+            <div class="well row-fluid">
+                <div  id="framework-content">
+                    <div class="tabbable"><!-- default tabs -->
+                        <ul class="nav nav-tabs">
+                            <li id="table1" class="active"><a href="#tab1" data-toggle="tab">{{'En accouchement'}}</a></li>
+                            <li id="table2"><a href="#tab2" data-toggle="tab">{{'Post accouchement'}}</a></li>
+                            <li id="table3" {{disableTabOuput}}><a  href="#tab3" alt="Actif"  data-toggle="tab">{{'Archive'}}</a></li> 
+                        </ul> 
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">                              
+                                <div id="impactCreate">
+                                    <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
+ {% include "evenement/list.data.html.twig" %}
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab2">                               
+                                <div id="outcomeCreate">
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab3" >           
+                                <div id="outputCreate">
+
+                                </div>
+                            </div>
+                            <div class="form-actions align-right">
+                                {#<a href="{{site_url("configuration/resultFramework/reset")}}"  <button type="reset" class="btn"><i class="fam-arrow-rotate-anticlockwise"></i>Reset</button> </a>
+                                 {% if operation == 1%} <button style="display: none;" class="btn btn-danger" id="cancel"><i class="fam-cancel"></i>Cancel</button> {%endif%}#}
+                                <a href="{{site_url("configuration/resultFramework")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Exit'}}</button>  </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+{% endblock %}

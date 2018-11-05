@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <title>E-Partogramme</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{css_url('main')}}">
+        <!--[if IE 8]><link href="css/ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
+        <!--[if IE 9]><link href="css/ie9.css" rel="stylesheet" type="text/css" /><![endif]-->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{css_url('font-awesome')}}">
+        <script src="{{ js_url('files/jquery.min') }}"></script>
+        <script src="{{ js_url('files/jquery-ui.min') }}"></script>
+        <script src="{{ js_url('plugins/forms/jquery.uniform.min') }}"></script>
+        <script src="{{ js_url('files/bootstrap.min') }}"></script>
+        <script src="{{ js_url('files/login') }}"></script>  
+    </head> 
+    <body class="back"> 
+        {% include "themes/default/shortcut.html.twig" %}
+
+        <!-- Login block -->
+        <div class="login">
+            <div class="navbar">
+			 {% if error %}
+
+                <div class="alert alert-error" style="margin-top: 16px;">
+                    <button type="button" class="close" data-dismiss="alert">X</button>
+                    <strong>Erreur! </strong> 
+                        {{ error }}
+                </div>
+        {% endif %}
+                <div class="navbar-inner">
+
+                    <h6><i class="icon-user"></i>page d'authentification</h6>
+                    <div class="nav pull-right">
+                        <a href="#" class="dropdown-toggle navbar-icon" data-toggle="dropdown"><i class="icon-cog"></i></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="{{ site_url("users/add") }}"><i class="icon-plus"></i>Créer un compte</a></li>
+                            <li><a href="{{ site_url("auth/forgot") }}"><i class="icon-refresh"></i>Mot de passe oublié</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+            <div class="well">
+                <form action="login" method="post" class="row-fluid">
+                    <div class="control-group">
+                        <label class="control-label">Login</label>
+                        <div class="controls"><input class="span12" type="text" name="login" placeholder="login" required /></div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Mot de passe:</label>
+                        <div class="controls"><input class="span12" type="password" name="password" placeholder="password" required /></div>
+                    </div>
+                    <div class="login-btn"><input type="submit" value="Connexion" class="btn btn-danger btn-block" /></div>
+                </form>
+            </div>
+        </div>
+        <!-- /login block -->
+
+
+        <!-- Footer -->
+        <div id="footer">
+            <div class="copyrights">COPYRIGHT &copy; 2018 CERTES</div>
+            <ul class="footer-links">
+                <li><a href="//www.certesmali.org" title=""><i class="icon-cogs"></i>CERTES</a></li>
+            </ul>
+        </div>
+        <!-- /footer -->
+
+    </body>
+</html>

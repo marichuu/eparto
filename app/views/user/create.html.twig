@@ -1,0 +1,104 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+{{"Utlisateurs"}}  {{ parent() }}
+{% endblock %}
+{% block breadcrumb %}  
+<li><a href="#">Gestion des utilisateurs</a></li>
+<li class="active"><a href="{{ site_url("users") }}" title="">utilisateurs</a></li> 
+{% endblock %}
+{% block content %}
+<div class="wrapper"> 
+    <div class="wrapper_small"> 
+        <br>
+        <div class="row">
+        {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div class="navbar"><div class="navbar-inner"><h6>utilisateurs / nouveau</h6></div></div>
+            <div class="well row-fluid">
+                <form id="validate" class="form-horizontal" action="{{ site_url("users/create") }}" method="post"> 
+                    <div class="control-group">
+                        <label class="control-label">Nom d'utilisateur : <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="text" class="validate span6" name="email" id="email" value = "{{set_value('email')}}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Mot de passe: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="password" class="validate[required,minSize[6]] span6" name="password" id="password" value = "{{set_value('password')}}"/>
+                            <span class="help-block">Doit contenir au moins 6 caractères avec au moins un chiffre et une lettre majuscule</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Confirmer mot de passe: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="password" class="validate[required,equals[password]] span6" name="password1" id="password1" value = "{{set_value('password1')}}"/>
+
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Prénoms: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="text" class="validate[required,minSize[2]] span6" name="firstName" id="firstName" value = "{{set_value('firstName')}}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Nom: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="text" class="validate[required,minSize[2]] span6" name="lastName" id="lastName" value = "{{set_value('lastName')}}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Téléphone: <span class="text-error"></span></label> 
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on">+223</span><input id="prependedInput" data-mask="99-99-99-99" name="phone" type="text" value = "{{set_value('phone')}}" class="validate[minSize[11],maxSize[11],custom[phone]] span6" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Structure: </label>
+                        <div class="controls">
+                            <input type="text" class="span6" name="libelle_structure" id="libelle_structure" value = "{{set_value('libelle_structure')}}"/>
+                        </div>
+                    </div>
+                        <div class="control-group">
+                        <label class="control-label">Region / District de : </label>
+                        <div class="controls">
+                            <input type="text" class="span6" name="region" id="region" value = "{{set_value('region')}}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">District sanitaire de : </label>
+                        <div class="controls">
+                            <input type="text" class="span6" name="cercle" id="cercle" value = "{{set_value('cercle')}}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Commune de : </label>
+                        <div class="controls">
+                            <input type="text" class="span6" name="commune" id="commune" value = "{{set_value('commune')}}"/>
+                        </div>
+                    </div>    
+                    
+                    
+                    <div class="control-group" hidden>
+                        <label class="control-label">Actif:</label>
+                        <div class="controls">
+                            <label class="radio inline"><input type="radio" name="active" id="active1" value="1" class="styled" {{set_radio('active', '1', TRUE)}} {{actif}}>Oui</label>
+                            <label class="radio inline"><input type="radio" name="active" id="active2" value="0" class="styled" {{set_radio('active', '0')}} {{actif}}>Non</label> 
+                        </div>
+                    </div>
+                    <div class="form-actions align-right">
+                        <button type="reset" class="btn"><i class="fam-arrow-rotate-anticlockwise"></i>Annuler</button>
+                        <button type="submit" class="btn btn-success" id="save_button" name="save_button"><i class="fam-accept"></i>Enregistrer</button>
+                        <!--<a class="btn btn-inverse" href="{{ site_url("users") }}"><i class="fam-table"></i>Liste des utilisateurs</a>-->
+                    </div>
+                </form>  
+            </div> 
+        </div>
+    </div>     
+</div>
+{% endblock %}

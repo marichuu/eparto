@@ -1,0 +1,121 @@
+
+{% block content %}
+    <div class="wrapper"> 
+        <div class="wrapper_small"> 
+            {% if(nb_exam == 0 ) %}    
+            <br>
+
+            <div class="row">
+                {{ getMessages()|raw }}
+            </div>
+            <div class="widget">
+                <div class="navbar"><div class="navbar-inner"><h6>{{"Examen"}} / {{"Nouveau"}}</h6></div></div>
+                <div class="well row-fluid">
+                    <form id="validate" class="form-horizontal" action="{{ site_url("examen/create") }}" method="post"> 
+
+                        <div class="control-group">
+                            <label class="control-label">{{"TA"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="text" value="{{set_value('ta')}}" class="validate[required] span4" name="ta" id="taille"/>
+                                <input type="hidden" value="{{femme.id}}" class="validate[required] span4" name="femme_id" id="femme_id"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"Pouls"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="number" value="{{set_value('pouls')}}" class="validate[required] span4" name="pouls" id="pouls"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"Température"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="text" value="{{set_value('temp')}}" class="span2" name="temp" id="temp"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"HU"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="text" value="{{set_value('hu')}}" class="span4" name="hu" id="hu"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"BCF"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="text" value="{{set_value('exam_bcf')}}" class="span4" name="exam_bcf" id="exam_bcf"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"Contractions"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="text" value="{{set_value('contraction')}}" class="span4" name="contraction" id="contraction"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"PDE"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <select  id="pde"  name="pde" class="validate[required]">
+                                    <option value=""></option> 
+                                    <option value="1" alt="" {{ set_select('1')}}>Intacte ou liq. clair</option>
+                                    <option value="2" alt="" {{ set_select('2')}}>Liq. teinté</option>
+                                    <option value="3" alt="" {{ set_select('3')}}>Rompue 12H</option>
+                                   
+                                </select>
+                            </div>
+                        </div>
+                         <div class="control-group">
+                            <label class="control-label">Autres facteurs de risque: </label>
+                            <div class="controls">
+                                <textarea name="autre_facteur_risque" class="span10"></textarea>
+                            </div>
+                        </div>            
+                        <div class="form-actions align-right">
+                            <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                            
+                        </div>
+                    </form>  
+                </div> 
+            </div>
+                                    {% else %}
+                                         <!-- Default table -->
+                <div class="widget">
+                	<div class="navbar"><div class="navbar-inner"><h6> Risques ( {{femme.prenom}} {{femme.nom}} )</h6></div></div>
+                    <div class="table-overflow">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>TA</th>
+                                    <td>{{ examen.ta }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Pouls</th>
+                                    <td>{{ examen.pouls }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Temperature</th>
+                                    <td> {{ examen.temperature }}</td>
+                                </tr>
+                                <tr>
+                                    <th>HU</th>
+                                    <td>{{ examen.hu }}</td>
+                                </tr>
+                                <tr>
+                                    <th>BCF</th>
+                                    <td>{{ examen.examenBcf }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Contractions</th>
+                                    <td>{{ examen.contractions }}</td>
+                                </tr>
+                                <tr>
+                                    <th>PDE</th>
+                                    <td>{%if examen.pde == 1%} Intacte ou Liq clair {% elseif examen.pde == 2 %} Liq. teinté{% elseif examen.pde == 2 %} Rompue 12H {% endif %}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /default table -->   
+                                    {% endif %}
+        </div>     
+    </div>    
+{% endblock %}

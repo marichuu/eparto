@@ -1,0 +1,47 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+Reset de Mot de passe  {{ parent() }}
+{% endblock %}
+{% block breadcrumb %}  
+<li class="active"><a href="{{ site_url("auth/reset") }}" title="">Reset</a></li> 
+{% endblock %}
+{% block content %}
+<div class="wrapper"> 
+    <div class="wrapper_small"> 
+        <br>
+        <div class="row">
+        {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div class="well row-fluid">
+                <form id="validate" class="form-horizontal" action="{{ site_url("auth/resetPassword") }}" method="post"> 
+                    <div class="control-group">
+                        <label class="control-label">Mot de passe actuel: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="password" class="validate[required,minSize[6]] span6" name="current_password" value = "{{set_value('current_password')}}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Nouveau mot de passe: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="password" class="validate[required,minSize[6]] span6" name="password" id="password" value = "{{set_value('password')}}"/>
+                            <span class="help-block">Doit contenir au moins 6 caractères avec au moins un chiffre et une lettre majuscule</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Confirmer mot de passe: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="password" class="validate[required,equals[password]] span6" name="password_conf" id="password1" value = "{{set_value('password1')}}"/>
+
+                        </div>
+                    </div>
+                    <div class="form-actions align-right">
+                        <button type="submit" class="btn btn-success" id="save_button" name="save_button"><i class="fam-accept"></i>Enregistrer le nouveau mot de passe</button>
+                    </div>
+                </form>  
+            </div> 
+        </div>
+    </div>     
+
+{% endblock %}

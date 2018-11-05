@@ -1,0 +1,44 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+{{Etudiant}}  {{ parent() }}
+{% endblock %}
+{% block breadcrumb %}  
+<li class="active"><a href="{{ site_url("etudiant") }}" title="">{{"Etudiant"}}</a></li> 
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <div class="wrapper_small">
+        <br>
+        <div class="widget">
+            <div class="navbar"><div class="navbar-inner"><h6>{{"Etudiant"}}</h6>
+                    <a href="{{ site_url("etudiant/add") }}" title="">
+                        <button type="button" class="btn btn-primary pull-right"><b class="icon-plus"></b>Ajouter</button></a></div></div>
+            <div class="table-overflow">
+                <table class="table table-striped table-bordered" id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Matricule</th>
+                            <th>Nom Prenoms</th>
+                            <th>Classe</th>
+                            <th>Filière</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                {% for etudiant in etudiants %}
+
+                        <tr>
+                            <td>{{ etudiant.matricule }}</td>
+                            <td><a href="{{ site_url("etudiant/edit") }}/?xl={{ etudiant.id|crypter }}" title="">{{ etudiant.nom }} {{ etudiant.prenom }}</a></td>
+                            <td>{{ etudiant.classe.libelle }}</td>
+                            <td>{{ etudiant.filiere.libelle }}</td>
+                        </tr>
+
+                {% endfor %}  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

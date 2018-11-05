@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %} | ALISCO </title>
+    <meta name="description" content="ALISCO">
+    <meta name="author" content="VOOLINKS"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+     
+    <link rel="stylesheet" type="text/css" media="screen" href="{{css_url('main')}}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{css_url('style')}}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{css_url('docs')}}">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&amp;sensor=false"></script>
+    <!--[if IE 8]><link href="{{css_url('ie8')}}" rel="stylesheet" type="text/css" /><![endif]-->
+    <!--[if IE 8]><link href="{{css_url('ie9')}}" rel="stylesheet" type="text/css" /><![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+   
+
+    {% block layout_css %}{% endblock %}
+
+    <!-- #FAVICONS -->
+    <link href="{{ img_url('img/icons/favicon.ico') }}" rel="shortcut icon">
+    
+</head>
+<body>
+	
+    {% include "themes/default/header.html.twig" %}
+ 	
+    <!-- Fixed top -->
+   
+    <!-- /fixed top -->
+    <!-- Content container -->
+    <div id="container">  
+        {% include "themes/default/shortcut.html.twig"%} 
+        <!-- Content -->
+        <div id="content">
+            
+        {% block breadcrumbs %} 
+        <div class="wrapper">
+            <div class="crumbs">
+                 {% if session.userdata.user != null %}   
+                <ul id="breadcrumbs" class="breadcrumb"> 
+                    <li><a href="{{ site_url("home/home") }}">Accueil</a></li>
+                    {% block breadcrumb %}
+                        <li class="active"><a href="{{ site_url("home/home") }}" title="">Tableau de bord</a></li>
+                    {% endblock %} 
+
+                </ul>
+                
+                <ul class="alt-buttons">
+                                <li class="dropdown"><a href="#" title="" data-toggle="dropdown"><i class="icon-user"></i><span> 
+                                               Bonjour,  
+                            </span> <strong>{{ session.userdata.user.firstName }}</strong></a>
+                            <ul class="dropdown-menu pull-right"> 
+                                <li><a href="{{ site_url("auth/logout") }}" title=""><i class="icon-off"></i>Deconnexion</a></li>
+                                <li><a href="{{ site_url("auth/reset") }}" title=""><i class="icon-edit"></i>Changement de mot de passe</a></li>
+                            </ul>
+                    </li>
+                </ul>
+                            {%endif%}
+            </div>
+        </div>
+            {% endblock %}
+        {% block content %}{% endblock %}
+             
+        </div>
+        
+        <!-- /content --> 
+    </div>
+    <!-- /content container -->
+     <!-- Footer -->
+     <div id="footer">
+         {% include "themes/default/footer.html.twig" %}
+    </div>
+    <!-- /footer -->
+     <script src="{{ js_url('files/jquery.min') }}"></script>
+    <script src="{{ js_url('files/jquery-ui.min') }}"></script> 
+    <script src="{{ js_url('plugins/ui/jquery.easytabs.min') }}"></script>
+    <script src="{{ js_url('plugins/ui/jquery.collapsible.min') }}"></script>
+    <script src="{{ js_url('plugins/ui/jquery.mousewheel') }}"></script>
+    <script src="{{ js_url('plugins/ui/jquery.bootbox.min') }}"></script>
+    <script src="{{ js_url('plugins/ui/jquery.colorpicker') }}"></script>
+    <script src="{{ js_url('plugins/ui/jquery.timepicker.min') }}"></script>
+    <script src="{{ js_url('plugins/ui/jquery.jgrowl') }}"></script>
+    <script src="{{ js_url('plugins/ui/jquery.fancybox') }}"></script>
+    <script src="{{ js_url('plugins/ui/jquery.fullcalendar.min') }}"></script>
+    <script src="{{ js_url('plugins/ui/jquery.elfinder') }}"></script>
+    <script src="{{ js_url('plugins/uploader/plupload') }}"></script>
+    <script src="{{ js_url('plugins/uploader/plupload.html4') }}"></script>
+    <script src="{{ js_url('plugins/uploader/plupload.html5') }}"></script>
+    <script src="{{ js_url('plugins/uploader/jquery.plupload.queue') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.uniform.min') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.autosize') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.inputlimiter.min') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.tagsinput.min') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.inputmask') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.select2.min') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.listbox') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.validation') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.listbox') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.validationEngine-en') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.form.wizard') }}"></script>
+    <script src="{{ js_url('plugins/forms/jquery.form') }}"></script>
+    <script src="{{ js_url('plugins/tables/jquery.dataTables.min') }}"></script>
+    <script src="{{ js_url('files/bootstrap.min') }}"></script>
+    <script src="{{ js_url('files/functions') }}"></script> 
+    <script src="{{ js_url('plugins/jstree/docs') }}"></script>
+    <script src="{{ js_url('general') }}"></script> 
+     <script src="{{ js_url('plugins/charts/jquery.sparkline.min') }}"></script> 
+    
+    <script src="{{ js_url('plugins/amcharts/amcharts/amcharts') }}"></script>
+	<script src="{{ js_url('plugins/amcharts/amcharts/serial') }}"></script>
+	<script src="{{ js_url('plugins/amcharts/amcharts/pie') }}"></script>
+	<script src="{{ js_url('plugins/amcharts/amcharts/plugins/export/export') }}"></script>
+</body>
+</html>
+ 
