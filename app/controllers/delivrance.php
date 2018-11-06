@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 /**
  *
  * @package Delivrance
- * @category Module
+ * @category Accouchement
  */
 class Delivrance extends CI_Controller {
 
