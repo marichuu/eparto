@@ -1,0 +1,50 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+    Delivrance  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <br>
+    <div class="row">
+        {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div class="well row-fluid">
+                <div  id="framework-content">
+                    <div class="tabbable"><!-- default tabs -->
+                        <ul class="nav nav-tabs">
+                            <li id="table1" class="active"><a href="#tab1" data-toggle="tab">{{'En accouchement'}}</a></li>
+                            <li id="table2"><a href="#tab2" data-toggle="tab">{{'Post accouchement'}}</a></li>
+                            <li id="table3" {{disableTabOuput}}><a  href="#tab3" alt="Actif"  data-toggle="tab">{{'Archive'}}</a></li> 
+                        </ul> 
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">                              
+                                <div id="impactCreate">
+                                    <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
+ {% include "delivrance/create.html.twig" %}
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab2">                               
+                                <div id="outcomeCreate">
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab3" >           
+                                <div id="outputCreate">
+
+                                </div>
+                            </div>
+                            <div class="form-actions align-right">
+                                {#<a href="{{site_url("configuration/resultFramework/reset")}}"  <button type="reset" class="btn"><i class="fam-arrow-rotate-anticlockwise"></i>Reset</button> </a>
+                                 {% if operation == 1%} <button style="display: none;" class="btn btn-danger" id="cancel"><i class="fam-cancel"></i>Cancel</button> {%endif%}#}
+                                <a href="{{site_url("configuration/resultFramework")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Exit'}}</button>  </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+{% endblock %}

@@ -16,7 +16,7 @@
 		                        <li>age: <span class="pull-right">{{femme.age}}</span></li>
 		                        <li>Motif: <strong class="pull-right text-error">{{femme.motif}}</strong></li>
                                         <li>Rup. M : <strong class="pull-right text-error">{{femme.dateRupture|date}}</strong></li>
-                                        <button type="button" class="btn btn-info"><i class="fam-resultset-next"></i>Delivrance</button>
+                                        <a href="{{site_url('delivrance/add')}}/?xl={{ femme.id|crypter }}"><button type="button" class="btn btn-info"><i class="fam-resultset-next"></i>Delivrance</button></a>
 		                    </ul>
 		                </div>
 		             

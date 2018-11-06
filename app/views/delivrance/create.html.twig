@@ -1,0 +1,114 @@
+<div class="wrapper"> 
+    <div class="wrapper_small">   
+        <br>
+        <div class="row">
+            {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div class="navbar"><div class="navbar-inner"><h6>Accouchement ( {{femme.prenom}} {{femme.nom}} ) </h6></div></div>
+            <div class="well row-fluid">
+                <form id="validate" class="form-horizontal" action="{{ site_url("delivrance/create") }}" method="post"> 
+
+                    <div class="control-group">
+                        <label class="control-label">Delivrance:</label>
+                        <div class="controls">
+                            <ul class="dates-range no-append">
+                                <li><input type="date" placeholder="date..." id="date" class="" name="date" ></li>
+                                <li class="sep">-</li>
+                                <li><input class="span12" type="time" name="heure" /></li>
+                                <input type='hidden' name='femme' value='{{femme.id}}'>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Type Placenta: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <select name='type' >
+                                <option value="">---</option>
+                                <option value="1">Naturelle</option>
+                                <option value="2">Active (GATPA)</option>
+                                <option value="3">Artificielle</option>
+                                <option value="4">Révision utérine</option>
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="control-group">
+                        <label class="control-label">Etat du placenta: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <select name='etat' >
+                                <option value="">---</option>
+                                <option value="1">Complet</option>
+                                <option value="2">Incomplet</option>
+                                <option value="3">Acréta</option>
+                            </select>
+                        </div>
+                    </div> 
+
+                    <div class="control-group">
+                        <label class="control-label">Poids du placenta: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="text" name="poids" id="" value="" >
+                        </div>
+                    </div> 
+                    <div class="control-group">
+                        <label class="control-label">Cordon:</label>
+                        <div class="controls">
+                            <div class="row-fluid">
+                                <div class="span2">
+                                    <input type="number" name="longueur_cordon" class="span12" /><span class="help-block align-center">Longueur (cm)</span>
+                                </div>
+                                <div class="span2">
+                                    <input type="number" name="petit_cote_cordon" class="span12" /><span class="help-block align-center">Petit côté (cm)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Référence/Evacuation: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <label class="radio inline"><input type="radio" name="reference" id="reference1" value="1" class="styled" >Oui</label>
+                            <label class="radio inline"><input type="radio" name="reference" id="reference2" value="0" class="styled" >Non</label> 
+                        </div>
+                    </div>
+                    <div class="control-group reference">
+                        <label class="control-label">Motif: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type='text' name='motif' id='motif' class='validate[required]'>
+                        </div>
+                    </div>
+                    <div class="control-group reference">
+                        <label class="control-label">Vers: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type='text' name='structure' placeholder='Structure' id='structure' class='validate[required]'>
+                        </div>
+                    </div>
+                    <div class="form-actions align-right">
+                        <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                    </div>
+                </form>  
+            </div> 
+        </div>
+
+    </div>     
+</div>   
+<script src="{{ js_url('files/ajax.jquery.min') }}"></script>
+<script type="text/javascript">
+
+    $('#reference1').click(function () {
+        if (this.checked) {
+            $(".reference").show();
+            $("#motif").attr("class", "validate[required]");
+            $("#structure").attr("class", "validate[required]");
+        }
+    });
+    $('#reference2').click(function () {
+        if (this.checked) {
+            $("#motif").val('');
+            $("#structure").val('');
+            $("#motif").removeAttr('class');
+            $("#structure").removeAttr('class');
+            $(".reference").hide();
+        }
+    });
+    $(".reference").hide();
+</script>
