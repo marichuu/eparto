@@ -68,12 +68,6 @@ class Delivrance {
      */
     private $evacuationReference;
 
-    /**
-     * @var string
-     *
-     * @Column(name="motif", type="string")
-     */
-    private $motif;
 
     /**
      * @var \Entity\Femme
@@ -189,27 +183,6 @@ class Delivrance {
         return $this->evacuationReference;
     }
 
-    /**
-     * Set motif
-     *
-     * @param string $motif
-     *
-     * @return Delivrance
-     */
-    public function setMotif($motif) {
-        $this->motif = $motif;
-
-        return $this;
-    }
-
-    /**
-     * Get motif
-     *
-     * @return string
-     */
-    public function getMotif() {
-        return $this->motif;
-    }
 
     /**
      * Set createdDate

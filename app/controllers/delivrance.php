@@ -39,7 +39,7 @@ class Delivrance extends CI_Controller {
         if ($_POST) {
             $config = array(
                 forme_rules('date', 'Date', 'trim|required'),
-                forme_rules('time', 'Heure', 'trim|required'),
+                forme_rules('heure', 'Heure', 'trim|required'),
             );
             $this->form_validation->set_rules($config);
             if (!$this->form_validation->run('add')) {
@@ -54,27 +54,32 @@ class Delivrance extends CI_Controller {
                     $etat = $this->input->post('etat');
                     $poids = $this->input->post('poids');
                     $longueurCordon = $this->input->post('longueur_cordon');
-                    $petitCote = $this->input->post('petit_cote');
+                    $petitCote = $this->input->post('petit_cote_cordon');
                     $motif = $this->input->post('motif');
                     $structure = $this->input->post('structure');
                     $reference = $this->input->post('reference');
-                    $heure = $this->input->post('time').":00";
+                    $heure = $this->input->post('heure').":00";
                     $dateDelivrance = $date." ".$heure;
                     $dateCreation = new DateTime();
-                    $femme_id = $this->input->post('femme_id');
+                    $femme_id = $this->input->post('femme');
                     $femme = $this->_em->find('Entity\\Femme', $femme_id);
                             
                     $delivrance = new Entity\Delivrance();
-                    $delivrance->setDate($dateDelivrance);
+                    $delivrance->setDate(new \DateTime($dateDelivrance));
                     $delivrance->setEtat($etat);
                     $delivrance->setType($type);
                     $delivrance->setLongeurCordon($longueurCordon);
                     $delivrance->setPetitCoteCordon($petitCote);
+                    $delivrance->setEvacuationReference($reference);
                     $delivrance->setPoidsPlacenta($poids);
                     $delivrance->setCreatedDate($dateCreation);
                     $delivrance->setFemme($femme);
                     
+                   
+                    
                     $this->_em->persist($delivrance);
+                    
+                   
                     
                     if($reference == 1){
                         $ref = new Entity\Reference();
