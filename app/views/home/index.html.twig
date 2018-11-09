@@ -27,11 +27,7 @@
             <div class="well row-fluid">
                 <div  id="framework-content">
                     <div class="tabbable"><!-- default tabs -->
-                        <ul class="nav nav-tabs">
-                            <li id="table1" class="active"><a href="#tab1" data-toggle="tab">{{'En accouchement'}}</a></li>
-                            <li id="table2"><a href="#tab2" data-toggle="tab">{{'Post accouchement'}}</a></li>
-                            <li id="table3" {{disableTabOuput}}><a  href="#tab3" alt="Actif"  data-toggle="tab">{{'Archive'}}</a></li> 
-                        </ul> 
+                        {% include "home/tab1.html.twig" %}
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">                              
                                 <div id="impactCreate">
@@ -40,7 +36,7 @@
                             </div>
                             <div class="tab-pane" id="tab2">                               
                                 <div id="outcomeCreate">
-
+{% include "home/postPartum.html.twig" %}
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab3" >           

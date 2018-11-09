@@ -15,8 +15,14 @@ class Home extends CI_Controller {
     }
       
    public function index() { 
-        $femmes = $this->_em->getRepository('Entity\\Femme')->findBy(array('status'=>1), array('id'=>'desc'));
+        $femmes = $this->_em->getRepository('Entity\\Femme')->findBy(array('status'=>'1'), array('id'=>'desc'));
         $data['femmes'] = $femmes; 
+        
+        // Post partum
+        $data['Pfemmes'] = $this->_em->getRepository('Entity\\Femme')->findBy(array('status'=>'2'), array('id'=>'desc'));
+        
+         // Archives
+        $data['Afemmes'] = $this->_em->getRepository('Entity\\Femme')->findBy(array('status'=>'3'), array('id'=>'desc'));
         $this->twig->display("home/index.html.twig", $data);
    }
    

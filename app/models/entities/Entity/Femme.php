@@ -1,7 +1,6 @@
 <?php
-
+use \Doctrine\Common\Collections\Collection;
 namespace Entity;
-
 
 /**
  * Femme
@@ -9,9 +8,8 @@ namespace Entity;
  * @Table(name="femme")
  * @Entity
  */
- 
-class Femme
-{
+class Femme {
+
     /**
      * @var integer
      *
@@ -41,64 +39,64 @@ class Femme
      * @Column(name="age", type="integer", nullable=true)
      */
     private $age;
-    
+
     /**
      * @var string
      *
      * @Column(name="nom_mari", type="string", length=255, nullable=true)
      */
     private $mari;
-    
+
     /**
      * @var string
      *
      * @Column(name="village", type="string", length=255, nullable=true)
      */
     private $village;
-    
-     /**
+
+    /**
      * @var string
      *
      * @Column(name="nb_grossesse", type="integer", nullable=true)
      */
     private $nbGrossesse;
-    
-     /**
+
+    /**
      * @var string
      *
      * @Column(name="nb_parite", type="integer", nullable=true)
      */
     private $nbParite;
-    
-     /**
+
+    /**
      * @var string
      *
      * @Column(name="nb_enfant_vivant", type="integer", nullable=true)
      */
     private $nbEnfantVivant;
-    
-     /**
+
+    /**
      * @var string
      *
      * @Column(name="nb_avortement", type="integer", nullable=true)
      */
     private $nbAvortement;
-    
-     /**
+
+    /**
      * @var string
      *
      * @Column(name="nb_iig", type="integer", nullable=true)
      */
     private $nbIig;
-    
+
     /**
      * @var boolean
      *
      * @Column(name="status", type="boolean")
      */
     private $status;
-    
-  /**
+
+    /**
      * @var \Entity\Structure
      *
      * @ManyToOne(targetEntity="Structure")
@@ -107,42 +105,49 @@ class Femme
      * })
      */
     private $structure;
-    
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @OneToMany(targetEntity="Entity\Delivrance", mappedBy="femme")
+     *
+     */
+    private $delivrance;
+
     /**
      * @var string
      *
      * @Column(name="motif_venue_maternite", type="string", length=255, nullable=true)
      */
     private $motif;
-    
+
     /**
      * @var \DateTime
      *
      * @Column(name="date_entree", type="datetime", nullable=true)
      */
     private $dateEntree;
-    
+
     /**
      * @var \DateTime
      *
      * @Column(name="date_debut_travail", type="datetime", nullable=true)
      */
     private $dateDebutTravail;
-    
+
     /**
      * @var \DateTime
      *
      * @Column(name="heure_rupture_membrane", type="datetime", nullable=true)
      */
     private $heureRuptureMembrane;
-    
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -152,10 +157,9 @@ class Femme
      * @param string $nom
      * @return Femme
      */
-    public function setNom($nom)
-    {
+    public function setNom($nom) {
         $this->nom = $nom;
-    
+
         return $this;
     }
 
@@ -164,8 +168,7 @@ class Femme
      *
      * @return string 
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
 
@@ -175,10 +178,9 @@ class Femme
      * @param string $prenom
      * @return Femme
      */
-    public function setPrenom($prenom)
-    {
+    public function setPrenom($prenom) {
         $this->prenom = $prenom;
-    
+
         return $this;
     }
 
@@ -187,8 +189,7 @@ class Femme
      *
      * @return string 
      */
-    public function getPrenom()
-    {
+    public function getPrenom() {
         return $this->prenom;
     }
 
@@ -198,10 +199,9 @@ class Femme
      * @param integer $age
      * @return Femme
      */
-    public function setAge($age)
-    {
+    public function setAge($age) {
         $this->age = $age;
-    
+
         return $this;
     }
 
@@ -210,8 +210,7 @@ class Femme
      *
      * @return integer 
      */
-    public function getAge()
-    {
+    public function getAge() {
         return $this->age;
     }
 
@@ -221,10 +220,9 @@ class Femme
      * @param boolean $status
      * @return Femme
      */
-    public function setStatus($status)
-    {
+    public function setStatus($status) {
         $this->status = $status;
-    
+
         return $this;
     }
 
@@ -233,8 +231,7 @@ class Femme
      *
      * @return boolean 
      */
-    public function getStatus()
-    {
+    public function getStatus() {
         return $this->status;
     }
 
@@ -244,10 +241,9 @@ class Femme
      * @param \Entity\Structure $structure
      * @return Femme
      */
-    public function setStructure(\Entity\Structure $structure)
-    {
+    public function setStructure(\Entity\Structure $structure) {
         $this->structure = $structure;
-    
+
         return $this;
     }
 
@@ -256,8 +252,7 @@ class Femme
      *
      * @return \Entity\Structure 
      */
-    public function getStructure()
-    {
+    public function getStructure() {
         return $this->structure;
     }
 
@@ -267,10 +262,9 @@ class Femme
      * @param string $mari
      * @return Femme
      */
-    public function setMari($mari)
-    {
+    public function setMari($mari) {
         $this->mari = $mari;
-    
+
         return $this;
     }
 
@@ -279,8 +273,7 @@ class Femme
      *
      * @return string 
      */
-    public function getMari()
-    {
+    public function getMari() {
         return $this->mari;
     }
 
@@ -290,10 +283,9 @@ class Femme
      * @param string $village
      * @return Femme
      */
-    public function setVillage($village)
-    {
+    public function setVillage($village) {
         $this->village = $village;
-    
+
         return $this;
     }
 
@@ -302,8 +294,7 @@ class Femme
      *
      * @return string 
      */
-    public function getVillage()
-    {
+    public function getVillage() {
         return $this->village;
     }
 
@@ -313,10 +304,9 @@ class Femme
      * @param integer $nbGrossesse
      * @return Femme
      */
-    public function setNbGrossesse($nbGrossesse)
-    {
+    public function setNbGrossesse($nbGrossesse) {
         $this->nbGrossesse = $nbGrossesse;
-    
+
         return $this;
     }
 
@@ -325,8 +315,7 @@ class Femme
      *
      * @return integer 
      */
-    public function getNbGrossesse()
-    {
+    public function getNbGrossesse() {
         return $this->nbGrossesse;
     }
 
@@ -336,10 +325,9 @@ class Femme
      * @param integer $nbParite
      * @return Femme
      */
-    public function setNbParite($nbParite)
-    {
+    public function setNbParite($nbParite) {
         $this->nbParite = $nbParite;
-    
+
         return $this;
     }
 
@@ -348,8 +336,7 @@ class Femme
      *
      * @return integer 
      */
-    public function getNbParite()
-    {
+    public function getNbParite() {
         return $this->nbParite;
     }
 
@@ -359,10 +346,9 @@ class Femme
      * @param integer $nbEnfantVivant
      * @return Femme
      */
-    public function setNbEnfantVivant($nbEnfantVivant)
-    {
+    public function setNbEnfantVivant($nbEnfantVivant) {
         $this->nbEnfantVivant = $nbEnfantVivant;
-    
+
         return $this;
     }
 
@@ -371,8 +357,7 @@ class Femme
      *
      * @return integer 
      */
-    public function getNbEnfantVivant()
-    {
+    public function getNbEnfantVivant() {
         return $this->nbEnfantVivant;
     }
 
@@ -382,10 +367,9 @@ class Femme
      * @param integer $nbAvortement
      * @return Femme
      */
-    public function setNbAvortement($nbAvortement)
-    {
+    public function setNbAvortement($nbAvortement) {
         $this->nbAvortement = $nbAvortement;
-    
+
         return $this;
     }
 
@@ -394,8 +378,7 @@ class Femme
      *
      * @return integer 
      */
-    public function getNbAvortement()
-    {
+    public function getNbAvortement() {
         return $this->nbAvortement;
     }
 
@@ -405,10 +388,9 @@ class Femme
      * @param integer $nbIig
      * @return Femme
      */
-    public function setNbIig($nbIig)
-    {
+    public function setNbIig($nbIig) {
         $this->nbIig = $nbIig;
-    
+
         return $this;
     }
 
@@ -417,8 +399,7 @@ class Femme
      *
      * @return integer 
      */
-    public function getNbIig()
-    {
+    public function getNbIig() {
         return $this->nbIig;
     }
 
@@ -429,10 +410,9 @@ class Femme
      *
      * @return Femme
      */
-    public function setMotif($motif)
-    {
+    public function setMotif($motif) {
         $this->motif = $motif;
-    
+
         return $this;
     }
 
@@ -441,8 +421,7 @@ class Femme
      *
      * @return string
      */
-    public function getMotif()
-    {
+    public function getMotif() {
         return $this->motif;
     }
 
@@ -453,10 +432,9 @@ class Femme
      *
      * @return Femme
      */
-    public function setDateEntree($dateEntree)
-    {
+    public function setDateEntree($dateEntree) {
         $this->dateEntree = $dateEntree;
-    
+
         return $this;
     }
 
@@ -465,8 +443,7 @@ class Femme
      *
      * @return \DateTime
      */
-    public function getDateEntree()
-    {
+    public function getDateEntree() {
         return $this->dateEntree;
     }
 
@@ -477,10 +454,9 @@ class Femme
      *
      * @return Femme
      */
-    public function setDateDebutTravail($dateDebutTravail)
-    {
+    public function setDateDebutTravail($dateDebutTravail) {
         $this->dateDebutTravail = $dateDebutTravail;
-    
+
         return $this;
     }
 
@@ -489,8 +465,7 @@ class Femme
      *
      * @return \DateTime
      */
-    public function getDateDebutTravail()
-    {
+    public function getDateDebutTravail() {
         return $this->dateDebutTravail;
     }
 
@@ -501,10 +476,9 @@ class Femme
      *
      * @return Femme
      */
-    public function setHeureRuptureMembrane($heureRuptureMembrane)
-    {
+    public function setHeureRuptureMembrane($heureRuptureMembrane) {
         $this->heureRuptureMembrane = $heureRuptureMembrane;
-    
+
         return $this;
     }
 
@@ -513,8 +487,8 @@ class Femme
      *
      * @return \DateTime
      */
-    public function getHeureRuptureMembrane()
-    {
+    public function getHeureRuptureMembrane() {
         return $this->heureRuptureMembrane;
     }
+
 }

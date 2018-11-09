@@ -61,8 +61,9 @@ class Delivrance extends CI_Controller {
                     $heure = $this->input->post('heure').":00";
                     $dateDelivrance = $date." ".$heure;
                     $dateCreation = new DateTime();
-                    $femme_id = $this->input->post('femme');
+                    $femme_id = $this->input->post('femme_id');
                     $femme = $this->_em->find('Entity\\Femme', $femme_id);
+                    
                             
                     $delivrance = new Entity\Delivrance();
                     $delivrance->setDate(new \DateTime($dateDelivrance));
@@ -75,7 +76,8 @@ class Delivrance extends CI_Controller {
                     $delivrance->setCreatedDate($dateCreation);
                     $delivrance->setFemme($femme);
                     
-                   
+                    
+                    $femme->setStatus("2");
                     
                     $this->_em->persist($delivrance);
                     
