@@ -1,0 +1,72 @@
+<div class="wrapper"> 
+    <div class="wrapper_small">   
+        <br>
+        <div class="row">
+            {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div class="navbar"><div class="navbar-inner"><h6>Surveillance ( {{femme.prenom}} {{femme.nom}} ) </h6></div></div>
+            <div class="well row-fluid">
+                <form id="validate" class="form-horizontal" action="{{ site_url("surveillance/create") }}" method="post"> 
+
+                    <div class="control-group">
+                        <label class="control-label">Saignement: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <select name='saignement' class='validate[required]'>
+                                <option value="">---</option>
+                                <option value="1">Minime</option>
+                                <option value="2">Moyen</option>
+                                <option value="3">Abondant</option>
+                            </select>
+                            <input type='hidden' name='femme_id' value='{{femme.id}}'>
+                        </div>
+                    </div> 
+                    <div class="control-group">
+                        <label class="control-label">Globe de sécurité: </label>
+                        <div class="controls">
+                            <select name='globeSecurite' >
+                                <option value="">---</option>
+                                <option value="1">Bien formé (dur)</option>
+                                <option value="2">Mal formé (mou)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Pouls: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="text" name="pouls" id="" value="" class='validate[required]'>
+                        </div>
+                    </div> 
+                    <div class="control-group">
+                        <label class="control-label">TA: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="text" name="ta" id="" value="" class='validate[required]'>
+                        </div>
+                    </div> 
+                    <div class="control-group">
+                        <label class="control-label">Temperature: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="number" name="temperature" class='validate[required]'/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Traitement: </label>
+                        <div class="controls">
+                            <textarea name='traitement' id='traitement' ></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Observation: </label>
+                        <div class="controls">
+                            <textarea name='observation' id='observation' ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions align-right">
+                        <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                    </div>
+                </form>  
+            </div> 
+        </div>
+
+    </div>     
+</div>   

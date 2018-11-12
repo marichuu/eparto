@@ -1,0 +1,92 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+    Surveillance  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <br>
+    <div class="row">
+        {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div class="well row-fluid">
+                <div  id="framework-content">
+                    <div class="tabbable"><!-- default tabs -->
+                        {% include "home/tab1.html.twig" %}
+                        <div class="tab-content">
+                            <div class="tab-pane" id="tab1">                               
+                                <div id="outcomeCreate">
+
+                                </div>
+                            </div>
+                            <div class="tab-pane active" id="tab1">                              
+                                <div id="impactCreate">
+                                    <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
+                                    {% include "surveillance/create.html.twig" %}
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab3" >           
+                                <div id="outputCreate">
+
+                                </div>
+                            </div>
+                            <div class="form-actions align-right">
+                                {#<a href="{{site_url("configuration/resultFramework/reset")}}"  <button type="reset" class="btn"><i class="fam-arrow-rotate-anticlockwise"></i>Reset</button> </a>
+                                 {% if operation == 1%} <button style="display: none;" class="btn btn-danger" id="cancel"><i class="fam-cancel"></i>Cancel</button> {%endif%}#}
+                                <a href="{{site_url("home/home")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Exit'}}</button>  </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+                                
+   <div class="wrapper">
+        <div class="wrapper_small">
+            <br>
+            <div class="widget">
+                {% for surveillance in surveillances %}
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td><b>Date</b></td><td>{{ surveillance.createdDate|date('d/m/Y') }} à {{ surveillance.createdDate|date('H') }} H {{ surveillance.createdDate|date('i') }} </td>
+                        </tr>
+                        <tr>
+                            <td><b>Saignement</b></td>
+                            <td>
+                                {% if surveillance.saignement == "1" %}
+                                    Minime
+                                {% elseif surveillance.saignement == "2"%}
+                                    Moyen
+                                {% else %}
+                                    Abondant
+                                {% endif%} 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Globe de sécurité</b></td>
+                            <td>{{ surveillance.globeSecurite }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Pouls</b></td>
+                            <td>{{ surveillance.pouls }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>TA</b></td>
+                            <td>{{ surveillance.ta }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Temperature</b></td>
+                            <td>{{ surveillance.temperature }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Observation</b></td>
+                            <td>{{ surveillance.observation }}</td>
+                        </tr>
+                    </table></br>
+                        
+                {% endfor %}
+                </div></div></div>                             
+{% endblock %}
