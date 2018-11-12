@@ -28,7 +28,7 @@
                                         <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
                                         <fieldset class="form-horizontal">
                                             <div>
-                                                <div class="navbar"><div class="navbar-inner"><h6>BCF</h6><span style="float: right"><img id="form_gender_close" class="cursor" src="{{ img_url("delete.png") }}" />&nbsp;&nbsp;&nbsp;</span></div></div>
+                                                <div class="navbar"><div class="navbar-inner"><h6>BCF</h6><span style="float: right">&nbsp;&nbsp;&nbsp;</span></div></div>
                                                 <div class="well row-fluid">
                                                     <div class="control-group">
                                                         <div class="row-fluid"> 
@@ -41,8 +41,81 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-actions align-right">
-                                                         <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                                                        <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
                                                     </div>
+
+                                                    <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
+                                                    <script src="{{ js_url('plugins/amcharts/amcharts/amcharts') }}"></script>
+                                                    <script src="{{ js_url('plugins/amcharts/amcharts/serial') }}"></script>
+                                                    <script src="{{ js_url('plugins/amcharts/amcharts/plugins/export/export') }}"></script>
+                                                    <script type="text/javascript">
+                                                        var chart;
+                                                        var graph;
+
+    var chartData = [                                                                     {% for g in bcfs %}
+                                                                {
+                                                                    "time": "{{g.createdDate|date("H:i")}}",
+                                                                    "value":{{g.value}},
+                                                                },
+                                                        {% endfor %}  
+                                                            ];
+
+
+                                                            AmCharts.ready(function () {
+                                                                // SERIAL CHART
+                                                                chart = new AmCharts.AmSerialChart();
+                                                                chart.dataProvider = chartData;
+                                                                chart.categoryField = "time";
+                                                                chart.startDuration = 0.5;
+                                                                chart.balloon.color = "#000000";
+
+                                                                // AXES
+                                                                // category
+                                                                var categoryAxis = chart.categoryAxis;
+                                                                categoryAxis.fillAlpha = 1;
+                                                                categoryAxis.fillColor = "#FAFAFA";
+                                                                categoryAxis.gridAlpha = 0;
+                                                                categoryAxis.axisAlpha = 0;
+                                                                categoryAxis.gridPosition = "start";
+                                                                categoryAxis.position = "bottom";
+
+                                                                // value
+                                                                var valueAxis = new AmCharts.ValueAxis();
+                                                                valueAxis.title = "Bruit du coeur foetal";
+                                                                valueAxis.dashLength = 5;
+                                                                valueAxis.axisAlpha = 0;
+                                                                valueAxis.minimum = 80;
+                                                                valueAxis.maximum = 200;
+                                                                valueAxis.integersOnly = true;
+                                                                valueAxis.gridCount = 10;
+                                                                valueAxis.reversed = false; // this line makes the value axis reversed
+                                                                chart.addValueAxis(valueAxis);
+
+
+
+                                                                // BCF graph
+                                                                var graph = new AmCharts.AmGraph();
+                                                                graph.title = "BCF";
+                                                                graph.valueField = "value";
+                                                                graph.balloonText = "Bruit du coeur foetal à [[category]]: [[value]]";
+                                                                graph.bullet = "round";
+                                                                chart.addGraph(graph);
+
+
+                                                                // LEGEND
+                                                                var legend = new AmCharts.AmLegend();
+                                                                legend.useGraphSettings = true;
+                                                                chart.addLegend(legend);
+
+                                                                // WRITE
+                                                                chart.write("chartdiv");
+                                                            });
+
+
+                                                    </script>
+                                                    {%if(bcfs)%}
+                                                        <div id="chartdiv" style="width:100%; height:400px;"></div>
+                                                    {%endif%}
                                                 </div> 
                                             </div>
                                         </fieldset>
@@ -60,12 +133,11 @@
                                 </div>
                             </div>
                             <div class="form-actions align-right">
-                                <a href="{{site_url("home/home")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Exit'}}</button>  </a>
+                                <a href="{{site_url("home/home")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Quiter'}}</button>  </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>    
-{% endblock %}
+    </div>{% endblock %}

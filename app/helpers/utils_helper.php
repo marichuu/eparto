@@ -680,3 +680,13 @@ if (!function_exists('eleveNonNourri')) {
     	return($eleveNonNourri);
 	}
 }
+
+if (!function_exists('bcfGraph')) {
+	function bcfGraph($femme_id){
+	$doctrine = new Doctrine();
+	$taux_moyen_fille = 0;
+	$femme = $doctrine->em->find('Entity\\Femme', $femme_id);
+	$bcf = 	$doctrine->em->getRepository('Entity\\Bcf')->findBy(array('femme' => $femme), array('id' => 'asc'));
+    	return($bcf);
+	}
+}
