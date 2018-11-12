@@ -37,6 +37,12 @@ class Reference
      */
     private $structure;
     
+     /**
+     * @var \DateTime
+     *
+     * @Column(name="created_date", type="datetime", nullable=true)
+     */
+    private $createdDate;
     
     /**
      * @var \Entity\Femme
@@ -47,6 +53,16 @@ class Reference
      * })
      */
     private $femme;
+    
+    /**
+     * @var \Entity\User
+     *
+     * @ManyToOne(targetEntity="User")
+     * @JoinColumns({
+     *   @JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $user;
 
     /**
      * Get id
@@ -128,5 +144,53 @@ class Reference
     public function getFemme()
     {
         return $this->femme;
+    }
+
+    /**
+     * Set createdDate
+     *
+     * @param \DateTime $createdDate
+     *
+     * @return Reference
+     */
+    public function setCreatedDate($createdDate)
+    {
+        $this->createdDate = $createdDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdDate
+     *
+     * @return \DateTime
+     */
+    public function getCreatedDate()
+    {
+        return $this->createdDate;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Entity\User $user
+     *
+     * @return Reference
+     */
+    public function setUser(\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

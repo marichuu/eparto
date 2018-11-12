@@ -85,6 +85,16 @@ class Delivrance {
      * @Column(name="created_date", type="datetime", nullable=true)
      */
     private $createdDate;
+    
+    /**
+     * @var \Entity\User
+     *
+     * @ManyToOne(targetEntity="User")
+     * @JoinColumns({
+     *   @JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $user;
 
     /**
      * Get id
@@ -299,5 +309,29 @@ class Delivrance {
     public function getPetitCoteCordon()
     {
         return $this->petitCoteCordon;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Entity\User $user
+     *
+     * @return Delivrance
+     */
+    public function setUser(\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

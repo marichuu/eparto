@@ -93,6 +93,16 @@ class Examen
      * @Column(name="created_date", type="date", nullable=true)
      */
     private $createdDate;
+    
+    /**
+     * @var \Entity\User
+     *
+     * @ManyToOne(targetEntity="User")
+     * @JoinColumns({
+     *   @JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $user;
     /**
      * Get id
      *
@@ -332,5 +342,29 @@ class Examen
     public function getCreatedDate()
     {
         return $this->createdDate;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Entity\User $user
+     *
+     * @return Examen
+     */
+    public function setUser(\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

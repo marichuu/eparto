@@ -63,6 +63,7 @@ class Risque extends CI_Controller {
                     $dateCreation = new DateTime();
                     $femme_id = $this->input->post('femme_id');
                     $femme = $this->_em->find('Entity\\Femme', $femme_id);
+                    $user = findUser();
                             
                     $risque = new Entity\Risque();
                     $risque->setTaille($taille);
@@ -75,6 +76,7 @@ class Risque extends CI_Controller {
                     $risque->setDernierEnfant($dernier_enfant);
                     $risque->setCreatedDate($dateCreation);
                     $risque->setFemme($femme);
+                    $risque->setUser($user);
                     
                     $this->_em->persist($risque);
                     $this->_em->flush();

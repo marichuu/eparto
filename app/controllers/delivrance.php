@@ -34,6 +34,13 @@ class Delivrance extends CI_Controller {
         $data['femme'] = $femme = $this->_em->find('Entity\\Femme',(int)decrypter($id));
         $this->twig->display("home/delivrance.html.twig", $data);
     }
+    public function add_refer() {
+        $id = str_replace(' ', '+', $_GET['xl']); 
+        if($id=="") redirect('');
+        $data['femme'] = $femme = $this->_em->find('Entity\\Femme',(int)decrypter($id));
+        $data['refer'] = 1;
+        $this->twig->display("home/delivrance.html.twig", $data);
+    }
 
     public function create() {
         if ($_POST) {
@@ -63,6 +70,7 @@ class Delivrance extends CI_Controller {
                     $dateCreation = new DateTime();
                     $femme_id = $this->input->post('femme_id');
                     $femme = $this->_em->find('Entity\\Femme', $femme_id);
+                    $user = findUser();
                     
                             
                     $delivrance = new Entity\Delivrance();
@@ -75,6 +83,7 @@ class Delivrance extends CI_Controller {
                     $delivrance->setPoidsPlacenta($poids);
                     $delivrance->setCreatedDate($dateCreation);
                     $delivrance->setFemme($femme);
+                    $delivrance->setUser($user);
                     
                     
                     $femme->setStatus("2");
@@ -87,8 +96,11 @@ class Delivrance extends CI_Controller {
                         $ref = new Entity\Reference();
                         $ref->setMotif($motif);
                         $ref->setStructure($structure);
+                        $ref->setCreatedDate($dateCreation);
+                        $ref->setUser($user);
                         $ref->setFemme($femme);
                         $this->_em->persist($ref);
+                        $femme->setStatus("3");
                     }
                     $this->_em->flush();
                     setMessages('Operation effectuée avec succes.', 'success');
@@ -103,4 +115,46 @@ class Delivrance extends CI_Controller {
         }
     }   
 
+    public function refer() {
+        if ($_POST) {
+            $config = array(
+                forme_rules('motif', 'Motif', 'trim|required'),
+                forme_rules('structure', 'Structure', 'trim|required'),
+            );
+            $this->form_validation->set_rules($config);
+            if (!$this->form_validation->run('add')) {
+                if (!validation_errors() == '') {
+                    $msg = array('insert' => validation_errors());
+                    setMessages($msg, 'danger');
+                }
+            } else {
+                try {
+                   
+                    $motif = $this->input->post('motif');
+                    $structure = $this->input->post('structure');
+                    $dateCreation = new DateTime();
+                    $femme_id = $this->input->post('femme_id');
+                    $femme = $this->_em->find('Entity\\Femme', $femme_id);
+                    $user = findUser();
+                    
+                    $ref = new Entity\Reference();
+                    $ref->setMotif($motif);
+                    $ref->setStructure($structure);
+                    $ref->setFemme($femme);
+                    $ref->setCreatedDate($dateCreation);
+                    $ref->setUser($user);
+                    $this->_em->persist($ref);
+                    $femme->setStatus("3");
+                    $this->_em->flush();
+                    setMessages('Operation effectuée avec succes.', 'success');
+                } catch (DBALException $e) {
+                    setMessages('Erreur lors de l\'enregistrement. ', 'danger');
+                    setMessages($e->getMessage(), 'danger');
+                    redirect('delivrance/add_refer');
+                }
+            }
+
+            redirect('home/home');
+        }
+    }  
 }

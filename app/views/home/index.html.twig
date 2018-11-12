@@ -9,34 +9,38 @@
     <div class="wrapper">
         <br>
         <div class="row">
-                {{ getMessages()|raw }}
-            </div>
+            {{ getMessages()|raw }}
+        </div>
         <div class="widget">
             <div id="user-stats">
                 <ul class="round-buttons">
                     <li><div class="depth"><a href="{{site_url('femme/add')}}" title="Ajouter une femme" class="tip"><i class="icon-plus"></i></a></div></li>
                 </ul>
             </div>
-           <!-- <div id="user-stats">
-                <ul class="round-buttons">
-                    <li><div class="depth"><a href="" title="RSS feed" class="tip"><i class="icon-rss"></i></a></div></li>
-                    <li><div class="depth"><a href="" title="Create new task" class="tip"><i class="icon-tasks"></i></a></div></li>
-                    <li><div class="depth"><a href="" title="Layout settings" class="tip"><i class="icon-cogs"></i></a></div></li>
-                </ul>
-            </div>-->
+            <!-- <div id="user-stats">
+                 <ul class="round-buttons">
+                     <li><div class="depth"><a href="" title="RSS feed" class="tip"><i class="icon-rss"></i></a></div></li>
+                     <li><div class="depth"><a href="" title="Create new task" class="tip"><i class="icon-tasks"></i></a></div></li>
+                     <li><div class="depth"><a href="" title="Layout settings" class="tip"><i class="icon-cogs"></i></a></div></li>
+                 </ul>
+             </div>-->
             <div class="well row-fluid">
                 <div  id="framework-content">
                     <div class="tabbable"><!-- default tabs -->
-                        {% include "home/tab1.html.twig" %}
+                        <ul class="nav nav-tabs">
+                            <li id="table1" class="active"><a href="#tab1" data-toggle="tab">{{'Travail'}}</a></li>
+                            <li id="table2"><a href="#tab2" data-toggle="tab">{{'Post partum'}}</a></li>
+                            <li id="table3"><a  href="#tab3" alt="Actif" data-toggle="tab">{{'Archive'}}</a></li> 
+                        </ul> 
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">                              
                                 <div id="impactCreate">
- {% include "home/accouchement.html.twig" %}
+                                    {% include "home/accouchement.html.twig" %}
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab2">                               
                                 <div id="outcomeCreate">
-{% include "home/postPartum.html.twig" %}
+                                    {% include "home/postPartum.html.twig" %}
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab3" >           

@@ -1,34 +1,23 @@
-{% block content %}
-    <div class="wrapper">
-        <div class="wrapper_small">
-            <br>
-            <div class="widget">
-                {% for femme in Pfemmes %}
-                    <div class="well invoice">
-                        <div class="invoice-head">
-                            <a href="#" title="invoice" class="invoice-logo">{{femme.prenom}} {{femme.nom}}</a>
-                            <ul class="pull-right minus-list invoice-data">
-                                <li>Entrée: <strong class="text-info pull-right">{{femme.dateEntree|date}}</strong></li>
-                                <li>age: <span class="pull-right">{{femme.age}}</span></li>
-                                <li>Motif: <strong class="pull-right text-error">{{femme.motif}}</strong></li>
-                                {% if(femme.heureRuptureMembrane is not null) %}<li>Date D : <strong class="pull-right text-error">{{femme.delivrance.date|date}}</strong></li>{% endif %}
-                                <a href="{{site_url('decharge/add')}}/?xl={{ femme.id|crypter }}"><button type="button" class="btn btn-danger"><i class="icon-arrow-right"></i>&nbsp;Decharge</button></a>
-                            </ul>
-                        </div>
-                        <div class="invoice-footer">
-                            <span class="footer-note"></span>
-                            <ul class="">
-                                <a href="{{site_url('home/home/addData')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-application-edit"></i> Infos accouchement </li></a>&nbsp;&nbsp;
-                                <a href=""<li><i class="ico-share-alt"></i>Référer</li></a> &nbsp;&nbsp;
-                                <a href=""<li><i class="fam-chart-line"></i>Partographe</li></a>&nbsp;&nbsp; 
-                            </ul>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+
+{% for femme in Pfemmes %}
+    <div class="well invoice">
+        <div class="invoice-head">
+            <a href="#" title="invoice" class="invoice-logo">{{femme.prenom}} {{femme.nom}}</a>
+            <ul class="pull-right minus-list invoice-data">
+                <li>Entrée: <strong class="text-info pull-right">{{femme.dateEntree|date}}</strong></li>
+                <li>age: <span class="pull-right">{{femme.age}}</span></li>
+                <li>Motif: <strong class="pull-right text-error">{{femme.motif}}</strong></li>
+                {% if(femme.heureRuptureMembrane is not null) %}<li>Date D : <strong class="pull-right text-error">{{femme.delivrance.date|date}}</strong></li>{% endif %}
+                <a href="{{site_url('decharge/add')}}/?xl={{ femme.id|crypter }}"><button type="button" class="btn btn-danger"><i class="icon-arrow-right"></i>&nbsp;Decharge</button></a>
+            </ul>
         </div>
-        <!-- /invoice -->
+        <div class="invoice-footer">
+            <span class="footer-note"></span>
+            <ul class="">
+                <a href="{{site_url('home/home/addData')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-application-edit"></i> Infos accouchement </li></a>&nbsp;&nbsp;
+                <a href="{{site_url('delivrance/add_refer')}}/?xl={{ femme.id|crypter }}"<li><i class="ico-share-alt"></i>Référer</li></a> &nbsp;&nbsp;
+                <a href=""<li><i class="fam-chart-line"></i>Partographe</li></a>&nbsp;&nbsp; 
+            </ul>
+        </div>
     </div>
-</div>
-</div>
-{% endblock %}
+{% endfor %}

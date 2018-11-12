@@ -22,7 +22,7 @@ class Evenement extends CI_Controller {
         $this->twig->display("evenement/index.html.twig", $data);
    }
    
-   public function bcf() {
+   public function add_bcf() {
         $id = str_replace(' ', '+', $_GET['xl']); 
         if($id=="") redirect('');
         $data['femme'] = $femme = $this->_em->find('Entity\\Femme',(int)decrypter($id));
@@ -41,6 +41,45 @@ class Evenement extends CI_Controller {
             'indicator' => $indicator, 'periodicity' => $periodicity, 'structure' => $structure, 'annee' => $date));
         $this->twig->display("dataentry/activityData/gender.html.twig", $data);
     }
+    
+    public function bcf() {
+        if ($_POST) {
+            $config = array(
+                forme_rules('value', 'BCF', 'trim|required'),
+            );
+            $this->form_validation->set_rules($config);
+            if (!$this->form_validation->run('add')) {
+                if (!validation_errors() == '') {
+                    $msg = array('insert' => validation_errors());
+                    setMessages($msg, 'danger');
+                }
+            } else {
+                try {
+                   
+                    $value = $this->input->post('value');
+                    $dateCreation = new DateTime();
+                    $femme_id = $this->input->post('femme_id');
+                    $femme = $this->_em->find('Entity\\Femme', $femme_id);
+                    $user = findUser();
+                    
+                    $bcf = new Entity\Bcf();
+                    $bcf->setValue($value);
+                    $bcf->setFemme($femme);
+                    $bcf->setCreatedDate($dateCreation);
+                    $bcf->setUser($user);
+                    $this->_em->persist($bcf);
+                    $this->_em->flush();
+                    setMessages('Operation effectuée avec succes.', 'success');
+                } catch (DBALException $e) {
+                    setMessages('Erreur lors de l\'enregistrement. ', 'danger');
+                    setMessages($e->getMessage(), 'danger');
+                    redirect('delivrance/add_refer');
+                }
+            }
+
+            redirect('home/home');
+        }
+    } 
 
 }
 

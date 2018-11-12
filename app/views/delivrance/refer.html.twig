@@ -1,0 +1,33 @@
+<div class="wrapper"> 
+    <div class="wrapper_small">   
+        <br>
+        <div class="row">
+            {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div class="navbar"><div class="navbar-inner"><h6>Reference de  ( {{femme.prenom}} {{femme.nom}} ) </h6></div></div>
+            <div class="well row-fluid">
+                <form id="validate" class="form-horizontal" action="{{ site_url("delivrance/refer") }}" method="post"> 
+
+                    <div class="control-group reference">
+                        <label class="control-label">Motif: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type='text' name='motif' id='motif' class='validate[required] span6'>
+                            <input type='hidden' name='femme_id' value='{{femme.id}}'>
+                        </div>
+                    </div>
+                    <div class="control-group reference">
+                        <label class="control-label">Vers: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type='text' name='structure' placeholder='Structure' id='structure' class='validate[required] span6'>
+                        </div>
+                    </div>
+                    <div class="form-actions align-right">
+                        <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                    </div>
+                </form>  
+            </div> 
+        </div>
+
+    </div>     
+</div>   

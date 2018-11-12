@@ -1,41 +1,28 @@
-{% block content %}
-    <div class="wrapper">
-        <div class="wrapper_small">
-            <br>
-            <div class="widget">
-
-                <!--<button type="button" class="btn btn-primary pull-right"><b class="icon-plus"></b>Ajouter</button></a></div></div>
-                <!-- Invoice -->
-                {% for femme in femmes %}
-                    <div class="well invoice">
-                        <div class="invoice-head">
-                            <a href="#" title="invoice" class="invoice-logo">{{femme.prenom}} {{femme.nom}}</a>
-                            <ul class="pull-right minus-list invoice-data">
-                                <li>Entrée: <strong class="text-info pull-right">{{femme.dateEntree|date}}</strong></li>
-                                <li>age: <span class="pull-right">{{femme.age}}</span></li>
-                                <li>Motif: <strong class="pull-right text-error">{{femme.motif}}</strong></li>
-                                {% if(femme.heureRuptureMembrane is not null) %} <li>Rup. M : <strong class="pull-right text-error">{{femme.heureRuptureMembrane|date}}</strong></li>{% endif %}
-                                <a href="{{site_url('delivrance/add')}}/?xl={{ femme.id|crypter }}"><button type="button" class="btn btn-info"><i class="fam-resultset-next"></i>Delivrance</button></a>
-                            </ul>
-                        </div>
 
 
-                        <div class="invoice-footer">
-                            <span class="footer-note"></span>
-                            <ul class="">
-                                <a href="{{site_url('home/home/addData')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-application-cascade"></i> Saisie de données</li></a>&nbsp;&nbsp;
-                               <!-- <a href="{{site_url('risque/add')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-rosette"></i> Risque</li></a>&nbsp;&nbsp;
-                                <a href="{{site_url('examen/add')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-application-cascade"></i>1er Examen</li></a>&nbsp;&nbsp;-->
-                                <a href=""<li><i class="ico-share-alt"></i>Référer</li></a> &nbsp;&nbsp;
-                                <a href=""<li><i class="fam-chart-line"></i>Partographe</li></a>&nbsp;&nbsp; 
-                            </ul>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+<!--<button type="button" class="btn btn-primary pull-right"><b class="icon-plus"></b>Ajouter</button></a></div></div>
+<!-- Invoice -->
+{% for f in femmes %}
+    <div class="well invoice">
+        <div class="invoice-head">
+            <a href="#" title="invoice" class="invoice-logo">{{f.prenom}} {{f.nom}}</a>
+            <ul class="pull-right minus-list invoice-data">
+                <li>Entrée: <strong class="text-info pull-right">{{f.dateEntree|date}}</strong></li>
+                <li>age: <span class="pull-right">{{f.age}}</span></li>
+                <li>Motif: <strong class="pull-right text-error">{{f.motif}}</strong></li>
+                {% if(f.heureRuptureMembrane is not null) %} <li>Rup. M : <strong class="pull-right text-error">{{f.heureRuptureMembrane|date}}</strong></li>{% endif %}
+                <a href="{{site_url('delivrance/add')}}/?xl={{ f.id|crypter }}"><button type="button" class="btn btn-info"><i class="fam-resultset-next"></i>Delivrance</button></a>
+            </ul>
         </div>
-        <!-- /invoice -->
+
+
+        <div class="invoice-footer">
+            <span class="footer-note"></span>
+            <ul class="">
+                <a href="{{site_url('home/home/addData')}}/?xl={{ f.id|crypter }}"<li><i class="fam-application-cascade"></i> Saisie de données</li></a>&nbsp;&nbsp;
+                <a href="{{site_url('delivrance/add_refer')}}/?xl={{ f.id|crypter }}"<li><i class="ico-share-alt"></i>Référer</li></a> &nbsp;&nbsp;
+                <a href=""<li><i class="fam-chart-line"></i>Partographe</li></a>&nbsp;&nbsp; 
+            </ul>
+        </div>
     </div>
-</div>
-</div>
-{% endblock %}
+{% endfor %}

@@ -7,8 +7,8 @@
 
     <div class="wrapper">
         <br>
-    <div class="row">
-        {{ getMessages()|raw }}
+        <div class="row">
+            {{ getMessages()|raw }}
         </div>
         <div class="widget">
             <div class="well row-fluid">
@@ -19,7 +19,12 @@
                             <div class="tab-pane active" id="tab1">                              
                                 <div id="impactCreate">
                                     <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
- {% include "delivrance/create.html.twig" %}
+                                    <input type="hidden" value="{{refer}}" class="span4" name="refer" id=""/>
+                                    {%if(refer==1)%}
+                                        {% include "delivrance/refer.html.twig" %}
+                                    {%else%}
+                                        {% include "delivrance/create.html.twig" %}
+                                    {%endif%}
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab2">                               

@@ -63,6 +63,7 @@ class Examen extends CI_Controller {
                     $femme_id = $this->input->post('femme_id'); 
                     $autreFacteurRisque = $this->input->post('autre_facteur_risque');
                     $femme = $this->_em->find('Entity\\Femme', $femme_id);
+                    $user = findUser();
                             
                     $examen = new Entity\Examen();
                     $examen->setTa($ta);
@@ -75,6 +76,7 @@ class Examen extends CI_Controller {
                     $examen->setAutreFacteurRisque($autreFacteurRisque);
                     $examen->setCreatedDate($dateCreation);
                     $examen->setFemme($femme);
+                    $examen->setUser($user);
                     
                     $this->_em->persist($examen);
                     $this->_em->flush();

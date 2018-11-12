@@ -61,12 +61,15 @@ class Femme extends CI_Controller {
                     $user = findUser();
                     $structure = $user->getStructure();
                     $motif = $this->input->post('motif');
+                    $rupture_membrane = $this->input->post('rupture_membrane');
                     $date_entree = $this->input->post('date_entree');
                     $heure_entree = $this->input->post('heure_entree').":00";
                     $date_travail = $this->input->post('date_travail');
                     $heure_travail = $this->input->post('heure_travail').":00";
-                    $date_rupture = $this->input->post('date_rupture');
-                    $heure_rupture = $this->input->post('heure_rupture').":00";
+                    if($rupture_membrane == 1){
+                        $date_rupture = $this->input->post('date_rupture');
+                        $heure_rupture = $this->input->post('heure_rupture').":00";
+                    }
                     
                     $femme = new Entity\Femme();
                     $femme->setAge($age);
@@ -82,7 +85,9 @@ class Femme extends CI_Controller {
                     $femme->setStatus(1);
                     $femme->setMotif($motif);
                     $femme->setStructure($structure);
+                    $femme->setUser($user);
                     $femme->setDateEntree(new \DateTime($date_entree." ".$heure_entree));
+                    if($rup)    
                     $femme->setDateDebutTravail(new \DateTime($date_travail." ".$heure_travail));
                     $femme->setHeureRuptureMembrane(new \DateTime($date_rupture." ".$heure_rupture));
                     

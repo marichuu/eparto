@@ -24,7 +24,7 @@ class Bcf
     /**
      * @var string
      *
-     * @Column(name="taille", type="string", length=255)
+     * @Column(name="value", type="string", length=255)
      */
     private $value;
     
@@ -45,6 +45,16 @@ class Bcf
      * @Column(name="created_date", type="datetime", nullable=true)
      */
     private $createdDate;
+    
+    /**
+     * @var \Entity\User
+     *
+     * @ManyToOne(targetEntity="User")
+     * @JoinColumns({
+     *   @JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $user;
     
     
 
@@ -128,5 +138,29 @@ class Bcf
     public function getFemme()
     {
         return $this->femme;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Entity\User $user
+     *
+     * @return Bcf
+     */
+    public function setUser(\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -105,14 +105,17 @@ class Femme {
      * })
      */
     private $structure;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
+    
+     /**
+     * @var \Entity\User
      *
-     * @OneToMany(targetEntity="Entity\Delivrance", mappedBy="femme")
-     *
+     * @ManyToOne(targetEntity="User")
+     * @JoinColumns({
+     *   @JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * })
      */
-    private $delivrance;
+    private $user;
+
 
     /**
      * @var string
@@ -491,4 +494,28 @@ class Femme {
         return $this->heureRuptureMembrane;
     }
 
+
+    /**
+     * Set user
+     *
+     * @param \Entity\User $user
+     *
+     * @return Femme
+     */
+    public function setUser(\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

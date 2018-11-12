@@ -94,6 +94,16 @@ class Risque
     private $createdDate;
     
     /**
+     * @var \Entity\User
+     *
+     * @ManyToOne(targetEntity="User")
+     * @JoinColumns({
+     *   @JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $user;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -337,5 +347,29 @@ class Risque
     public function getNbCpn()
     {
         return $this->nbCpn;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Entity\User $user
+     *
+     * @return Risque
+     */
+    public function setUser(\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
