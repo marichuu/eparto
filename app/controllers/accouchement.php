@@ -25,6 +25,6 @@ class Accouchement extends CI_Controller {
         $id = str_replace(' ', '+', $_GET['xl']); 
         if($id=="") redirect('');
         $data['femme'] = $femme = $this->_em->find('Entity\\Femme',(int)decrypter($id));
-        $this->twig->display("accouchement/liste.html.twig", $data);
+        $this->twig->display("accouchement/list.html.twig", $data);
     }
 }
