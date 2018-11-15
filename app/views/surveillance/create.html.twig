@@ -1,4 +1,5 @@
-<div class="wrapper"> 
+{#{% block content %}#}
+    <div class="wrapper"> 
     <div class="wrapper_small">   
         <br>
         <div class="row">
@@ -29,6 +30,19 @@
                                 <option value="1">Bien formé (dur)</option>
                                 <option value="2">Mal formé (mou)</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{"Globe de sécurité"}}: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <label class="radio inline">
+                                <input class="styled" type="radio" name="globeSecurite" value="1" data-prompt-position="topLeft:-1,-5"/>
+                                Oui
+                            </label>
+                            <label class="radio inline">
+                                <input class="styled" type="radio" name="globeSecurite" value="0" data-prompt-position="topLeft:-1,-5"/>
+                                Non
+                            </label>
                         </div>
                     </div>
                     <div class="control-group">
@@ -69,4 +83,4 @@
         </div>
 
     </div>     
-</div>   
+</div>

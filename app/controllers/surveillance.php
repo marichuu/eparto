@@ -41,7 +41,7 @@ class Surveillance extends CI_Controller {
         $data['femme'] = $femme = $this->_em->find('Entity\\Femme', (int) decrypter($id));
         $surveillances = $this->_em->getRepository('Entity\\Surveillance')->findBy(array('femme' => $femme), array('id' => 'asc'));
         $data['surveillances'] = $surveillances;
-        $this->twig->display("surveillance/form.html.twig", $data);
+        $this->twig->display("home/surveillance.html.twig", $data);
     }
 
     public function create() {
@@ -101,8 +101,8 @@ class Surveillance extends CI_Controller {
                 }
             }
 
-//            redirect('surveillance/form');
-            $this->twig->display("surveillance/form.html.twig", $data);
+//            redirect('home/surveillance');
+            $this->twig->display("home/surveillance.html.twig", $data);
         }
     }
 

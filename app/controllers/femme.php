@@ -85,7 +85,7 @@ class Femme extends CI_Controller {
                     $femme->setStatus(1);
                     $femme->setMotif($motif);
                     $femme->setStructure($structure);
-                    $femme->setUser($user);
+                    $femme->setUser($user); 
                     $femme->setDateEntree(new \DateTime($date_entree." ".$heure_entree));
                     if($rup)    
                     $femme->setDateDebutTravail(new \DateTime($date_travail." ".$heure_travail));

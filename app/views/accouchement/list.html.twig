@@ -1,0 +1,21 @@
+
+{% block content %}
+    
+    <div class="wrapper"> 
+        <div class="wrapper_small"> 
+           
+            <div class="widget">
+                <div class="tab-pane active" id="glyphs">
+                            <ul class="clearfix">
+                                <li><a href="{{site_url('evenement/pde')}}/?xl={{ femme.id|crypter }}"><i class="fam-table-multiple"></i> Pouls / TA </a></li>
+                                <li><a href="{{site_url('evenement/pde')}}/?xl={{ femme.id|crypter }}"><i class="fam-table-multiple"></i> Temperature</a></li>
+                                <li><a href="{{site_url('evenement/pde')}}/?xl={{ femme.id|crypter }}"><i class="fam-table-multiple"></i> urine </a></li>
+                                
+                            </ul>    
+                </div>
+            </div>
+	 
+        </div>     
+    </div>   
+
+{% endblock %}
