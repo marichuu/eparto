@@ -3,12 +3,12 @@
 namespace Entity;
 
 /**
- * Pde
+ * Temperature
  *
- * @Table(name="pde")
+ * @Table(name="temperature")
  * @Entity
  */
-class Pde {
+class Temperature {
 
     /**
      * @var integer
@@ -26,12 +26,6 @@ class Pde {
      */
     private $value;
 
-    /**
-     * @var string
-     *
-     * @Column(name="chevauchement", type="string", length=255, nullable=true)
-     */
-    private $chevauchement;
 
     /**
      * @var \Entity\Femme
@@ -61,6 +55,7 @@ class Pde {
     private $user;
 
 
+
     /**
      * Get id
      *
@@ -76,7 +71,7 @@ class Pde {
      *
      * @param string $value
      *
-     * @return Pde
+     * @return Temperature
      */
     public function setValue($value)
     {
@@ -96,35 +91,11 @@ class Pde {
     }
 
     /**
-     * Set chevauchement
-     *
-     * @param string $chevauchement
-     *
-     * @return Pde
-     */
-    public function setChevauchement($chevauchement)
-    {
-        $this->chevauchement = $chevauchement;
-    
-        return $this;
-    }
-
-    /**
-     * Get chevauchement
-     *
-     * @return string
-     */
-    public function getChevauchement()
-    {
-        return $this->chevauchement;
-    }
-
-    /**
      * Set createdDate
      *
      * @param \DateTime $createdDate
      *
-     * @return Pde
+     * @return Temperature
      */
     public function setCreatedDate($createdDate)
     {
@@ -148,7 +119,7 @@ class Pde {
      *
      * @param \Entity\Femme $femme
      *
-     * @return Pde
+     * @return Temperature
      */
     public function setFemme(\Entity\Femme $femme)
     {
@@ -172,7 +143,7 @@ class Pde {
      *
      * @param \Entity\User $user
      *
-     * @return Pde
+     * @return Temperature
      */
     public function setUser(\Entity\User $user = null)
     {

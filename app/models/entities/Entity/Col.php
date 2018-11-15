@@ -2,14 +2,16 @@
 
 namespace Entity;
 
+
 /**
- * Pde
+ * Col
  *
- * @Table(name="pde")
+ * @Table(name="col")
  * @Entity
  */
-class Pde {
-
+ 
+class Col
+{
     /**
      * @var integer
      *
@@ -18,22 +20,24 @@ class Pde {
      * @GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
+    
     /**
      * @var string
      *
-     * @Column(name="value", type="string", length=255)
+     * @Column(name="col", type="string", length=255)
      */
-    private $value;
-
+    private $col;
+    
+    
     /**
      * @var string
      *
-     * @Column(name="chevauchement", type="string", length=255, nullable=true)
+     * @Column(name="descente_tete", type="string", length=255)
      */
-    private $chevauchement;
-
-    /**
+    private $descenteTete;
+    
+    
+      /**
      * @var \Entity\Femme
      *
      * @ManyToOne(targetEntity="Femme")
@@ -49,7 +53,7 @@ class Pde {
      * @Column(name="created_date", type="datetime", nullable=true)
      */
     private $createdDate;
-
+    
     /**
      * @var \Entity\User
      *
@@ -59,7 +63,8 @@ class Pde {
      * })
      */
     private $user;
-
+    
+    
 
     /**
      * Get id
@@ -72,51 +77,51 @@ class Pde {
     }
 
     /**
-     * Set value
+     * Set col
      *
-     * @param string $value
+     * @param string $col
      *
-     * @return Pde
+     * @return Col
      */
-    public function setValue($value)
+    public function setCol($col)
     {
-        $this->value = $value;
+        $this->col = $col;
     
         return $this;
     }
 
     /**
-     * Get value
+     * Get col
      *
      * @return string
      */
-    public function getValue()
+    public function getCol()
     {
-        return $this->value;
+        return $this->col;
     }
 
     /**
-     * Set chevauchement
+     * Set descenteTete
      *
-     * @param string $chevauchement
+     * @param string $descenteTete
      *
-     * @return Pde
+     * @return Col
      */
-    public function setChevauchement($chevauchement)
+    public function setDescenteTete($descenteTete)
     {
-        $this->chevauchement = $chevauchement;
+        $this->descenteTete = $descenteTete;
     
         return $this;
     }
 
     /**
-     * Get chevauchement
+     * Get descenteTete
      *
      * @return string
      */
-    public function getChevauchement()
+    public function getDescenteTete()
     {
-        return $this->chevauchement;
+        return $this->descenteTete;
     }
 
     /**
@@ -124,7 +129,7 @@ class Pde {
      *
      * @param \DateTime $createdDate
      *
-     * @return Pde
+     * @return Col
      */
     public function setCreatedDate($createdDate)
     {
@@ -148,7 +153,7 @@ class Pde {
      *
      * @param \Entity\Femme $femme
      *
-     * @return Pde
+     * @return Col
      */
     public function setFemme(\Entity\Femme $femme)
     {
@@ -172,7 +177,7 @@ class Pde {
      *
      * @param \Entity\User $user
      *
-     * @return Pde
+     * @return Col
      */
     public function setUser(\Entity\User $user = null)
     {

@@ -1,0 +1,87 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+    Medicament  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% set pietable = '' %}
+
+    <div class="wrapper">
+        <br>
+        <div class="row">
+            {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div id="user-stats">
+                <ul class="round-buttons">
+                    <li><div class="depth"><a href="{{site_url('femme/add')}}" title="Ajouter une femme" class="tip"><i class="icon-plus"></i></a></div></li>
+                </ul>
+            </div>
+            <div class="well row-fluid">
+                <div  id="framework-content">
+                    <div class="tabbable"><!-- default tabs -->
+                        {% include "home/tab1.html.twig" %}
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">                              
+                                <div id="impactCreate">
+                                    <form id="validate" class="form-horizontal" action="{{ site_url("evenement/medicament") }}" method="post"> 
+                                        <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
+                                        <fieldset class="form-horizontal">
+                                            <div>
+                                                <div class="navbar"><div class="navbar-inner"><h6>Medicament</h6><span style="float: right">&nbsp;&nbsp;&nbsp;</span></div></div>
+                                                <div class="well row-fluid">
+                                                    <div class="control-group">
+                                                        <div class="row-fluid"> 
+                                                            <div class="control-group">
+                                                                <label class="control-label">Medicaments prescrits et Liquides IV: <span class="text-error">*</span></label>
+                                                                <div class="controls">
+                                                                    <textarea name="value" class="span10"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-actions align-right">
+                                                        <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                                                    </div>
+
+
+                                                </div> 
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                    {% for m in medicaments %}
+                                        <div class="widget">
+                                            <div class="navbar"><div class="navbar-inner"><h6> {{m.createdDate|date()}}</h6></div></div>
+                                            <div class="table-overflow">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Valeur</th>
+                                                            <td>{{ m.value }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    {% endfor%}
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab2">                               
+                                <div id="outcomeCreate">
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab3" >           
+                                <div id="outputCreate">
+
+                                </div>
+                            </div>
+                            <div class="form-actions align-right">
+                                <a href="{{site_url("home/home")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Quiter'}}</button>  </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>{% endblock %}

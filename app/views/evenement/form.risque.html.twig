@@ -3,81 +3,81 @@
     <div class="wrapper"> 
         <div class="wrapper_small"> 
             {% if(nb_risque == 0 ) %}    
-            <br>
+                <br>
 
-            <div class="row">
-                {{ getMessages()|raw }}
-            </div>
-            <div class="widget">
-                <div class="navbar"><div class="navbar-inner"><h6>{{"Risque"}} / {{"Nouveau"}} ( {{femme.prenom}} {{femme.nom}} ) </h6></div></div>
-                <div class="well row-fluid">
-                    <form id="validate" class="form-horizontal" action="{{ site_url("risque/create") }}" method="post"> 
-
-                        <div class="control-group">
-                            <label class="control-label">{{"Taille"}}: <span class="text-error">*</span></label>
-                            <div class="controls">
-                                <input type="number" value="{{set_value('taille')}}" class="validate[required] span4" name="taille" id="taille"/>
-                                 <input type="hidden" value="{{femme.id}}" class="validate[required] span4" name="femme_id" id="femme_id"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">{{"Hémoragie"}}: <span class="text-error">*</span></label>
-                            <div class="controls">
-                                <label class="radio inline"><input type="radio" name="hemoragie" id="active1" value="1" class="styled" >Oui</label>
-                                <label class="radio inline"><input type="radio" name="hemoragie" id="active2" value="0" class="styled" >Non</label> 
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">{{"A terme"}}: <span class="text-error">*</span></label>
-                            <div class="controls">
-                                <label class="radio inline"><input type="radio" name="terme" id="active1" value="1" class="styled" >Oui</label>
-                                <label class="radio inline"><input type="radio" name="terme" id="active2" value="0" class="styled" >Non</label> 
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">{{"CPN"}}: <span class="text-error">*</span></label>
-                            <div class="controls">
-                                <label class="radio inline"><input type="radio" name="cpn" id="cpn1" value="1" class="styled" >Oui</label>
-                                <label class="radio inline"><input type="radio" name="cpn" id="cpn2" value="0" class="styled" >Non</label> 
-                            </div>
-                            <div class="controls nb_cpn">
-                            <input type="number" placeholder="nombre de CPN" value="{{set_value('cpn')}}" class="span4" name="nb_cpn" id="nb_cpn"/>
-                        </div>  
-                         </div>  
-                        <div class="control-group">
-                            <label class="control-label">{{"Césarienne dernier accouchement"}}: <span class="text-error">*</span></label>
-                            <div class="controls">
-                                <label class="radio inline"><input type="radio" name="cesa_dernier_acc" id="active1" value="1" class="styled" >Oui</label>
-                                <label class="radio inline"><input type="radio" name="cesa_dernier_acc" id="active2" value="0" class="styled" >Non</label> 
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">{{"Présentation"}}: <span class="text-error">*</span></label>
-                            <div class="controls">
-                                <label class="radio inline"><input type="radio" name="presentation" id="active1" value="1" class="styled" >Sommet</label>
-                                <label class="radio inline"><input type="radio" name="presentation" id="active2" value="2" class="styled" >Siège/Face</label>
-                                <label class="radio inline"><input type="radio" name="presentation" id="active2" value="3" class="styled" >Epaule/Front</label>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">{{"Dernier enfant"}}: <span class="text-error">*</span></label>
-                            <div class="controls">
-                                <label class="radio inline"><input type="radio" name="dernier_enfant" id="active1" value="1" class="styled" >Vivant</label>
-                                <label class="radio inline"><input type="radio" name="dernier_enfant" id="active2" value="0" class="styled" >Mort-né</label> 
-                            </div>
-                        </div> 
-
-
-                        <div class="form-actions align-right">
-                            <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
-                        </div>
-                    </form>  
-                </div> 
-            </div>
-                            {% else %}
-             <!-- Default table -->
+                <div class="row">
+                    {{ getMessages()|raw }}
+                </div>
                 <div class="widget">
-                	<div class="navbar"><div class="navbar-inner"><h6> Risques ( {{femme.prenom}} {{femme.nom}} )</h6></div></div>
+                    <div class="navbar"><div class="navbar-inner"><h6>{{"Risque"}} / {{"Nouveau"}} ( {{femme.prenom}} {{femme.nom}} ) </h6></div></div>
+                    <div class="well row-fluid">
+                        <form id="validate" class="form-horizontal" action="{{ site_url("risque/create") }}" method="post"> 
+
+                            <div class="control-group">
+                                <label class="control-label">{{"Taille"}}: <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    <input type="number" value="{{set_value('taille')}}" class="validate[required] span4" name="taille" id="taille"/>
+                                    <input type="hidden" value="{{femme.id}}" class="validate[required] span4" name="femme_id" id="femme_id"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">{{"Hémoragie"}}: <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    <label class="radio inline"><input type="radio" name="hemoragie" id="active1" value="1" class="styled" >Oui</label>
+                                    <label class="radio inline"><input type="radio" name="hemoragie" id="active2" value="0" class="styled" >Non</label> 
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">{{"A terme"}}: <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    <label class="radio inline"><input type="radio" name="terme" id="active1" value="1" class="styled" >Oui</label>
+                                    <label class="radio inline"><input type="radio" name="terme" id="active2" value="0" class="styled" >Non</label> 
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">{{"CPN"}}: <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    <label class="radio inline"><input type="radio" name="cpn" id="cpn1" value="1" class="styled" >Oui</label>
+                                    <label class="radio inline"><input type="radio" name="cpn" id="cpn2" value="0" class="styled" >Non</label> 
+                                </div>
+                                <div class="controls nb_cpn">
+                                    <input type="number" placeholder="nombre de CPN" value="{{set_value('cpn')}}" class="span4" name="nb_cpn" id="nb_cpn"/>
+                                </div>  
+                            </div>  
+                            <div class="control-group">
+                                <label class="control-label">{{"Césarienne dernier accouchement"}}: <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    <label class="radio inline"><input type="radio" name="cesa_dernier_acc" id="active1" value="1" class="styled" >Oui</label>
+                                    <label class="radio inline"><input type="radio" name="cesa_dernier_acc" id="active2" value="0" class="styled" >Non</label> 
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">{{"Présentation"}}: <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    <label class="radio inline"><input type="radio" name="presentation" id="active1" value="1" class="styled" >Sommet</label>
+                                    <label class="radio inline"><input type="radio" name="presentation" id="active2" value="2" class="styled" >Siège/Face</label>
+                                    <label class="radio inline"><input type="radio" name="presentation" id="active2" value="3" class="styled" >Epaule/Front</label>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">{{"Dernier enfant"}}: <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    <label class="radio inline"><input type="radio" name="dernier_enfant" id="active1" value="1" class="styled" >Vivant</label>
+                                    <label class="radio inline"><input type="radio" name="dernier_enfant" id="active2" value="0" class="styled" >Mort-né</label> 
+                                </div>
+                            </div> 
+
+
+                            <div class="form-actions align-right">
+                                <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                            </div>
+                        </form>  
+                    </div> 
+                </div>
+            {% else %}
+                <!-- Default table -->
+                <div class="widget">
+                    <div class="navbar"><div class="navbar-inner"><h6> Risques ( {{femme.prenom}} {{femme.nom}} )</h6></div></div>
                     <div class="table-overflow">
                         <table class="table">
                             <tbody>
@@ -114,16 +114,16 @@
                     </div>
                 </div>
                 <!-- /default table -->                    
-                            {% endif %}
+            {% endif %}
         </div>     
     </div>   
-                            <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
+    <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
     <script type="text/javascript">
-       
-         $('#cpn1').click(function () {
+
+        $('#cpn1').click(function () {
             if (this.checked) {
                 $(".nb_cpn").show();
-               // alert("Oui");
+                // alert("Oui");
             }
         });
         $('#cpn2').click(function () {
@@ -133,6 +133,6 @@
                 // alert("Non");
             }
         });
-         $(".nb_cpn").hide();
+        $(".nb_cpn").hide();
     </script>
 {% endblock %}

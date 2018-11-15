@@ -1,0 +1,147 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+    Urine  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <br>
+        <div class="row">
+            {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div id="user-stats">
+                <ul class="round-buttons">
+                    <li><div class="depth"><a href="{{site_url('femme/add')}}" title="Ajouter une femme" class="tip"><i class="icon-plus"></i></a></div></li>
+                </ul>
+            </div>
+            <div class="well row-fluid">
+                <div  id="framework-content">
+                    <div class="tabbable"><!-- default tabs -->
+                        {% include "home/tab1.html.twig" %}
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">                              
+                                <div id="impactCreate">
+                                    <form id="validate" class="form-horizontal" action="{{ site_url("evenement/urine") }}" method="post"> 
+                                        <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
+                                        <fieldset class="form-horizontal">
+                                            <div>
+                                                <div class="navbar"><div class="navbar-inner"><h6>Urine</h6><span style="float: right">&nbsp;&nbsp;&nbsp;</span></div></div>
+                                                <div class="well row-fluid">
+                                                    <div class="control-group">
+                                                        <div class="row-fluid"> 
+
+                                                            <div class="control-group">
+                                                                <label class="control-label">Protéinurie: <span class="text-error">*</span></label>
+                                                                <div class="controls">
+                                                                    <label class="radio inline"><input type="radio" name="pro_res" id="pro1" value="1" class="styled" >Positif</label>
+                                                                    <label class="radio inline"><input type="radio" name="pro_res" id="pro2" value="0" class="styled" >Négatif</label> 
+                                                                </div>
+                                                                <div class="controls proteinurie">
+                                                                    <input type="text" placeholder="Valeur du protéinurie" value="{{set_value('proteinurie')}}" class="span4 validate[required] " name="proteinurie" id="proteinurie"/>
+                                                                </div>  
+                                                            </div> 
+                                                            <div class="control-group">
+                                                                <label class="control-label">Cétone: <span class="text-error">*</span></label>
+                                                                <div class="controls">
+                                                                    <label class="radio inline"><input type="radio" name="cetone_res" id="cetone1" value="1" class="styled" >Positif</label>
+                                                                    <label class="radio inline"><input type="radio" name="cetone_res" id="cetone2" value="0" class="styled" >Négatif</label> 
+                                                                </div>
+                                                                <div class="controls cetone">
+                                                                    <input type="text" placeholder="Valeur du cetome" value="{{set_value('cetone')}}" class="span4 validate[required] " name="cetone" id="cetone"/>
+                                                                </div>  
+                                                            </div> 
+
+                                                            <div class="control-group">
+                                                                <label class="control-label">Volume: </label>
+                                                                <div class="controls">
+                                                                    <div class="span12">
+                                                                        <input type="text" name="volume" value="" class="span4">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-actions align-right">
+                                                        <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                                                    </div>
+
+                                                </div> 
+
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                    <table class="table table-striped table-bordered" >
+                                        <thead>
+                                            <tr>
+                                                <th>Fais à</th>
+                                                <th>Protéinurie</th>
+                                                <th>Cétone</th>
+                                                <th>Volume</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for u in urines %}
+
+                                                <tr>
+                                                    <td>{{ u.createdDate|date("H:i") }}</td>
+                                                    <td>{{ u.proteinurie }}</td>
+                                                    <td>{{ u.cetone }}</td>
+                                                    <td>{{ u.volume }}</td>
+                                                </tr>
+
+                                            {% endfor %}  
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab2">                               
+                                <div id="outcomeCreate">
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab3" >           
+                                <div id="outputCreate">
+
+                                </div>
+                            </div>
+                            <div class="form-actions align-right">
+                                <a href="{{site_url("home/home")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Quiter'}}</button>  </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
+    <script type="text/javascript">
+
+        $('#pro1').click(function () {
+            if (this.checked) {
+                $(".proteinurie").show();
+            }
+        });
+        $('#pro2').click(function () {
+            if (this.checked) {
+                $("#proteinurie").val('');
+                $(".proteinurie").hide();
+            }
+        });
+        $('#cetone1').click(function () {
+            if (this.checked) {
+                $(".cetone").show();
+            }
+        });
+        $('#cetone2').click(function () {
+            if (this.checked) {
+                $("#cetone").val('');
+                $(".cetone").hide();
+            }
+        });
+        $(".proteinurie").hide();
+        $(".cetone").hide();
+
+    </script>
+{% endblock %}

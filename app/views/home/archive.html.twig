@@ -1,0 +1,56 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+    Archive  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% set pietable = '' %}
+
+    <div class="wrapper">
+        <br>
+        <div class="row">
+            {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div id="user-stats">
+                <ul class="round-buttons">
+                    <li><div class="depth"><a href="{{site_url('femme/add')}}" title="Ajouter une femme" class="tip"><i class="icon-plus"></i></a></div></li>
+                </ul>
+            </div>
+            <div class="well row-fluid">
+                <div  id="framework-content">
+                    <div class="tabbable"><!-- default tabs -->
+                        {% include "home/tab3.html.twig" %}
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab2">                               
+                                <div id="postPartum">
+                                    {% for femme in femmes %}
+                                        <div class="well invoice">
+                                            <div class="invoice-head">
+                                                <a href="#" title="invoice" class="invoice-logo">{{femme.prenom}} {{femme.nom}}</a>
+                                                <ul class="pull-right minus-list invoice-data">
+                                                    <li>Entrée: <strong class="text-info pull-right">{{femme.dateEntree|date}}</strong></li>
+                                                    <li>age: <span class="pull-right">{{femme.age}}</span></li>
+                                                    <li>Motif: <strong class="pull-right text-error">{{femme.motif}}</strong></li>
+                                                    <a href="{{site_url('home/home/partographe')}}/?xl={{ femme.id|crypter }}"><button type="button" class="btn"><i class="fam-chart-line"></i>&nbsp;Partographe</button></a>
+                                                    {% if(is_refer(femme.id) is not null) %}<li><strong class="pull-right text-error">Referée à {{is_refer(femme.id).structure}} pour {{is_refer(femme.id).motif}}</strong></li>
+                                                    {% else %}<a href="{{site_url('decharge/add')}}/?xl={{ femme.id|crypter }}"><button type="button" class="btn btn-info"><i class="icon-arrow-right"></i>&nbsp;Fiche de delivrance</button></a> 
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="form-actions align-right">
+                                {#<a href="{{site_url("configuration/resultFramework/reset")}}"  <button type="reset" class="btn"><i class="fam-arrow-rotate-anticlockwise"></i>Reset</button> </a>
+                                 {% if operation == 1%} <button style="display: none;" class="btn btn-danger" id="cancel"><i class="fam-cancel"></i>Cancel</button> {%endif%}#}
+                                <a href="{{site_url("home/home")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Exit'}}</button>  </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+{% endblock %}
