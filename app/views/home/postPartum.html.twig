@@ -1,5 +1,5 @@
 
-{% for femme in Pfemmes %}
+{% for femme in femmes %}
     <div class="well invoice">
         <div class="invoice-head">
             <a href="#" title="invoice" class="invoice-logo">{{femme.prenom}} {{femme.nom}}</a>
@@ -17,7 +17,7 @@
                 <a href="{{site_url('accouchement/index')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-application-edit"></i> Infos accouchement </li></a>&nbsp;&nbsp;
                 <a href="{{site_url('surveillance/add')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-application-edit"></i> Surveillance </li></a>&nbsp;&nbsp;
                 <a href="{{site_url('delivrance/add_refer')}}/?xl={{ femme.id|crypter }}"<li><i class="ico-share-alt"></i>Référer</li></a> &nbsp;&nbsp;
-                <a href=""<li><i class="fam-chart-line"></i>Partographe</li></a>&nbsp;&nbsp; 
+                <a href="{{site_url('home/home/partographe')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-chart-line"></i>Partographe</li></a>&nbsp;&nbsp; 
             </ul>
         </div>
     </div>

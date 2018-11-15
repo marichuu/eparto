@@ -1,9 +1,9 @@
 {% extends "themes/default/layout.html.twig" %}
 {% block title %}
-{{Etudiant}}  {{ parent() }}
+{{Femme}}  {{ parent() }}
 {% endblock %}
 {% block breadcrumb %}  
-<li class="active"><a href="{{ site_url("etudiant") }}" title="">{{"Etudiant"}}</a></li> 
+<li class="active"><a href="{{ site_url("femme") }}" title="">{{"Femme"}}</a></li> 
 {% endblock %}
 
 {% block content %}
@@ -11,27 +11,27 @@
     <div class="wrapper_small">
         <br>
         <div class="widget">
-            <div class="navbar"><div class="navbar-inner"><h6>{{"Etudiant"}}</h6>
-                    <a href="{{ site_url("etudiant/add") }}" title="">
+            <div class="navbar"><div class="navbar-inner"><h6>{{"Femme"}}</h6>
+                    <a href="{{ site_url("femme/add") }}" title="">
                         <button type="button" class="btn btn-primary pull-right"><b class="icon-plus"></b>Ajouter</button></a></div></div>
             <div class="table-overflow">
                 <table class="table table-striped table-bordered" id="data-table">
                     <thead>
                         <tr>
-                            <th>Matricule</th>
+                            <th>id</th>
                             <th>Nom Prenoms</th>
                             <th>Classe</th>
                             <th>Filière</th>
                         </tr>
                     </thead>
                     <tbody>
-                {% for etudiant in etudiants %}
+                {% for femme in femmes %}
 
                         <tr>
-                            <td>{{ etudiant.matricule }}</td>
-                            <td><a href="{{ site_url("etudiant/edit") }}/?xl={{ etudiant.id|crypter }}" title="">{{ etudiant.nom }} {{ etudiant.prenom }}</a></td>
-                            <td>{{ etudiant.classe.libelle }}</td>
-                            <td>{{ etudiant.filiere.libelle }}</td>
+                            <td>{{ femme.id }}</td>
+                            <td><a href="{{ site_url("femme/edit") }}/?xl={{ femme.id|crypter }}" title="">{{ femme.nom }} {{ femme.prenom }}</a></td>
+                            <td>{{ femme.classe.libelle }}</td>
+                            <td>{{ femme.structure.libelle }}</td>
                         </tr>
 
                 {% endfor %}  

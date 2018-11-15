@@ -14,7 +14,7 @@
         <div class="widget">
             <div id="user-stats">
                 <ul class="round-buttons">
-                    <li><div class="depth"><a href="{{site_url('risque/add')}}" title="Ajouter une femme" class="tip"><i class="icon-plus"></i></a></div></li>
+                    <li><div class="depth"><a href="{{site_url('femme/add')}}" title="Ajouter une femme" class="tip"><i class="icon-plus"></i></a></div></li>
                 </ul>
             </div>
             <div class="well row-fluid">
@@ -33,37 +33,23 @@
                                                     <div class="control-group">
                                                         <div class="row-fluid"> 
                                                             <div class="control-group">
-                                                                <label class="control-label">Col (cm): <span class="text-error">*</span></label>
+                                                                <label class="control-label">Liquide amniotique: <span class="text-error">*</span></label>
                                                                 <div class="controls">
                                                                     <div class="span12">
-                                                                        <select  id="pde"  name="col" class="validate[required]">
-                                                                            <option value=""></option> 
-                                                                            <option value="1" alt="" {{ set_select('1')}}>1</option>
-                                                                            <option value="2" alt="" {{ set_select('2')}}>2</option>
-                                                                            <option value="3" alt="" {{ set_select('3')}}>3</option>
-                                                                            <option value="4" alt="" {{ set_select('4')}}>4</option>
-                                                                            <option value="5" alt="" {{ set_select('5')}}>5</option>
-                                                                            <option value="6" alt="" {{ set_select('6')}}>6</option>
-                                                                            <option value="7" alt="" {{ set_select('7')}}>7</option>
-                                                                            <option value="8" alt="" {{ set_select('8')}}>8</option>
-                                                                            <option value="9" alt="" {{ set_select('9')}}>9</option>
-                                                                            <option value="10" alt="" {{ set_select('10')}}>10</option>
+                                                                        <select  id="pde"  name="value" class="validate[required]">
+                                                                            <option value="">-- Choisir le PDE --</option> 
+                                                                            <option value="1" alt="" {{ set_select('1')}}>Intacte ou liq. clair</option>
+                                                                            <option value="2" alt="" {{ set_select('2')}}>Liq. teinté</option>
+                                                                            <option value="3" alt="" {{ set_select('3')}}>Rompue 12H</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="control-group">
-                                                                <label class="control-label">Descente de la tête: </label>
+                                                                <label class="control-label">Chevauchement: </label>
                                                                 <div class="controls">
                                                                     <div class="span12">
-                                                                        <select  id="pde"  name="descente_tete" class="">
-                                                                            <option value=""></option> 
-                                                                            <option value="5" alt="" {{ set_select('5')}}>-5</option>
-                                                                            <option value="4" alt="" {{ set_select('4')}}>-4</option>
-                                                                            <option value="3" alt="" {{ set_select('3')}}>-3</option>
-                                                                            <option value="2" alt="" {{ set_select('2')}}>-2</option>
-                                                                            <option value="1" alt="" {{ set_select('1')}}>-1</option>
-                                                                        </select>
+                                                                        <input type="text" name="chevauchement" value="" >
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -71,100 +57,47 @@
                                                     </div>
                                                     <div class="form-actions align-right">
                                                         <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
-                                                    </div>
-
-                                                    <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
-                                                    <script src="{{ js_url('plugins/amcharts/amcharts/amcharts') }}"></script>
-                                                    <script src="{{ js_url('plugins/amcharts/amcharts/serial') }}"></script>
-                                                    <script src="{{ js_url('plugins/amcharts/amcharts/plugins/export/export') }}"></script>
-                                                    <script type="text/javascript">
-                                                                var chart;
-                                                                var graph;
-                                                                var chartData = [{% for g in pdes %}
-                                                                {
-                                                                "time": "{{g.createdDate|date("H:i")}}",
-                                                                        "col":{{g.col}},
-                                                                        "tete":{{g.descenteTete}},
-                                                                },
-                                                        {% endfor %}  
-                                                                ];
-                                                                AmCharts.ready(function () {
-                                                                // SERIAL CHART
-                                                                chart = new AmCharts.AmSerialChart();
-                                                                        chart.dataProvider = chartData;
-                                                                        chart.categoryField = "time";
-                                                                        chart.startDuration = 0.5;
-                                                                        chart.balloon.color = "#000000";
-                                                                        // AXES
-                                                                        // category
-                                                                        var categoryAxis = chart.categoryAxis;
-                                                                        categoryAxis.fillAlpha = 1;
-                                                                        categoryAxis.fillColor = "#FAFAFA";
-                                                                        categoryAxis.gridAlpha = 0;
-                                                                        categoryAxis.axisAlpha = 0;
-                                                                        categoryAxis.gridPosition = "start";
-                                                                        categoryAxis.position = "bottom";
-                                                                        // value
-                                                                        var valueAxis = new AmCharts.ValueAxis();
-                                                                        valueAxis.title = "Col (cm) / Descente de la tête";
-                                                                        valueAxis.dashLength = 5;
-                                                                        valueAxis.axisAlpha = 0;
-                                                                        valueAxis.minimum = 0;
-                                                                        valueAxis.maximum = 10;
-                                                                        valueAxis.integersOnly = true;
-                                                                        valueAxis.gridCount = 10;
-                                                                        valueAxis.reversed = false; // this line makes the value axis reversed
-                                                                        chart.addValueAxis(valueAxis);
-                                                                        // col graph
-                                                                        var graph = new AmCharts.AmGraph();
-                                                                        graph.title = "Col (cm)";
-                                                                        graph.valueField = "col";
-                                                                        graph.balloonText = "Col à [[category]]: [[value]]";
-                                                                        graph.bullet = "round";
-                                                                        chart.addGraph(graph);
-                                                                        // descente tête graph
-                                                                        var graph = new AmCharts.AmGraph();
-                                                                        graph.title = "Descente de le tête";
-                                                                        graph.valueField = "tete";
-                                                                        graph.balloonText = "Descente de le tête à [[category]]: [[value]]";
-                                                                        graph.bullet = "triangleUp";
-                                                                        chart.addGraph(graph);
-                                                                       
-                                                                        // LEGEND
-                                                                        var legend = new AmCharts.AmLegend();
-                                                                        legend.useGraphSettings = true;
-                                                                        chart.addLegend(legend);
-                                                                        // WRITE
-                                                                        chart.write("chartdiv");
-                                                                });
-
-
-                                                        </script>
-                                                        {%if(pdes)%}
-                                                            <div id="chartdiv" style="width:100%; height:400px;"></div>
-                                                        {%endif%}
-                                                    </div> 
-                                                </div>
-                                            </fieldset>
-                                        </form>
-                                    </div>
+                                                    </div>   
+                                                </div> 
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                    <table class="table table-striped table-bordered" >
+                                        <thead>
+                                            <tr>
+                                                <th>Fais à</th>
+                                                <th>Liquide Amniotique</th>
+                                                <th>Chevauchement</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for p in pdes %}
+                                                <tr>
+                                                    <td>{{ p.createdDate|date("H:i") }}</td>
+                                                    <td>{% if(p.value==1) %} Intacte ou liq. clair {% elseif(p.value==2) %} Liq. teinté {% elseif(p.value==3) %} Rompue 12h {% endif %}  </td>
+                                                    <td>{{ p.chevauchement }}</td>
+                                                </tr>
+                                            {% endfor %}  
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="tab-pane" id="tab2">                               
-                                    <div id="outcomeCreate">
+                            </div>
+                            <div class="tab-pane" id="tab2">                               
+                                <div id="outcomeCreate">
 
-                                    </div>
                                 </div>
-                                <div class="tab-pane" id="tab3" >           
-                                    <div id="outputCreate">
+                            </div>
+                            <div class="tab-pane" id="tab3" >           
+                                <div id="outputCreate">
 
-                                    </div>
                                 </div>
-                                <div class="form-actions align-right">
-                                    <a href="{{site_url("home/home")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Quiter'}}</button>  </a>
-                                </div>
+                            </div>
+                            <div class="form-actions align-right">
+                                <a href="{{site_url("home/home")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Quiter'}}</button>  </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>{% endblock %}
+        </div>
+    </div>{% endblock %}

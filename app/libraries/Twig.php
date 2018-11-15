@@ -133,6 +133,8 @@ class Twig {
         $this->add_function('formatNumber');
         $this->add_function('getMessages');
         $this->add_function('getSession');
+        $this->add_function('is_refer');
+        
         $this->add_function('getStructuresTree');
         $this->add_function('hasRights');
         $this->add_function('manageRights');

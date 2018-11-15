@@ -1,0 +1,163 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+    Ocytocine  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% set pietable = '' %}
+
+    <div class="wrapper">
+        <br>
+        <div class="row">
+            {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div id="user-stats">
+                <ul class="round-buttons">
+                    <li><div class="depth"><a href="{{site_url('femme/add')}}" title="Ajouter une femme" class="tip"><i class="icon-plus"></i></a></div></li>
+                </ul>
+            </div>
+            <div class="well row-fluid">
+                <div  id="framework-content">
+                    <div class="tabbable"><!-- default tabs -->
+                        {% include "home/tab1.html.twig" %}
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">                              
+                                <div id="impactCreate">
+                                    <form id="validate" class="form-horizontal" action="{{ site_url("evenement/ocytocine") }}" method="post"> 
+                                        <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
+                                        <fieldset class="form-horizontal">
+                                            <div>
+                                                <div class="navbar"><div class="navbar-inner"><h6>Ocytocine</h6><span style="float: right">&nbsp;&nbsp;&nbsp;</span></div></div>
+                                                <div class="well row-fluid">
+                                                    <div class="control-group">
+                                                        <div class="row-fluid"> 
+                                                            <div class="control-group">
+                                                                <label class="control-label">Unité par litre: <span class="text-error">*</span></label>
+                                                                <div class="controls">
+                                                                    <div class="span12">
+                                                                        <select  id="ocytocine"  name="unite" class="validate[required]">
+                                                                          <option value=""></option> 
+                                                                            <option value="1" alt="" {{ set_select('1')}}>1 ampoule</option>
+                                                                            <option value="2" alt="" {{ set_select('2')}}>2 ampoules</option>
+                                                                            <option value="3" alt="" {{ set_select('3')}}>3 ampoules</option>
+                                                                            <option value="4" alt="" {{ set_select('4')}}>4 ampoules</option>
+                                                                            <option value="5" alt="" {{ set_select('5')}}>5 ampoules</option>
+                                                                            <option value="6" alt="" {{ set_select('6')}}>6 ampoules</option>
+                                                                            <option value="7" alt="" {{ set_select('7')}}>7 ampoules</option>
+                                                                            <option value="8" alt="" {{ set_select('8')}}>8 ampoules</option>
+                                                                            <option value="9" alt="" {{ set_select('9')}}>9 ampoules</option>
+                                                                            <option value="10" alt="" {{ set_select('10')}}>10 ampoules</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="control-group">
+                                                                <label class="control-label">Gouttes par minute: </label>
+                                                                <div class="controls">
+                                                                    <div class="span12">
+                                                                        <input type="number" name="goutte" value="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-actions align-right">
+                                                        <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                                                    </div>
+
+                                                    <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
+                                                    <script src="{{ js_url('plugins/amcharts/amcharts/amcharts') }}"></script>
+                                                    <script src="{{ js_url('plugins/amcharts/amcharts/serial') }}"></script>
+                                                    <script src="{{ js_url('plugins/amcharts/amcharts/plugins/export/export') }}"></script>
+                                                    <script type="text/javascript">
+                                                        var chart;
+                                                        var graph;
+                                                        var chartData = [{% for g in ocytocines %}
+                                                            {
+                                                                "time": "{{g.createdDate|date("H:i")}}",
+                                                                        "unite":{{g.unite}},
+                                                                        "goutte":{{g.goutte}},
+                                                            },
+                                                        {% endfor %}  
+                                                        ];
+                                                        AmCharts.ready(function () {
+                                                            // SERIAL CHART
+                                                            chart = new AmCharts.AmSerialChart();
+                                                            chart.dataProvider = chartData;
+                                                            chart.categoryField = "time";
+                                                            chart.startDuration = 0.5;
+                                                            chart.balloon.color = "#000000";
+                                                            // AXES
+                                                            // category
+                                                            var categoryAxis = chart.categoryAxis;
+                                                            categoryAxis.fillAlpha = 1;
+                                                            categoryAxis.fillColor = "#FAFAFA";
+                                                            categoryAxis.gridAlpha = 0;
+                                                            categoryAxis.axisAlpha = 0;
+                                                            categoryAxis.gridPosition = "start";
+                                                            categoryAxis.position = "bottom";
+                                                            // value
+                                                            var valueAxis = new AmCharts.ValueAxis();
+                                                            valueAxis.title = "Unité par litre / gouttes par minute";
+                                                            valueAxis.dashLength = 5;
+                                                            valueAxis.axisAlpha = 0;
+                                                            valueAxis.minimum = 0;
+                                                            valueAxis.maximum = 10;
+                                                            valueAxis.integersOnly = true;
+                                                            valueAxis.gridCount = 10;
+                                                            valueAxis.reversed = false; // this line makes the value axis reversed
+                                                            chart.addValueAxis(valueAxis);
+                                                            // Unite graph
+                                                            var graph = new AmCharts.AmGraph();
+                                                            graph.title = "Unite/l ";
+                                                            graph.valueField = "unite";
+                                                            graph.balloonText = "[[value]] unités par litre à [[category]]";
+                                                            graph.bullet = "round";
+                                                            chart.addGraph(graph);
+                                                            // descente tête graph
+                                                            var graph = new AmCharts.AmGraph();
+                                                            graph.title = "gouttes par minute";
+                                                            graph.valueField = "goutte";
+                                                            graph.balloonText = "[[value]] gouttes par litre à [[category]]";
+                                                            graph.bullet = "triangleUp";
+                                                            chart.addGraph(graph);
+
+                                                            // LEGEND
+                                                            var legend = new AmCharts.AmLegend();
+                                                            legend.useGraphSettings = true;
+                                                            chart.addLegend(legend);
+                                                            // WRITE
+                                                            chart.write("chartdiv");
+                                                        });
+
+
+                                                        </script>
+                                                        {%if(ocytocines)%}
+                                                            <div id="chartdiv" style="width:100%; height:400px;"></div>
+                                                        {%endif%}
+                                                    </div> 
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab2">                               
+                                    <div id="outcomeCreate">
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab3" >           
+                                    <div id="outputCreate">
+
+                                    </div>
+                                </div>
+                                <div class="form-actions align-right">
+                                    <a href="{{site_url("home/home")}}" <button type="" class="btn btn-inverse"> <i class="ico-arrow-left"></i>{{'Quiter'}}</button>  </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>{% endblock %}

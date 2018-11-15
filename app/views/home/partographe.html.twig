@@ -1,0 +1,506 @@
+{% extends "themes/default/layout.html.twig" %}
+{% block title %}
+    {{"Femme"}}  {{ parent() }}
+{% endblock %}
+{% block breadcrumb %}  
+    <li class="active"><a href="{{ site_url("femme") }}" title="">{{"Femme"}}</a></li> 
+    {% endblock %}
+
+{% block content %}
+    <div class="wrapper"> 
+        <div class="wrapper_small"> 
+            <br>
+            <div class="widget-title">
+                <h5 class="widget-name"><i class="fam-chart-line"></i>Partographe</h5>
+                <a href="{{site_url("home/home")}}" class="pull-right">Retour &rarr;</a>
+            </div>
+
+            <div class="widget">
+                <div class="navbar"><div class="navbar-inner"><h6>Partographe ( {{femme.prenom}} {{femme.nom}} )</h6></div></div>
+                <div class="well row-fluid">
+                    <div class="span6">
+
+                        <!-- Vertical bars -->       
+                        <div class="widget">
+                            <div class="navbar">
+                                <div class="navbar-inner">
+                                    <h6>Risque</h6>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Taille</th>
+                                        <td>{{ risque.taille }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Hémoragie</th>
+                                        <td>{%if risque.hemoragie == 1%} OUI {% elseif risque.hemoragie == 0 %} NON {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>A terme</th>
+                                        <td> {%if risque.terme == 1%} OUI {% elseif risque.terme == 0 %} NON {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>CPN</th>
+                                        <td>{%if risque.cpn == 1%} {{ risque.nbCpn }} {% elseif risque.terme == 0 %} NON {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Césarienne dernier accouchement</th>
+                                        <td>{%if risque.cesarienneDernierAccouchement == 1%} OUI {% elseif risque.cesarienneDernierAccouchement == 0 %} NON {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Présentation</th>
+                                        <td>{%if risque.presentation == 1%} Sommet {% elseif risque.terme == 2 %} Siège/Face {% elseif risque.terme == 3 %} Epaule/Front {% endif %} {{ risque.presentation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dernier enfant</th>
+                                        <td>{%if risque.dernier_enfant == 1%} Vivant {% elseif risque.dernier_enfant == 0 %} Mort-né {% endif %}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <!-- /vertical bars -->
+
+                        <!-- Simple chart -->       
+                        <div class="widget">
+                            <div class="navbar">
+                                <div class="navbar-inner">
+                                    <h6>1er examen</h6>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>TA</th>
+                                        <td>{{ examen.ta }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pouls</th>
+                                        <td>{{ examen.pouls }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Temperature</th>
+                                        <td> {{ examen.temperature }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>HU</th>
+                                        <td>{{ examen.hu }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>BCF</th>
+                                        <td>{{ examen.examenBcf }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contractions</th>
+                                        <td>{{ examen.contractions }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>PDE</th>
+                                        <td>{%if examen.pde == 1%} Intacte ou Liq clair {% elseif examen.pde == 2 %} Liq. teinté{% elseif examen.pde == 2 %} Rompue 12H {% endif %}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
+                    <script src="{{ js_url('plugins/amcharts/amcharts/amcharts') }}"></script>
+                    <script src="{{ js_url('plugins/amcharts/amcharts/serial') }}"></script>
+                    <script src="{{ js_url('plugins/amcharts/amcharts/plugins/export/export') }}"></script>
+                    <script type="text/javascript">
+                                var chart;
+                                var graph;
+                                var chartData = [{% for g in bcfs %}
+                                {
+                                "time": "{{g.createdDate|date("H:i")}}",
+                                        "value":{{g.value}},
+                                },
+                        {% endfor %}  
+                                ];
+                                AmCharts.ready(function () {
+                                // SERIAL CHART
+                                chart = new AmCharts.AmSerialChart();
+                                        chart.dataProvider = chartData;
+                                        chart.categoryField = "time";
+                                        chart.startDuration = 0.5;
+                                        chart.balloon.color = "#000000";
+                                        // AXES
+                                        // category
+                                        var categoryAxis = chart.categoryAxis;
+                                        categoryAxis.fillAlpha = 1;
+                                        categoryAxis.fillColor = "#FAFAFA";
+                                        categoryAxis.gridAlpha = 0;
+                                        categoryAxis.axisAlpha = 0;
+                                        categoryAxis.gridPosition = "start";
+                                        categoryAxis.position = "bottom";
+                                        // value
+                                        var valueAxis = new AmCharts.ValueAxis();
+                                        valueAxis.title = "Bruit du coeur foetal";
+                                        valueAxis.dashLength = 5;
+                                        valueAxis.axisAlpha = 0;
+                                        valueAxis.minimum = 80;
+                                        valueAxis.maximum = 200;
+                                        valueAxis.integersOnly = true;
+                                        valueAxis.gridCount = 10;
+                                        valueAxis.reversed = false; // this line makes the value axis reversed
+                                        chart.addValueAxis(valueAxis);
+                                        // BCF graph
+                                        var graph = new AmCharts.AmGraph();
+                                        graph.title = "BCF";
+                                        graph.valueField = "value";
+                                        graph.balloonText = "Bruit du coeur foetal à [[category]]: [[value]]";
+                                        graph.bullet = "round";
+                                        chart.addGraph(graph);
+                                        // LEGEND
+                                        var legend = new AmCharts.AmLegend();
+                                        legend.useGraphSettings = true;
+                                        chart.addLegend(legend);
+                                        // WRITE
+                                        chart.write("chartBcf");
+                                });
+                                var chart2;
+                                var graph2;
+                                var chartData2 = [{% for c in contractions %}
+                                {
+                                "time": "{{c.createdDate|date("H:i")}}",
+                                        "contraction":{{c.value}},
+                                },
+                            {% endfor %}  
+                                ];
+                                AmCharts.ready(function () {
+                                // SERIAL CHART
+                                chart2 = new AmCharts.AmSerialChart();
+                                        chart2.dataProvider = chartData2;
+                                        chart2.categoryField = "time";
+                                        chart2.startDuration = 0.5;
+                                        chart2.balloon.contractionor = "#000000";
+                                        // AXES
+                                        // category
+                                        var categoryAxis = chart2.categoryAxis;
+                                        categoryAxis.fillAlpha = 1;
+                                        categoryAxis.fillContractionor = "#FAFAFA";
+                                        categoryAxis.gridAlpha = 0;
+                                        categoryAxis.axisAlpha = 0;
+                                        categoryAxis.gridPosition = "start";
+                                        categoryAxis.position = "bottom";
+                                        // value
+                                        var valueAxis = new AmCharts.ValueAxis();
+                                        valueAxis.title = "Contraction par 10 minute ";
+                                        valueAxis.dashLength = 5;
+                                        valueAxis.axisAlpha = 0;
+                                        valueAxis.minimum = 1;
+                                        valueAxis.maximum = 5;
+                                        valueAxis.integersOnly = true;
+                                        valueAxis.gridCount = 10;
+                                        valueAxis.reversed = false; // this line makes the value axis reversed
+                                        chart2.addValueAxis(valueAxis);
+                                        // contraction graph
+                                        var graph2 = new AmCharts.AmGraph();
+                                        graph2.title = "Contractions par 10 minute";
+                                        graph2.valueField = "contraction";
+                                        graph2.balloonText = "Contraction à [[category]]: [[value]]";
+                                        graph2.bullet = "round";
+                                        chart2.addGraph(graph2);
+                                        // LEGEND
+                                        var legend = new AmCharts.AmLegend();
+                                        legend.useGraphSettings = true;
+                                        chart2.addLegend(legend);
+                                        // WRITE
+                                        chart2.write("chartContraction");
+                                });
+                                var chart3;
+                                var graph3;
+                                var chartData3 = [{% for g in ocytocines %}
+                                {
+                                "time": "{{g.createdDate|date("H:i")}}",
+                                        "unite":{{g.unite}},
+                                        "goutte":{{g.goutte}},
+                                },
+                                {% endfor %}  
+                                ];
+                                AmCharts.ready(function () {
+                                // SERIAL CHART
+                                chart3 = new AmCharts.AmSerialChart();
+                                        chart3.dataProvider = chartData3;
+                                        chart3.categoryField = "time";
+                                        chart3.startDuration = 0.5;
+                                        chart3.balloon.color = "#000000";
+                                        // AXES
+                                        // category
+                                        var categoryAxis = chart3.categoryAxis;
+                                        categoryAxis.fillAlpha = 1;
+                                        categoryAxis.fillColor = "#FAFAFA";
+                                        categoryAxis.gridAlpha = 0;
+                                        categoryAxis.axisAlpha = 0;
+                                        categoryAxis.gridPosition = "start";
+                                        categoryAxis.position = "bottom";
+                                        // value
+                                        var valueAxis = new AmCharts.ValueAxis();
+                                        valueAxis.title = "Unité par litre / gouttes par minute";
+                                        valueAxis.dashLength = 5;
+                                        valueAxis.axisAlpha = 0;
+                                        valueAxis.minimum = 0;
+                                        valueAxis.maximum = 10;
+                                        valueAxis.integersOnly = true;
+                                        valueAxis.gridCount = 10;
+                                        valueAxis.reversed = false; // this line makes the value axis reversed
+                                        chart3.addValueAxis(valueAxis);
+                                        // Unite graph
+                                        var graph3 = new AmCharts.AmGraph();
+                                        graph3.title = "Unite/l ";
+                                        graph3.valueField = "unite";
+                                        graph3.balloonText = "[[value]] unités par litre à [[category]]";
+                                        graph3.bullet = "round";
+                                        chart3.addGraph(graph3);
+                                        // descente tête graph
+                                        var graph3 = new AmCharts.AmGraph();
+                                        graph3.title = "gouttes par minute";
+                                        graph3.valueField = "goutte";
+                                        graph3.balloonText = "[[value]] gouttes par litre à [[category]]";
+                                        graph3.bullet = "triangleUp";
+                                        chart3.addGraph(graph3);
+                                        // LEGEND
+                                        var legend = new AmCharts.AmLegend();
+                                        legend.useGraphSettings = true;
+                                        chart3.addLegend(legend);
+                                        // WRITE
+                                        chart3.write("chartOcytocine");
+                                });
+                                var chart4;
+                                var graph4;
+                                var chartData4 = [{% for g in poulsTa %}
+                                {
+                                "time": "{{g.createdDate|date("H:i")}}",
+                                        "pouls":{{g.pouls}},
+                                },
+                                    {% endfor %}  
+                                ];
+                                AmCharts.ready(function () {
+                                // SERIAL CHART
+                                chart4 = new AmCharts.AmSerialChart();
+                                        chart4.dataProvider = chartData4;
+                                        chart4.categoryField = "time";
+                                        chart4.startDuration = 0.5;
+                                        chart4.balloon.color = "#000000";
+                                        // AXES
+                                        // category
+                                        var categoryAxis = chart4.categoryAxis;
+                                        categoryAxis.fillAlpha = 1;
+                                        categoryAxis.fillColor = "#FAFAFA";
+                                        categoryAxis.gridAlpha = 0;
+                                        categoryAxis.axisAlpha = 0;
+                                        categoryAxis.gridPosition = "start";
+                                        categoryAxis.position = "bottom";
+                                        // value
+                                        var valueAxis = new AmCharts.ValueAxis();
+                                        valueAxis.title = "Pouls";
+                                        valueAxis.dashLength = 5;
+                                        valueAxis.axisAlpha = 0;
+                                        valueAxis.minimum = 60;
+                                        valueAxis.maximum = 180;
+                                        valueAxis.integersOnly = true;
+                                        valueAxis.gridCount = 10;
+                                        valueAxis.reversed = false; // this line makes the value axis reversed
+                                        chart4.addValueAxis(valueAxis);
+                                        // pouls graph
+                                        var graph4 = new AmCharts.AmGraph();
+                                        graph4.title = "Pouls";
+                                        graph4.valueField = "pouls";
+                                        graph4.balloonText = "[[value]] unités par litre à [[category]]";
+                                        graph4.bullet = "round";
+                                        chart4.addGraph(graph4);
+                                        // LEGEND
+                                        var legend = new AmCharts.AmLegend();
+                                        legend.useGraphSettings = true;
+                                        chart4.addLegend(legend);
+                                        // WRITE
+                                        chart4.write("chartPoulsTa");
+                                });
+                                var chart5;
+                                var graph5;
+                                var chartData5 = [{% for g in temperatures %}
+                                {
+                                "time": "{{g.createdDate|date("H:i")}}",
+                                        "temperature":{{g.value}},
+                                },
+                                        {% endfor %}  
+                                ];
+                                AmCharts.ready(function () {
+                                // SERIAL CHART
+                                chart5 = new AmCharts.AmSerialChart();
+                                        chart5.dataProvider = chartData5;
+                                        chart5.categoryField = "time";
+                                        chart5.startDuration = 0.5;
+                                        chart5.balloon.temperatureor = "#000000";
+                                        // AXES
+                                        // category
+                                        var categoryAxis = chart5.categoryAxis;
+                                        categoryAxis.fillAlpha = 1;
+                                        categoryAxis.fillTemperatureor = "#FAFAFA";
+                                        categoryAxis.gridAlpha = 0;
+                                        categoryAxis.axisAlpha = 0;
+                                        categoryAxis.gridPosition = "start";
+                                        categoryAxis.position = "bottom";
+                                        // value
+                                        var valueAxis = new AmCharts.ValueAxis();
+                                        valueAxis.title = "Temperature";
+                                        valueAxis.dashLength = 5;
+                                        valueAxis.axisAlpha = 0;
+                                        valueAxis.minimum = 30;
+                                        valueAxis.maximum = 40;
+                                        valueAxis.integersOnly = true;
+                                        valueAxis.gridCount = 10;
+                                        valueAxis.reversed = false; // this line makes the value axis reversed
+                                        chart5.addValueAxis(valueAxis);
+                                        // temperature graph
+                                        var graph5 = new AmCharts.AmGraph();
+                                        graph5.title = "Temperatures";
+                                        graph5.valueField = "temperature";
+                                        graph5.balloonText = "Temperature à [[category]]: [[value]]";
+                                        graph5.bullet = "round";
+                                        chart5.addGraph(graph5);
+                                        // LEGEND
+                                        var legend = new AmCharts.AmLegend();
+                                        legend.useGraphSettings = true;
+                                        chart5.addLegend(legend);
+                                        // WRITE
+                                        chart5.write("chartTemp");
+                                });
+
+                                        </script>
+                                        {%if(bcfs)%}
+                                        <div id="chartBcf" style="width:100%; height:400px;"></div>
+                                        {%endif%}
+                                        {% if(pdes)%}
+                                        <div class="navbar"><div class="navbar-inner"><h6>Liquide amniotique / chevauchement </h6></div></div>
+                                        <table class="table table-striped table-bordered" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Fais à</th>
+                                                    <th>Liquide Amniotique</th>
+                                                    <th>Chevauchement</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for p in pdes %}
+                                                    <tr>
+                                                        <td>{{ p.createdDate|date("H:i") }}</td>
+                                                        <td>{% if(p.value==1) %} Intacte ou liq. clair {% elseif(p.value==2) %} Liq. teinté {% elseif(p.value==3) %} Rompue 12h {% endif %}  </td>
+                                                        <td>{{ p.chevauchement }}</td>
+                                                    </tr>
+                                                {% endfor %}  
+                                            </tbody>
+                                        </table>
+                                        {%endif%}  
+                                        {%if(contractions)%}
+                                            <div id="chartContraction" style="width:100%; height:400px;"></div>
+                                        {%endif%}
+                                        {%if(ocytocines)%}
+                                            <div id="chartOcytocine" style="width:100%; height:400px;"></div>
+                                        {%endif%}
+                                        {%if(medicaments)%}
+                                        <div class="navbar"><div class="navbar-inner"><h6>Médicaments prescrits et liquides IV </h6></div></div>
+                                        <table class="table table-striped table-bordered" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Fais à</th>
+                                                    <th>Valeur</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for m in medicaments %}
+
+                                                    <tr>
+                                                        <td>{{ m.createdDate|date("H:i") }}</td>
+                                                        <td>{{ m.value }}</td>
+                                                    </tr>
+
+                                                {% endfor %}  
+                                            </tbody>
+                                        </table>
+                                        {%endif%}   
+                                        {%if(poulsTa)%}
+                                            <div class="row-fluid">
+                                                <div class="span6">
+
+                                                    <!-- Vertical bars -->       
+                                                    <div class="widget">
+                                                        <div class="navbar">
+                                                            <div class="navbar-inner">
+                                                                <h6>Pouls</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="well body">
+                                                            <div class="graph-standard" id="chartPoulsTa">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="span6">
+                                                    <!-- /vertical bars -->
+
+                                                    <!-- Simple chart -->       
+                                                    <div class="widget">
+                                                        <div class="navbar">
+                                                            <div class="navbar-inner">
+                                                                <h6>TA</h6>
+                                                            </div>
+                                                        </div>
+                                                        <table class="table table-striped table-bordered" >
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Fais à</th>
+                                                                    <th>Valeur</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for data in poulsTa %}
+
+                                                                    <tr>
+                                                                        <td>{{ data.createdDate|date("H:i") }}</td>
+                                                                        <td>{{ data.ta }}</td>
+                                                                    </tr>
+
+                                                                {% endfor %}  
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                {%if(temperatures)%}
+                                                    <div id="chartTemp" style="width:100%; height:400px;"></div>
+                                                {%endif%}
+                                                <div class="navbar"><div class="navbar-inner"><h6>Urine </h6></div></div>
+                                                <table class="table table-striped table-bordered" >
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Fais à</th>
+                                                            <th>Protéinurie</th>
+                                                            <th>Cétone</th>
+                                                            <th>Volume</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for u in urines %}
+
+                                                            <tr>
+                                                                <td>{{ u.createdDate|date("H:i") }}</td>
+                                                                <td>{{ u.proteinurie }}</td>
+                                                                <td>{{ u.cetone }}</td>
+                                                                <td>{{ u.volume }}</td>
+                                                            </tr>
+
+                                                        {% endfor %}  
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        {%endif%}
+                                    </div>
+                                </div>
+                            </div>     
+                        </div> 
+                        {% endblock %}
