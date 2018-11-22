@@ -44,13 +44,15 @@
                                     <input type="number" placeholder="nombre de CPN" value="{{set_value('cpn')}}" class="span4" name="nb_cpn" id="nb_cpn"/>
                                 </div>  
                             </div>  
-                            <div class="control-group">
-                                <label class="control-label">{{"Césarienne dernier accouchement"}}: <span class="text-error">*</span></label>
-                                <div class="controls">
-                                    <label class="radio inline"><input type="radio" name="cesa_dernier_acc" id="active1" value="1" class="styled" >Oui</label>
-                                    <label class="radio inline"><input type="radio" name="cesa_dernier_acc" id="active2" value="0" class="styled" >Non</label> 
+                            {% if(femme.nbGrossesse > 1 ) %} 
+                                <div class="control-group">
+                                    <label class="control-label">{{"Césarienne dernier accouchement"}}: <span class="text-error">*</span></label>
+                                    <div class="controls">
+                                        <label class="radio inline"><input type="radio" name="cesa_dernier_acc" id="active1" value="1" class="styled" >Oui</label>
+                                        <label class="radio inline"><input type="radio" name="cesa_dernier_acc" id="active2" value="0" class="styled" >Non</label> 
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
                             <div class="control-group">
                                 <label class="control-label">{{"Présentation"}}: <span class="text-error">*</span></label>
                                 <div class="controls">
@@ -59,14 +61,15 @@
                                     <label class="radio inline"><input type="radio" name="presentation" id="active2" value="3" class="styled" >Epaule/Front</label>
                                 </div>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label">{{"Dernier enfant"}}: <span class="text-error">*</span></label>
-                                <div class="controls">
-                                    <label class="radio inline"><input type="radio" name="dernier_enfant" id="active1" value="1" class="styled" >Vivant</label>
-                                    <label class="radio inline"><input type="radio" name="dernier_enfant" id="active2" value="0" class="styled" >Mort-né</label> 
-                                </div>
-                            </div> 
-
+                            {% if(femme.nbGrossesse > 1 ) %} 
+                                <div class="control-group">
+                                    <label class="control-label">{{"Dernier enfant"}}: <span class="text-error">*</span></label>
+                                    <div class="controls">
+                                        <label class="radio inline"><input type="radio" name="dernier_enfant" id="active1" value="1" class="styled" >Vivant</label>
+                                        <label class="radio inline"><input type="radio" name="dernier_enfant" id="active2" value="0" class="styled" >Mort-né</label> 
+                                    </div>
+                                </div> 
+                            {% endif %}
 
                             <div class="form-actions align-right">
                                 <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
@@ -97,18 +100,22 @@
                                     <th>CPN</th>
                                     <td>{%if risque.cpn == 1%} {{ risque.nbCpn }} {% elseif risque.terme == 0 %} NON {% endif %}</td>
                                 </tr>
+                                {% if(femme.nbGrossesse > 1 ) %} 
                                 <tr>
                                     <th>Césarienne dernier accouchement</th>
                                     <td>{%if risque.cesarienneDernierAccouchement == 1%} OUI {% elseif risque.cesarienneDernierAccouchement == 0 %} NON {% endif %}</td>
                                 </tr>
+                                {% endif %}
                                 <tr>
                                     <th>Présentation</th>
                                     <td>{%if risque.presentation == 1%} Sommet {% elseif risque.terme == 2 %} Siège/Face {% elseif risque.terme == 3 %} Epaule/Front {% endif %} {{ risque.presentation }}</td>
                                 </tr>
+                                {% if(femme.nbGrossesse > 1 ) %} 
                                 <tr>
                                     <th>Dernier enfant</th>
                                     <td>{%if risque.dernier_enfant == 1%} Vivant {% elseif risque.dernier_enfant == 0 %} Mort-né {% endif %}</td>
                                 </tr>
+                                {% endif %}
                             </tbody>
                         </table>
                     </div>

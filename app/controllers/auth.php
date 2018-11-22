@@ -165,8 +165,8 @@ class Auth extends CI_Controller {
         if ($_POST) {
             $config = array(
                 forme_rules('current_password', 'Mot de passe actuel', 'trim|required'),
-                forme_rules('password', 'Nouveau mot de passe', 'trim|required|min_length[6]|password_format|xss_clean'),
-                forme_rules('password_conf', 'Confirmation mot de passe', 'trim|required|min_length[6]|xss_clean'),
+                forme_rules('password', 'Nouveau mot de passe', 'trim|required'),
+                forme_rules('password_conf', 'Confirmation mot de passe', 'trim|required'),
             );
             $this->form_validation->set_rules($config);
             if (!$this->form_validation->run('reset')) {

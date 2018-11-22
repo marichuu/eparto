@@ -19,17 +19,18 @@
                 <div class="well row-fluid">
                     <form id="validate" class="form-horizontal" action="{{ site_url("femme/create") }}" method="post"> 
 
+
+                        <div class="control-group">
+                            <label class="control-label">{{"Prenom"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="text" value="" class="validate[required] span4" name="prenom" id="prenom"/>
+                            </div>
+                        </div>
                         <div class="control-group">
                             <label class="control-label">{{"Nom"}}: <span class="text-error">*</span></label>
                             <div class="controls">
                                 <input type="hidden" value="{{session.userdata.structure}}" class="span4" name="structure" id="structure"/>
                                 <input type="text" value="" class="validate[required] span4" name="nom" id="nom"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">{{"Prenom"}}: <span class="text-error">*</span></label>
-                            <div class="controls">
-                                <input type="text" value="" class="validate[required] span4" name="prenom" id="prenom"/>
                             </div>
                         </div>
                         <div class="control-group">
@@ -82,9 +83,9 @@
                             <label class="control-label">Entrée à la maternité:</label>
                             <div class="controls">
                                 <ul class="dates-range no-append">
-                                    <li><input type="date" placeholder="date..." id="date" class="" name="date_entree" ></li>
+                                    <li><input type="date" placeholder="date..." id="date" class="validate[required]" name="date_entree" ></li>
                                     <li class="sep">-</li>
-                                    <li><input class="span12" type="time" name="heure_entree" /></li>
+                                    <li><input class="span12 validate[required]" type="time" name="heure_entree" /></li>
                                 </ul>
                             </div>
                         </div>
@@ -92,9 +93,9 @@
                             <label class="control-label">{{"Debut travail"}}: <span class="text-error">*</span></label>
                             <div class="controls">
                                 <ul class="dates-range no-append">
-                                    <li><input type="date" placeholder="date..." id="date_travail" class="" name="date_travail" ></li>
+                                    <li><input type="date" placeholder="date..." id="date_travail" class="validate[required]" name="date_travail" ></li>
                                     <li class="sep">-</li>
-                                    <li><input class="span12" type="time" name="heure_travail" /></li>
+                                    <li><input class="span12 validate[required]" type="time" name="heure_travail" /></li>
                                 </ul>
                             </div>
                         </div>
@@ -110,19 +111,19 @@
                                     <input class="styled" type="radio" name="rupture_membrane" id="rupture_membrane2" value="0" data-prompt-position="topLeft:-1,-5"/>
                                     Non
                                 </label>
-                                 
+
                                 <label class=" inline rupture">
                                     <ul class="dates-range no-append">
-                                    <li><input type="date" placeholder="date..." id="date_rupture" class="span12" name="date_rupture" ></li>
-                                    <li class="sep">-</li>
-                                    <li><input class="span12" type="time" name="heure_rupture" /></li>
-                                </ul>
-                                <select  id="pde"  name="pde" class="validate[required]">
-                                    <option value="">-- Choisir le PDE --</option> 
-                                    <option value="1" alt="" {{ set_select('1')}}>Intacte ou liq. clair</option>
-                                    <option value="2" alt="" {{ set_select('2')}}>Liq. teinté</option>
-                                    <option value="3" alt="" {{ set_select('3')}}>Rompue 12H</option>
-                                </select>
+                                        <li><input type="date" placeholder="date..." id="date_rupture" class="span12" name="date_rupture" ></li>
+                                        <li class="sep">-</li>
+                                        <li><input class="span12" type="time" name="heure_rupture" /></li>
+                                    </ul>
+                                    <select  id="pde"  name="pde" class="validate[required]">
+                                        <option value="">-- Choisir le PDE --</option> 
+                                        <option value="1" alt="" {{ set_select('1')}}>Intacte ou liq. clair</option>
+                                        <option value="2" alt="" {{ set_select('2')}}>Liq. teinté</option>
+                                        <option value="3" alt="" {{ set_select('3')}}>Rompue 12H</option>
+                                    </select>
                                 </label>
                             </div>
                         </div>
@@ -137,11 +138,11 @@
     </div> 
     <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
     <script type="text/javascript">
-       
-         $('#rupture_membrane1').click(function () {
+
+        $('#rupture_membrane1').click(function () {
             if (this.checked) {
                 $(".rupture").show();
-               // alert("Oui");
+                // alert("Oui");
             }
         });
         $('#rupture_membrane2').click(function () {
@@ -151,6 +152,6 @@
                 // alert("Non");
             }
         });
-         $(".rupture").hide();
+        $(".rupture").hide();
     </script>
 {% endblock %}

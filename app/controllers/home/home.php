@@ -58,8 +58,10 @@ class Home extends CI_Controller {
         $data['poulsTa'] = $this->_em->getRepository('Entity\\PoulsTa')->findBy(array('femme' => $femme), array('id' => 'asc'));
         $data['temperatures'] = $this->_em->getRepository('Entity\\Temperature')->findBy(array('femme' => $femme), array('id' => 'asc'));
         $data['urines'] = $this->_em->getRepository('Entity\\Urine')->findBy(array('femme' => $femme), array('id' => 'asc'));
-        $data['examen'] = $this->_em->getRepository('Entity\\Examen')->findOneBy(array('femme'=>$femme));
-        $data['risque'] = $this->_em->getRepository('Entity\\Risque')->findOneBy(array('femme'=>$femme));
+        $data['examen'] = $examen = $this->_em->getRepository('Entity\\Examen')->findOneBy(array('femme'=>$femme));
+        $data['risque'] = $risque = $this->_em->getRepository('Entity\\Risque')->findOneBy(array('femme'=>$femme));
+        if ($risque!=null) $data['nb_risque'] = 1;
+        if ($examen!=null) $data['nb_exam'] = 1 ;
         $this->twig->display("home/partographe.html.twig", $data);
     }
 
