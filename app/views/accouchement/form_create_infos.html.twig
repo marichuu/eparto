@@ -14,31 +14,30 @@
                         <form id="validate" class="form-horizontal" action="{{ site_url("accouchement/create_infos_accouch") }}" method="post"> 
                             <div class="control-group">
                                 <label class="control-label">{{"Expulsion"}}: <span class="text-error">*</span></label>
-                                <div class="controls">
-                                    {#                                                                    <label class="radio inline"><input type="radio" name="expulsion" id="active1"  {%if accouchement.expulsion==1%} checked {%endif%} value="1" class="styled" >< 45 mn</label>#}
-                                    &nbsp; &nbsp;<label class="radio inline"><input type="radio" name="expulsion" id="active1" value="1" class="styled" >< 45 mn</label>
+                                <div class="controls">                                                   
+                                    <label class="radio inline"><input type="radio" name="expulsion" id="active1" value="1" class="styled" >< 45 mn</label>
                                     <label class="radio inline"><input type="radio" name="expulsion" id="active2" value="0" class="styled" >> 45 mn</label> 
                                 </div>
                             </div>
+
                             <div class="control-group">
-                                Mode d'accouchement: <span class="text-error">*</span> &nbsp; &nbsp; &nbsp; 
-                                {#                                                            <div class="controls">#}
-                                <label class="radio inline"><input type="radio" name="mode" id="active2" value="0" class="styled" >Dystocique</label> 
-                                <label class="radio inline"><input type="radio" name="mode" id="active1" value="1" class="styled" >Eutocique</label>
-                                    {#                                                            </div>#}
+                                <label class="control-label">Mode d'accouchement: <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    <label class="radio inline"><input type="radio" name="mode" id="active1" value="0" class="styled" >< 45 mn</label>
+                                    <label class="radio inline"><input type="radio" name="mode" id="active2" value="1" class="styled" >> 45 mn</label> 
+                                </div>
                             </div>
 
                             <div class="control-group">
-                                Nom de l'accoucheur (se) : <span class="text-error">*</span>
-                                {#                                                            <div class="controls">#}
-                                <input type="text" name="nomAccoucheur" id="" class='validate[required]'>
-                                {#                                 </div>#}
+                                <label class="control-label">Nom de l'accoucheur (se) : <span class="text-error">*</span></label>
+                               <div class="controls">
+                                <input type="text" name="nomAccoucheur" id="" class='validate[required] span6'>
+                                </div>
                             </div>
-
                             <div class="control-group">
                                 <label class="control-label">Traitement: </label>
                                 <div class="controls">
-                                    <textarea name='traitement' id='traitement' ></textarea>
+                                    <textarea name='traitement' id='traitement' class="span8" ></textarea>
                                 </div>
                             </div>
 

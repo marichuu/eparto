@@ -2,7 +2,7 @@
 {% block content %}
     <div class="wrapper"> 
         <div class="wrapper_small"> 
-            {% if(nb_apgar == 0 ) %}    
+             
                 <br>
 
                 <div class="row">
@@ -70,7 +70,7 @@
                         </form>  
                     </div> 
                 </div>
-            {% else %}
+            
                 <!-- Default table -->
                 <div class="widget">
                     <div class="navbar"><div class="navbar-inner"><h6> APGAR du (des) nouveau-né (s) de {{femme.prenom}} {{femme.nom}} </h6></div></div>
@@ -79,8 +79,8 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>Nouveau-né {{ loop.index }} </th>
-                                        <td>Né(e) le {{ apgar.nouveauNe.dateNais|date('d/m/Y') }} à {{ apgar.nouveauNe.dateNais|date('H') }} h {{ apgar.nouveauNe.createdDate|date('i') }} mn </td>
+                                        <th>Né(e) le {{ apgar.nouveauNe.dateNais|date('d/m/Y') }} à {{ apgar.nouveauNe.dateNais|date('H') }} h {{ apgar.nouveauNe.createdDate|date('i') }} mn </th>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <th>Pouls/BC </th>
@@ -113,7 +113,7 @@
 
                 </div>
                 <!-- /default table -->                    
-            {% endif %}
+            
         </div>     
     </div>   
     <script src="{{ js_url('files/ajax.jquery.min') }}">

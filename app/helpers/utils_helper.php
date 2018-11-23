@@ -716,11 +716,47 @@ if (!function_exists('date_interval')) {
 
         $nb_minutes = $diff->i;
         $nb_heures = $diff->h;
-        if($nb_heures > 0 )
-            $nb = $nb_heures." h et ".$nb_minutes;
+        if ($nb_heures > 0)
+            $nb = $nb_heures . " h et " . $nb_minutes;
         else
             $nb = $nb_minutes;
         return($nb);
     }
 
 }
+
+if (!function_exists('is_accouche')) {
+
+    function is_accouche($femme_id) {
+        $doctrine = new Doctrine();
+        $femme = $doctrine->em->find('Entity\\Femme', $femme_id);
+        $accouche = $doctrine->em->getRepository('Entity\\Accouchement')->findOneBy(array('femme' => $femme->getId()));
+        return($accouche);
+    }
+
+}
+
+if (!function_exists('is_pc_nne')) {
+
+    function is_pc_nne($femme_id) {
+        
+        $value = 0;;
+        $nb_prise_en_charge = 0;
+        $doctrine = new Doctrine();
+        $femme = $doctrine->em->find('Entity\\Femme', $femme_id);
+        $accouchement = $doctrine->em->getRepository('Entity\\Accouchement')->findOneBy(array('femme' => $femme), array('id' => 'desc'));
+        $nnes = $doctrine->em->getRepository('Entity\\Nouveau_ne')->findBy(array('accouchement' => $accouchement));
+        foreach ($nnes as $nne) {
+          $value = 0;
+          $pc = $doctrine->em->getRepository('Entity\\Prise_en_charge')->findBy(array('nouveauNe' => $nne));  
+          if(($pc))
+              $value= 1;
+        }
+        
+        
+    
+        return($value);
+    }
+
+} 
+
