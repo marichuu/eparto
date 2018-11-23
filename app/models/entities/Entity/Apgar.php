@@ -25,7 +25,7 @@ class Apgar {
      * @Column(name="created_date", type="datetime", nullable=true)
      */
     private $createdDate;
-    
+
     /**
      * @var \Entity\User
      *
@@ -35,7 +35,7 @@ class Apgar {
      * })
      */
     private $user;
-    
+
     /**
      * @var \Entity\Nouveau_ne
      *
@@ -49,9 +49,16 @@ class Apgar {
     /**
      * @var String
      *
+     * @Column(name="total", type="string", nullable=true)
+     */
+    private $total;
+
+    /**
+     * @var String
+     *
      * @Column(name="pouls_bc", type="string", nullable=true)
      */
-    private $pouls_bc;
+    private $poulsBc;
 
     /**
      * @var String
@@ -79,16 +86,14 @@ class Apgar {
      *
      * @Column(name="coloration_peau", type="string", nullable=true)
      */
-    private $coloration_peau;
-
+    private $colorationPeau;
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -99,10 +104,9 @@ class Apgar {
      *
      * @return Apgar
      */
-    public function setCreatedDate($createdDate)
-    {
+    public function setCreatedDate($createdDate) {
         $this->createdDate = $createdDate;
-    
+
         return $this;
     }
 
@@ -111,8 +115,7 @@ class Apgar {
      *
      * @return \DateTime
      */
-    public function getCreatedDate()
-    {
+    public function getCreatedDate() {
         return $this->createdDate;
     }
 
@@ -123,10 +126,9 @@ class Apgar {
      *
      * @return Apgar
      */
-    public function setPoulsBc($poulsBc)
-    {
-        $this->pouls_bc = $poulsBc;
-    
+    public function setPoulsBc($poulsBc) {
+        $this->poulsBc = $poulsBc;
+
         return $this;
     }
 
@@ -135,9 +137,8 @@ class Apgar {
      *
      * @return string
      */
-    public function getPoulsBc()
-    {
-        return $this->pouls_bc;
+    public function getPoulsBc() {
+        return $this->poulsBc;
     }
 
     /**
@@ -147,10 +148,9 @@ class Apgar {
      *
      * @return Apgar
      */
-    public function setRespiration($respiration)
-    {
+    public function setRespiration($respiration) {
         $this->respiration = $respiration;
-    
+
         return $this;
     }
 
@@ -159,8 +159,7 @@ class Apgar {
      *
      * @return string
      */
-    public function getRespiration()
-    {
+    public function getRespiration() {
         return $this->respiration;
     }
 
@@ -171,10 +170,9 @@ class Apgar {
      *
      * @return Apgar
      */
-    public function setTonus($tonus)
-    {
+    public function setTonus($tonus) {
         $this->tonus = $tonus;
-    
+
         return $this;
     }
 
@@ -183,8 +181,7 @@ class Apgar {
      *
      * @return string
      */
-    public function getTonus()
-    {
+    public function getTonus() {
         return $this->tonus;
     }
 
@@ -195,10 +192,9 @@ class Apgar {
      *
      * @return Apgar
      */
-    public function setReflexes($reflexes)
-    {
+    public function setReflexes($reflexes) {
         $this->reflexes = $reflexes;
-    
+
         return $this;
     }
 
@@ -207,8 +203,7 @@ class Apgar {
      *
      * @return string
      */
-    public function getReflexes()
-    {
+    public function getReflexes() {
         return $this->reflexes;
     }
 
@@ -219,10 +214,9 @@ class Apgar {
      *
      * @return Apgar
      */
-    public function setColorationPeau($colorationPeau)
-    {
-        $this->coloration_peau = $colorationPeau;
-    
+    public function setColorationPeau($colorationPeau) {
+        $this->colorationPeau = $colorationPeau;
+
         return $this;
     }
 
@@ -231,9 +225,8 @@ class Apgar {
      *
      * @return string
      */
-    public function getColorationPeau()
-    {
-        return $this->coloration_peau;
+    public function getColorationPeau() {
+        return $this->colorationPeau;
     }
 
     /**
@@ -243,10 +236,9 @@ class Apgar {
      *
      * @return Apgar
      */
-    public function setUser(\Entity\User $user)
-    {
+    public function setUser(\Entity\User $user) {
         $this->user = $user;
-    
+
         return $this;
     }
 
@@ -255,8 +247,7 @@ class Apgar {
      *
      * @return \Entity\User
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
@@ -267,10 +258,9 @@ class Apgar {
      *
      * @return Apgar
      */
-    public function setNouveauNe(\Entity\Nouveau_ne $nouveauNe)
-    {
+    public function setNouveauNe(\Entity\Nouveau_ne $nouveauNe) {
         $this->nouveauNe = $nouveauNe;
-    
+
         return $this;
     }
 
@@ -279,8 +269,32 @@ class Apgar {
      *
      * @return \Entity\Nouveau_ne
      */
-    public function getNouveauNe()
-    {
+    public function getNouveauNe() {
         return $this->nouveauNe;
+    }
+
+
+    /**
+     * Set total
+     *
+     * @param string $total
+     *
+     * @return Apgar
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+    
+        return $this;
+    }
+
+    /**
+     * Get total
+     *
+     * @return string
+     */
+    public function getTotal()
+    {
+        return $this->total;
     }
 }

@@ -58,18 +58,8 @@ class Accouchement {
      *
      * @Column(name="nbre_enfant", type="string", nullable=true)
      */
-    private $nbre_enfant;
+    private $nbreEnfant;
 
-    /**
-     * @var \Entity\Nouveau_ne
-     *
-     * @ManyToOne(targetEntity="Nouveau_ne")
-     * @JoinColumns({
-     *   @JoinColumn(name="nouveau_ne_id", referencedColumnName="id", nullable=false)
-     * })
-     */
-    private $nouveauNe;
-    
     /**
      * @var boolean
      *
@@ -159,7 +149,7 @@ class Accouchement {
      */
     public function setNbreEnfant($nbreEnfant)
     {
-        $this->nbre_enfant = $nbreEnfant;
+        $this->nbreEnfant = $nbreEnfant;
     
         return $this;
     }
@@ -171,7 +161,7 @@ class Accouchement {
      */
     public function getNbreEnfant()
     {
-        return $this->nbre_enfant;
+        return $this->nbreEnfant;
     }
 
     /**
@@ -292,29 +282,5 @@ class Accouchement {
     public function getFemme()
     {
         return $this->femme;
-    }
-
-    /**
-     * Set nouveauNe
-     *
-     * @param \Entity\Nouveau_ne $nouveauNe
-     *
-     * @return Accouchement
-     */
-    public function setNouveauNe(\Entity\Nouveau_ne $nouveauNe)
-    {
-        $this->nouveauNe = $nouveauNe;
-    
-        return $this;
-    }
-
-    /**
-     * Get nouveauNe
-     *
-     * @return \Entity\Nouveau_ne
-     */
-    public function getNouveauNe()
-    {
-        return $this->nouveauNe;
     }
 }

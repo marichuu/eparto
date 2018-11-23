@@ -26,33 +26,4 @@
 	 
         </div>     
     </div>   
-                            <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
-    <script type="text/javascript"> 
-       
-         $('#cpn1').click(function () {
-            if (this.checked) {
-                $(".nb_cpn").show();
-               // alert("Oui");
-            }
-        });
-        $('#cpn2').click(function () {
-            if (this.checked) {
-                $("#nb_cpn").val('');
-                $(".nb_cpn").hide();
-                // alert("Non");
-            }
-        });
-         $(".nb_cpn").hide();
-          $(".bcf").click(function() {
-                              $.ajax({
-                                  url: "../../../evenement/bcf",
-                                  type: "GET",
-                                  async: false,
-                                  success: function(response) {
-                                      $("#popup").empty().append(response);
-                                     // $(".div_documentbudget").empty().append(response);
-                                  }
-                              });
-                          });
-    </script>
 {% endblock %}

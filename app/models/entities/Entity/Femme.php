@@ -22,14 +22,14 @@ class Femme {
     /**
      * @var string
      *
-     * @Column(name="nom", type="string", length=255, precision=0, scale=0, nullable=false, unique=true)
+     * @Column(name="nom", type="string", length=255, precision=0, scale=0, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @Column(name="prenom", type="string", length=255, precision=0, scale=0, nullable=false, unique=true)
+     * @Column(name="prenom", type="string", length=255, precision=0, scale=0, nullable=false)
      */
     private $prenom;
 

@@ -23,31 +23,31 @@
                             <label class="control-label">{{"Nom"}}: <span class="text-error">*</span></label>
                             <div class="controls">
                                 <input type="hidden" value="{{session.userdata.structure}}" class="span4" name="structure" id="structure"/>
-                                <input type="text" value="" class="validate[required] span4" name="nom" id="nom"/>
+                                <input type="text" value="" class="validate[required] span4" name="nom" value="{{set_value('nom')}}" id="nom"/>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">{{"Prenom"}}: <span class="text-error">*</span></label>
                             <div class="controls">
-                                <input type="text" value="" class="validate[required] span4" name="prenom" id="prenom"/>
+                                <input type="text" value="" class="validate[required] span4" name="prenom" value="{{set_value('prenom')}}" id="prenom"/>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">{{"Age"}}: <span class="text-error">*</span></label>
                             <div class="controls">
-                                <input type="number" value="" class="span2" name="age" id="age"/>
+                                <input type="number" value="" class="span2" name="age" value="{{set_value('age')}}" id="age"/>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">{{"Nom du mari"}}: <span class="text-error">*</span></label>
                             <div class="controls">
-                                <input type="text" value="" class="span4" name="nom_mari" id="mari"/>
+                                <input type="text" value="" class="span4" value="{{set_value('nom_mari')}}" name="nom_mari" id="mari"/>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">{{"Village"}}: <span class="text-error">*</span></label>
                             <div class="controls">
-                                <input type="text" value="" class="span4" name="village" id="mari"/>
+                                <input type="text" value="" class="span4" value="{{set_value('village')}}" name="village" id="mari"/>
                             </div>
                         </div>
                         <div class="control-group">
