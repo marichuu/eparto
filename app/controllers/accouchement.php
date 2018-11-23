@@ -269,7 +269,7 @@ class Accouchement extends CI_Controller {
         $data['nb_prise_en_charge'] = $nb_prise_en_charge;
         $data['prise_en_charges'] = $prise_en_charges;
         $this->twig->display("accouchement/prise_en_charge.html.twig", $data);
-    }
+    } 
 
     public function create_prise_en_charge() {
 
