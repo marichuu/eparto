@@ -56,11 +56,6 @@
 
 
 </div>   
-<style>
-    
-<<<<<<< HEAD
-      
-</style>
 <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
 <script type="text/javascript">
  function blinker() {
@@ -97,31 +92,5 @@
     
   
 </script>
-=======
-    <div class="wrapper"> 
-        <div class="wrapper_small"> 
-           
-            <div class="widget">
-                <div class="tab-pane active" id="glyphs">
-                            <ul class="clearfix">
-                                <li><a href="{{site_url('risque/add')}}/?xl={{ femme.id|crypter }}"><i class="fam-tag-red"></i> &nbsp; Risque</a></li>
-                                <li><a href="{{site_url('examen/add')}}/?xl={{ femme.id|crypter }}"><i class="icon-beaker"></i> 1er Examen</a></li>
-                                <li><a href="{{site_url('evenement/add_bcf')}}/?xl={{ femme.id|crypter }}"><i class="icon-volume-down"></i> Bruits du coeur foetal</a></li>
-                                <li><a href="{{site_url('evenement/add_pde')}}/?xl={{ femme.id|crypter }}"><i class="icon-tint"></i> Liquide amniotique / Chevauchement</a></li>
-                                <li><a href="{{site_url('evenement/add_col')}}/?xl={{ femme.id|crypter }}"><i class="icon-resize-vertical"></i> Col et descente de la tête</a></li>
-                                <li><a href="{{site_url('evenement/add_contraction')}}/?xl={{ femme.id|crypter }}"><i class="icon-sort"></i> Contraction par 10 minutes</a></li>
-                                <li><a href="{{site_url('evenement/add_ocytocine')}}/?xl={{ femme.id|crypter }}"><i class="fam-contrast-high"></i>&nbsp;  Unité d'ocytocine par litre </a></li>
-                                <li><a href="{{site_url('evenement/add_medicament')}}/?xl={{ femme.id|crypter }}"><i class="fam-report-edit"></i>&nbsp;   Medicaments prescrits </a></li>
-                                <li><a href="{{site_url('evenement/add_pouls_ta')}}/?xl={{ femme.id|crypter }}"><i class="ico-search"></i>&nbsp;&nbsp; Pouls / TA </a></li>
-                                <li><a href="{{site_url('evenement/add_temperature')}}/?xl={{ femme.id|crypter }}"><i class="icon-text-height"></i>  Temperature</a></li>
-                                <li><a href="{{site_url('evenement/add_urine')}}/?xl={{ femme.id|crypter }}"><i class="icon-magnet"></i>  Urine </a></li>
-                                
-                            </ul>    
-                </div>
-            </div>
-                                 <div id="popup"></div>
-	 
-        </div>     
-    </div>   
->>>>>>> a24072ecf6142a4f7106af9514cbad65d1ae351f
+
 {% endblock %}

@@ -524,7 +524,7 @@ class Femme {
     public function getUser()
     {
         return $this->user;
-<<<<<<< HEAD
+
     }
 
     /**
@@ -549,7 +549,6 @@ class Femme {
     public function getPde()
     {
         return $this->pde;
-=======
->>>>>>> a24072ecf6142a4f7106af9514cbad65d1ae351f
+
     }
 }

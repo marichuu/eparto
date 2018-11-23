@@ -11,8 +11,8 @@
                 <li>age: <span class="pull-right">{{f.age}}</span></li>
                 <li>Motif: <strong class="pull-right text-error">{{f.motif}}</strong></li>
                 {% if(f.heureRuptureMembrane is not null) %} <li>Rup. M : <strong class="pull-right text-error">{{f.heureRuptureMembrane|date}}</strong></li>{% endif %}
-                <a href="{{site_url('accouchement/add')}}/?xl={{ f.id|crypter }}"><button type="button" class="btn btn-success"><i class="ico-check"></i>Accouchement</button></a>
-                <a href="{{site_url('delivrance/add')}}/?xl={{ f.id|crypter }}"><button type="button" class="btn btn-info" {% if accouchement is null %} disabled {% endif %}><i class="ico-play"></i>Delivrance</button></a>
+                <a href="{{site_url('accouchement/add_accouchement')}}/?xl={{ f.id|crypter }}"><button type="button" class="btn btn-success"><i class="ico-check"></i>Accouchement</button></a>
+                <a href="{{site_url('delivrance/add')}}/?xl={{ f.id|crypter }}"><button type="button" class="btn btn-info" {% if is_accouche(f.id) is null %} disabled {% endif %}><i class="ico-play"></i>Delivrance</button></a>
             </ul>
         </div>
 

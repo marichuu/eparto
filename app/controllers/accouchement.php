@@ -126,7 +126,7 @@ class Accouchement extends CI_Controller {
                     $data['nb_accouchement'] = 1;
                     setMessages('Operation effectuée avec succes.', 'success');
 
-                    $this->twig->display("accouchement/infos_accouch.html.twig");
+                    $this->twig->display("accouchement/infos_accouch.html.twig", $data);
                 } catch (DBALException $e) {
                     //setMessages('Erreur lors de l\'enregistrement. ', 'danger');
                     setMessages($e->getMessage(), 'danger');
@@ -179,6 +179,7 @@ class Accouchement extends CI_Controller {
 //            } else {
             try {
                 $femme_id = $this->input->post('femme_id');
+                $femme = $this->_em->find('Entity\\Femme', $femme_id);
                 $pouls_bcs = $this->input->post('pouls_bc');
                 $respirations = $this->input->post('respiration');
                 $tonuss = $this->input->post('tonus');
@@ -227,21 +228,23 @@ class Accouchement extends CI_Controller {
                 $data['apgars'] = $tab_apgar;
 
 //var_dump($tab_apgar); exit();
-
+                $accouchement = $this->_em->getRepository('Entity\\Accouchement')->findOneBy(array('femme' => $femme), array('id' => 'desc'));
+                $nouveauNes = $this->_em->getRepository('Entity\\Nouveau_ne')->findBy(array('accouchement' => $accouchement), array('id' => 'asc'));
+                $data['nouveauNes'] = $nouveauNes;
                 $data['femme'] = $femme = $this->_em->find('Entity\\Femme', $femme_id);
                 setMessages('Operation effectuée avec succes.', 'success');
                 $data['nb_apgar'] = 1;
-                $this->twig->display("accouchement/apgar.html.twig");
+                $this->twig->display("accouchement/apgar.html.twig", $data);
             } catch (DBALException $e) {
                 setMessages($e->getMessage(), 'danger');
                 redirect('accouchement/add_accouchement');
             }
 //            }
-            redirect("home/home");
+         //   redirect("home/home");
         }
     }
 
-    public function add_prise__en_charge() {
+    public function add_prise_en_charge() {
         $nb_prise_en_charge = 0;
         $id = str_replace(' ', '+', $_GET['xl']);
         if ($id == "")

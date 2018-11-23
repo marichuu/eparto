@@ -14,7 +14,9 @@
         <div class="invoice-footer">
             <span class="footer-note"></span>
             <ul class="">
-                <a href="{{site_url('accouchement/index')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-application-edit"></i> Infos accouchement </li></a>&nbsp;&nbsp;
+                <a href="{{site_url('accouchement/add_prise_en_charge')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-application-edit"></i> PC du N-NE </li></a>
+                {% if is_pc_nne(femme.id) == 1 %} <i class="fam-tick"></i><span class="help-block"></span> {% else %}<i class="fam-bell" title="Vous devez saisir les données"> </i>{% endif %}&nbsp;&nbsp;&nbsp;
+                <a href="{{site_url('accouchement/add_apgar')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-application-edit"></i> APGAR </li></a>&nbsp;&nbsp;
                 <a href="{{site_url('surveillance/add')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-application-edit"></i> Surveillance </li></a>&nbsp;&nbsp;
                 <a href="{{site_url('delivrance/add_refer')}}/?xl={{ femme.id|crypter }}"<li><i class="ico-share-alt"></i>Référer</li></a> &nbsp;&nbsp;
                 <a href="{{site_url('home/home/partographe')}}/?xl={{ femme.id|crypter }}"<li><i class="fam-chart-line"></i>Partographe</li></a>&nbsp;&nbsp; 
@@ -22,3 +24,11 @@
         </div>
     </div>
 {% endfor %}
+<script src="{{ js_url('files/ajax.jquery.min') }}"></script>
+<script type="text/javascript">
+    function blinker() {
+        $('.fam-bell').fadeOut(500).fadeIn(500);
+    }
+    setInterval(blinker, 1000);
+    
+</script>

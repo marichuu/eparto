@@ -151,6 +151,8 @@ class Twig {
         $this->add_function('eleveNourri');
         $this->add_function('eleveNonNourri');
         $this->add_function('date_interval');
+        $this->add_function('is_accouche');
+        $this->add_function('is_pc_nne');
     }
 
     public function ci_function_init_one($twig_name, $callable)
