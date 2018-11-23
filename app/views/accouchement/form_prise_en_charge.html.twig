@@ -1,0 +1,258 @@
+
+{% block content %}
+    <div class="wrapper"> 
+        <div class="wrapper_small"> 
+            {% if(nb_prise_en_charge == 0 ) %}    
+                <br>
+
+                <div class="row">
+                    {{ getMessages()|raw }}
+                </div>
+                <div class="widget">
+                    <div class="navbar"><div class="navbar-inner"><h6>{{"PRISE EN CHARGE"}} ({{femme.prenom}} {{femme.nom}}) </h6></div></div>
+                    <div class="well row-fluid">
+                        <form id="validate" class="form-horizontal" action="{{ site_url("accouchement/create_prise_en_charge") }}" method="post"> 
+                            <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
+
+                            {% for nouveauNe in nouveauNes %}
+                                {#<div class="controls">
+                                    <b>&nbsp; {{"PRISE EN CHARGE"}} du Nouveau-né {{ loop.index }}. Né(e) le {{ nouveauNe.dateNais|date('d/m/Y') }} à {{ nouveauNe.dateNais|date('H') }} h {{ nouveauNe.createdDate|date('i') }} mn</b>
+                                </div>#}
+                                <fieldset>
+                                    <legend>&nbsp;&nbsp;Nouveau-né {{ loop.index }}. Né(e) le {{ nouveauNe.dateNais|date('d/m/Y') }} à {{ nouveauNe.dateNais|date('H') }} h {{ nouveauNe.createdDate|date('i') }} mn</legend>
+
+                                    <div class="control-group">
+                                        <label class="control-label">Temperature: <span class="text-error">*</span></label>
+                                        <div class="controls">
+                                            <input type="number" name="temperature[{{ loop.index }}][]" class='validate[required]'/>
+                                            <input type="hidden" value="{{femme.id}}" class="validate[required] span4" name="femme_id" id="femme_id"/>
+                                            <input type="hidden" value="{{nouveauNe.id}}" class="span4" name="nouveau_ne_id[{{ loop.index }}][]"  id="{{"nouveau_ne_id_"~loop.index}}"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">{{"Respiration"}}: <span class="text-error">*</span></label>
+                                        <div class="controls">
+                                            <input type="number" name="respiration[{{ loop.index }}][]" class='validate[required]'/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">{{"Taille"}}: <span class="text-error">*</span></label>
+                                        <div class="controls">
+                                            <input type="number" class="validate[required] span4" name="taille[{{ loop.index }}][]" />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">{{"Périmètre cranien"}}: <span class="text-error">*</span></label>
+                                        <div class="controls">
+                                            <input type="number" class="validate[required] span4" name="perimetreCranien[{{ loop.index }}][]" />
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">{{"Réanimation"}}: <span class="text-error">*</span></label>
+                                        <div class="controls">
+                                            <label class="radio inline"><input type="radio" name="reanimation[{{ loop.index }}][]" value="0" class="styled" >OUI</label>
+                                            <label class="radio inline"><input type="radio" name="reanimation[{{ loop.index }}][]" value="1" class="styled" >NON</label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="control-group">
+                                        <label class="control-label">{{"Coloration de la peau"}}: <span class="text-error">*</span></label>
+                                        <div class="controls">
+                                            <label class="radio inline"><input type="radio" name="colorationPeau[{{ loop.index }}][]" value="0" class="styled" >Cyanose du corps</label>
+                                            <label class="radio inline"><input type="radio" name="colorationPeau[{{ loop.index }}][]" value="1" class="styled" >Cyanose extrémités</label>
+                                            <label class="radio inline"><input type="radio" name="colorationPeau[{{ loop.index }}][]" value="2" class="styled" >Rose</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">{{"Mise au sein"}}: <span class="text-error">*</span></label>
+                                        <div class="controls">
+                                            <label class="radio inline"><input type="radio" name="miseAuSein[{{ loop.index }}][]" value="0" class="styled" >Immédiate</label>
+                                            <label class="radio inline"><input type="radio" name="miseAuSein[{{ loop.index }}][]" value="1" class="styled" >Difficultés pour téter</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">{{"Poids"}}: <span class="text-error">*</span></label>
+                                        <div class="controls">
+                                            <label class="radio inline"><input type="radio" name="poids[{{ loop.index }}][]" value="0" class="styled" >> 2500 gr</label>
+                                            <label class="radio inline"><input type="radio" name="poids[{{ loop.index }}][]" value="1" class="styled" >< 2500 gr</label>
+                                            <label class="radio inline"><input type="radio" name="poids[{{ loop.index }}][]" value="1" class="styled" >< 2000 gr</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">{{"Malformation"}}: <span class="text-error">*</span></label>
+                                        <div class="controls">
+                                            <label class="radio inline"><input type="radio" name="malformation[{{ loop.index }}][]" class="malformation1{{ loop.index }}" value="0" class="styled" >OUI</label>
+                                            <label class="radio inline"><input type="radio" name="malformation[{{ loop.index }}][]" class="malformation2{{ loop.index }}" value="1" class="styled" >NON</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">{{"Type"}}:</label>
+                                        <div class="controls">
+                                            <input type="text" class="span4" name="typeMalformation[{{ loop.index }}][]" class="typeMalformation{{ loop.index }}"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Observation: </label>
+                                        <div class="controls">
+                                            <textarea name='observation[{{ loop.index }}][]'  ></textarea>
+                                        </div>
+                                    </div>
+
+                                    <fieldset>
+                                        <legend>&nbsp;&nbsp;Traitement / Soins essentiels</legend>
+
+                                        <div class="control-group">
+                                            <label class="control-label">{{"Vit K1"}}: <span class="text-error">*</span></label>
+                                            <div class="controls">
+                                                <label class="radio inline"><input type="radio" name="vitk1[{{ loop.index }}][]" value="0" class="styled" >OUI</label>
+                                                <label class="radio inline"><input type="radio" name="vitk1[{{ loop.index }}][]" value="1" class="styled" >NON</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                            <label class="control-label">{{"Polio 0"}}: <span class="text-error">*</span></label>
+                                            <div class="controls">
+                                                <label class="radio inline"><input type="radio" name="polio0[{{ loop.index }}][]" value="0" class="styled" >OUI</label>
+                                                <label class="radio inline"><input type="radio" name="polio0[{{ loop.index }}][]" value="1" class="styled" >NON</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                            <label class="control-label">{{"Tetra 1% oph"}}: <span class="text-error">*</span></label>
+                                            <div class="controls">
+                                                <label class="radio inline"><input type="radio" name="tetraOph[{{ loop.index }}][]" value="0" class="styled" >OUI</label>
+                                                <label class="radio inline"><input type="radio" name="tetraOph[{{ loop.index }}][]" value="1" class="styled" >NON</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                            <label class="control-label">{{"Chlorexidinedigluconate 7,1 %"}}: <span class="text-error">*</span></label>
+                                            <div class="controls">
+                                                <label class="radio inline"><input type="radio" name="chlorexidinedigluconate[{{ loop.index }}][]" value="0" class="styled" >OUI</label>
+                                                <label class="radio inline"><input type="radio" name="chlorexidinedigluconate[{{ loop.index }}][]" value="1" class="styled" >NON</label>
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+                                </fieldset>
+                                </br>
+                            {% endfor %}
+
+                            <div class="form-actions align-right">
+                                <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                            </div>
+                        </form>  
+                    </div> 
+                </div>
+            {% else %}
+                <!-- Default table -->
+                <div class="widget">
+                    <div class="navbar"><div class="navbar-inner"><h6> Prise en charge du (des) nouveau-né (s) de {{femme.prenom}} {{femme.nom}} </h6></div></div>
+                    {% for prise in prise_en_charges %}
+                        <div class="table-overflow">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Nouveau-né {{ loop.index }} </th>
+                                        <td>Né(e) le {{ prise.nouveauNe.dateNais|date('d/m/Y') }} à {{ prise.nouveauNe.dateNais|date('H') }} h {{ prise.nouveauNe.createdDate|date('i') }} mn </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Temperature </th>
+                                        <td>{{ prise.temperature }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Respiration </th>
+                                        <td>{{ prise.respiration }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Taille </th>
+                                        <td>{{ prise.taille }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Poids </th>
+                                        <td>{{ prise.poids }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Périmètre cranien </th>
+                                        <td>{{ prise.perimetreCranien }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Réanimation </th>
+                                        <td> {%if prise.reanimation == 0%} OUI {% elseif prise.reanimation == 1 %} NON {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Coloration de la peau </th>
+                                        <td> {%if prise.colorationPeau == 0%} Cyanose du corps {% elseif prise.colorationPeau == 1 %} Cyanose extrémités {% elseif prise.colorationPeau == 2 %} Rose {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mise au sein </th>
+                                        <td> {%if prise.miseAuSein == 0%} Immédiate {% elseif prise.miseAuSein == 1 %} Difficultés pour téter {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Malformation </th>
+                                        <td> {%if prise.malformation == 0%} OUI {% elseif prise.malformation == 1 %} NON {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Type de malformation </th>
+                                        <td>{{ prise.typeMalformation }} </td></tr>
+                                    <tr>
+                                        <th>Observation </th>
+                                        <td>{{ prise.observation }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Vit K1 </th>
+                                        <td> {%if prise.vitk1 == 0%} OUI {% elseif prise.miseAuSein == 1 %} NON {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Polio 0 </th>
+                                        <td> {%if prise.polio0 == 0%} OUI {% elseif prise.polio0 == 1 %} NON {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tetra 1% oph </th>
+                                        <td> {%if prise.tetraOph == 0%} OUI {% elseif prise.tetraOph == 1 %} NON {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Chlorexidinedigluconate 7,1 % </th>
+                                        <td> {%if prise.chlorexidinedigluconate == 0%} OUI {% elseif prise.chlorexidinedigluconate == 1 %} NON {% endif %}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div></br>
+                    {% endfor %}
+
+                </div>
+                <!-- /default table -->                    
+            {% endif %}
+        </div>     
+    </div>   
+    <script src="{{ js_url('files/ajax.jquery.min') }}">
+    </script>
+    <script type="text/javascript">
+        {% for nouveauNe in nouveauNes %}
+
+            $('.typeMalformation{{loop.index}}').hide();
+
+            $('.malformation1{{loop.index}}').click(function () {
+                if (this.checked) {
+                    $('.typeMalformation{{loop.index}}').show();
+                }
+            });
+
+            $('.malformation2{{loop.index}}').click(function () {
+                if (this.checked) {
+                    $('.typeMalformation{{loop.index}}').val('');
+                    $('.typeMalformation{{loop.index}}').hide();
+                }
+            });
+
+        {% endfor %}
+    </script>
+{% endblock %}

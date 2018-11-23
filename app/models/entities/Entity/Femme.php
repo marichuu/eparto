@@ -22,14 +22,14 @@ class Femme {
     /**
      * @var string
      *
-     * @Column(name="nom", type="string", length=255, precision=0, scale=0, nullable=false, unique=true)
+     * @Column(name="nom", type="string", length=255, precision=0, scale=0, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @Column(name="prenom", type="string", length=255, precision=0, scale=0, nullable=false, unique=true)
+     * @Column(name="prenom", type="string", length=255, precision=0, scale=0, nullable=false)
      */
     private $prenom;
 
@@ -524,6 +524,7 @@ class Femme {
     public function getUser()
     {
         return $this->user;
+<<<<<<< HEAD
     }
 
     /**
@@ -548,5 +549,7 @@ class Femme {
     public function getPde()
     {
         return $this->pde;
+=======
+>>>>>>> a24072ecf6142a4f7106af9514cbad65d1ae351f
     }
 }

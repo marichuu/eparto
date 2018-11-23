@@ -101,7 +101,6 @@ class Surveillance extends CI_Controller {
                 }
             }
 
-//            redirect('home/surveillance');
             $this->twig->display("home/surveillance.html.twig", $data);
         }
     }

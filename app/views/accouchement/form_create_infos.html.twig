@@ -1,0 +1,129 @@
+
+{% block content %}
+    <div class="wrapper"> 
+        <div class="wrapper_small"> 
+            {% if(nb_accouchement == 0 ) %}    
+                <br>
+
+                <div class="row">
+                    {{ getMessages()|raw }}
+                </div>
+                <div class="widget">
+                    <div class="navbar"><div class="navbar-inner"><h6>{{"Infos Achouchement"}} ( {{femme.prenom}} {{femme.nom}}) </h6></div></div>
+                    <div class="well row-fluid">
+                        <form id="validate" class="form-horizontal" action="{{ site_url("accouchement/create_infos_accouch") }}" method="post"> 
+                            <div class="control-group">
+                                <label class="control-label">{{"Expulsion"}}: <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    {#                                                                    <label class="radio inline"><input type="radio" name="expulsion" id="active1"  {%if accouchement.expulsion==1%} checked {%endif%} value="1" class="styled" >< 45 mn</label>#}
+                                    &nbsp; &nbsp;<label class="radio inline"><input type="radio" name="expulsion" id="active1" value="1" class="styled" >< 45 mn</label>
+                                    <label class="radio inline"><input type="radio" name="expulsion" id="active2" value="0" class="styled" >> 45 mn</label> 
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                Mode d'accouchement: <span class="text-error">*</span> &nbsp; &nbsp; &nbsp; 
+                                {#                                                            <div class="controls">#}
+                                <label class="radio inline"><input type="radio" name="mode" id="active2" value="0" class="styled" >Dystocique</label> 
+                                <label class="radio inline"><input type="radio" name="mode" id="active1" value="1" class="styled" >Eutocique</label>
+                                    {#                                                            </div>#}
+                            </div>
+
+                            <div class="control-group">
+                                Nom de l'accoucheur (se) : <span class="text-error">*</span>
+                                {#                                                            <div class="controls">#}
+                                <input type="text" name="nomAccoucheur" id="" class='validate[required]'>
+                                {#                                 </div>#}
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Traitement: </label>
+                                <div class="controls">
+                                    <textarea name='traitement' id='traitement' ></textarea>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">{{"Nombre d\'enfants"}}: <span class="text-error">*</span></label>
+                                <div class="controls">
+                                    <input type="text" value="" class="validate[required] span4" name="nbreEnfant" id="nbreEnfant" data-mask="9"/>
+                                    <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group heures" >
+                            </div>
+
+
+                            <div class="form-actions align-right">
+                                <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                            </div>
+
+                        </form>  
+                    </div> 
+                </div>
+            {% else %}
+                <!-- Default table -->
+                <div class="widget">
+                    <div class="navbar"><div class="navbar-inner"><h6> Accouchement de ( {{femme.prenom}} {{femme.nom}} )</h6></div></div>
+                    <div class="table-overflow">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Nom de l'accoucheur (se)</th>
+                                    <td>{{accouchement.nomAccoucheur}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Expulsion</th>
+                                    <td>{%if accouchement.expulsion == 1%} < 45 mn {% elseif accouchement.expulsion == 0 %} > 45 mn {% endif %}</td>
+                                </tr>
+                                <tr>
+                                    <th>Mode d'accouchement</th>
+                                    <td> {%if accouchement.mode == 1%} Eutocique {% elseif accouchement.mode == 0%} Dystocique {% endif %}</td>
+                                </tr>
+                                <tr>
+                                    <th>Traitement / soins </th>
+                                    <td>{{ accouchement.traitement }} </td>
+                                </tr>
+                                <tr>
+                                    <th>Nombre d'enfants </th>
+                                    <td>{{ accouchement.nbreEnfant }} </td>
+                                </tr>
+                                <tr>
+                                    <th>Nouveau-né</th>
+                                    <td>
+                                        {% for nouveauNe in nouveauNes %}
+
+                                            {{ loop.index }}. Né(e) le {{ nouveauNe.dateNais|date('d/m/Y') }} à {{ nouveauNe.dateNais|date('H') }} h {{ nouveauNe.dateNais|date('i') }} mn  
+                                            </br>
+                                        {% endfor %}
+                                    </td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /default table -->                    
+            {% endif %}
+        </div>     
+    </div>   
+    <script src="{{ js_url('files/ajax.jquery.min') }}">
+    </script>
+    <script type="text/javascript">
+        var i = 0;
+        $('#nbreEnfant').keyup(function () {
+            var nbreEnfant = parseInt($('#nbreEnfant').val());
+            if (nbreEnfant > 0) {
+                while (i < nbreEnfant) {
+                    var j = i + 1;
+                    $(".heures").show();
+                    $(".heures").append('<div class="control-group"><label class="control-label"> Nouveau-né ' + j + '. Date:  <span class="text-error">*</span></label><div class="controls"><ul class="dates-range no-append"><ul class="dates-range no-append"><li><input type="date" placeholder="date..." id="date" class="" name="date[]" ></li><li><input class="span12" type="time" name="heure[]" value="" /></li></ul></div></div></br>');
+                    $("input[type='submit'], input[type='checkbox'], input[type='text'], input[type='radio']").button();
+                    i++;
+                }
+            } else {
+                $(".heures").val("").hide();
+
+            }
+        });
+
+    </script>
+{% endblock %}

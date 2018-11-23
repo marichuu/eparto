@@ -24,7 +24,7 @@ class Nouveau_ne {
      *
      * @Column(name="date_nais", type="datetime", nullable=true)
      */
-    private $date_nais;
+    private $dateNais;
     
     /**
      * @var \Entity\Accouchement
@@ -53,9 +53,6 @@ class Nouveau_ne {
      */
     private $createdDate;
     
-    
-    
-    
 
     /**
      * Get id
@@ -76,7 +73,7 @@ class Nouveau_ne {
      */
     public function setDateNais($dateNais)
     {
-        $this->date_nais = $dateNais;
+        $this->dateNais = $dateNais;
     
         return $this;
     }
@@ -88,7 +85,7 @@ class Nouveau_ne {
      */
     public function getDateNais()
     {
-        return $this->date_nais;
+        return $this->dateNais;
     }
 
     /**

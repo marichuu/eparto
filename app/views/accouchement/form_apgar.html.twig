@@ -1,0 +1,170 @@
+
+{% block content %}
+    <div class="wrapper"> 
+        <div class="wrapper_small"> 
+            {% if(nb_apgar == 0 ) %}    
+                <br>
+
+                <div class="row">
+                    {{ getMessages()|raw }}
+                </div>
+                <div class="widget">
+                    <div class="navbar"><div class="navbar-inner"><h6>{{femme.prenom}} {{femme.nom}} </h6></div></div>
+                    <div class="well row-fluid">
+                        <form id="validate" class="form-horizontal" action="{{ site_url("accouchement/create_apgar") }}" method="post"> 
+                            <input type="hidden" value="{{femme.id}}" class="span4" name="femme_id" id="femme_id"/>
+                            
+                            {% for nouveauNe in nouveauNes %}
+                                <div class="controls">
+                                    <b>&nbsp; {{"APGAR"}} du Nouveau-né {{ loop.index }}. Né(e) le {{ nouveauNe.dateNais|date('d/m/Y') }} à {{ nouveauNe.dateNais|date('H') }} h {{ nouveauNe.createdDate|date('i') }} mn</b>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">{{"Pouls/BC"}}: <span class="text-error">*</span></label>
+                                    <div class="controls">
+                                        <label class="radio inline"><input type="radio" name="pouls_bc[{{ loop.index }}][]" value="0" class="styled apgar{{ loop.index }} pouls{{ loop.index }}" >0 - Absents.</label>
+                                        <label class="radio inline"><input type="radio" name="pouls_bc[{{ loop.index }}][]" value="1" class="styled apgar{{ loop.index }} pouls{{ loop.index }}" >1 - Inférieurs à 100 / min.</label>
+                                        <label class="radio inline"><input type="radio" name="pouls_bc[{{ loop.index }}][]" value="2" class="styled apgar{{ loop.index }} pouls{{ loop.index }}" >2 - Supérieurs à 100 / min.</label>
+                                        <input type="hidden" value="{{nouveauNe.id}}" class="span4" name="nouveau_ne_id[{{ loop.index }}][]"  id="{{"nouveau_ne_id_"~loop.index}}"/>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">{{"Respiration"}}: <span class="text-error">*</span></label>
+                                    <div class="controls">
+                                        <label class="radio inline"><input type="radio" name="respiration[{{ loop.index }}][]" value="0" class="styled apgar{{ loop.index }} respiration{{loop.index}}" >0 - Absente.</label>
+                                        <label class="radio inline"><input type="radio" name="respiration[{{ loop.index }}][]" value="1" class="styled apgar{{ loop.index }} respiration{{loop.index}}" >1 - Quelques mouvements spontanés.</label>
+                                        <label class="radio inline"><input type="radio" name="respiration[{{ loop.index }}][]" value="2" class="styled apgar{{ loop.index }} respiration{{loop.index}}" >2 - Normale.</label>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">{{"Tonus"}}: <span class="text-error">*</span></label>
+                                    <div class="controls">
+                                        <label class="radio inline"><input type="radio" name="tonus[{{ loop.index }}][]" value="0" class="styled apgar{{ loop.index }} tonus{{loop.index}}" >0 - Hypotonie globale.</label>
+                                        <label class="radio inline"><input type="radio" name="tonus[{{ loop.index }}][]" value="1" class="styled apgar{{ loop.index }} tonus{{loop.index}}" >1 - Flexion des membres.</label>
+                                        <label class="radio inline"><input type="radio" name="tonus[{{ loop.index }}][]" value="2" class="styled apgar{{ loop.index }} tonus{{loop.index}}" >2 - Mouvements actifs spontanés.</label>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">{{"Réflexes"}}: <span class="text-error">*</span></label>
+                                    <div class="controls">
+                                        <label class="radio inline"><input type="radio" name="reflexes[{{ loop.index }}][]" value="0" class="styled apgar{{ loop.index }} reflexes{{loop.index}}" >0 - Aucun.</label>
+                                        <label class="radio inline"><input type="radio" name="reflexes[{{ loop.index }}][]" value="1" class="styled apgar{{ loop.index }} reflexes{{loop.index}}" >1 - Grimaces.</label>
+                                        <label class="radio inline"><input type="radio" name="reflexes[{{ loop.index }}][]" value="2" class="styled apgar{{ loop.index }} reflexes{{loop.index}}" >2 - Vive.</label>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">{{"Coloration de la peau"}}: <span class="text-error">*</span></label>
+                                    <div class="controls">
+                                        <label class="radio inline"><input type="radio" name="coloration_peau[{{ loop.index }}][]" value="0" class="styled apgar{{ loop.index }} coloration_peau{{loop.index}}" >0 - Cyanosé, gris.</label>
+                                        <label class="radio inline"><input type="radio" name="coloration_peau[{{ loop.index }}][]" value="1" class="styled apgar{{ loop.index }} coloration_peau{{loop.index}}" >1 - Cyanose des extrémités.</label>
+                                        <label class="radio inline"><input type="radio" name="coloration_peau[{{ loop.index }}][]" value="2" class="styled apgar{{ loop.index }} coloration_peau{{loop.index}}" >2 - Rose.</label>
+                                    </div>
+                                </div>
+                                <div class="control-group {{"total"~loop.index}}" >
+                                    <label class="control-label">{{"Total"}} : </label> <input type="text" readonly id="{{"total"~loop.index}}">
+                                </div>
+
+                            {% endfor %}
+                            <div class="form-actions align-right">
+                                <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                            </div>
+                        </form>  
+                    </div> 
+                </div>
+            {% else %}
+                <!-- Default table -->
+                <div class="widget">
+                    <div class="navbar"><div class="navbar-inner"><h6> APGAR du (des) nouveau-né (s) de {{femme.prenom}} {{femme.nom}} </h6></div></div>
+                    {% for apgar in apgars %}
+                        <div class="table-overflow">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Nouveau-né {{ loop.index }} </th>
+                                        <td>Né(e) le {{ apgar.nouveauNe.dateNais|date('d/m/Y') }} à {{ apgar.nouveauNe.dateNais|date('H') }} h {{ apgar.nouveauNe.createdDate|date('i') }} mn </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pouls/BC </th>
+                                        <td>{{ apgar.poulsBc }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Respiration </th>
+                                        <td>{{ apgar.respiration }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tonus </th>
+                                        <td>{{ apgar.tonus }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Réflexes </th>
+                                        <td>{{ apgar.reflexes }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Coloration de la peau </th>
+                                        <td>{{ apgar.colorationPeau }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total </th>
+                                        <td>{{ apgar.total }} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div></br>
+                    {% endfor %}
+
+                </div>
+                <!-- /default table -->                    
+            {% endif %}
+        </div>     
+    </div>   
+    <script src="{{ js_url('files/ajax.jquery.min') }}">
+    </script>
+    <script type="text/javascript">
+        {#$('.apgar1').click(function () {
+       });#}
+        {% for nouveauNe in nouveauNes %}
+
+            $('.apgar{{loop.index}}').click(function () {
+                var pouls_bc_val = 0, respiration = 0, tonus = 0, reflexes = 0, coloration_peau = 0;
+                var total_pouls = 0, total_respiration = 0, total_tonus = 0, total_reflexes = 0, total_coloration_peau = 0;
+                var total;
+                $('.pouls{{loop.index}}').each(function () {
+                    if (this.checked) {
+                        pouls_bc_val = jQuery(this).val();
+                        total_pouls = parseInt(total_pouls) + parseInt(pouls_bc_val);
+                    }
+                });
+                $('.respiration{{loop.index}}').each(function () {
+                    if (this.checked) {
+                        respiration = jQuery(this).val();
+                        total_respiration = parseInt(total_respiration) + parseInt(respiration);
+                    }
+                });
+                $('.tonus{{loop.index}}').each(function () {
+                    if (this.checked) {
+                        tonus = jQuery(this).val();
+                        total_tonus = parseInt(total_tonus) + parseInt(tonus);
+                    }
+                });
+                $('.reflexes{{loop.index}}').each(function () {
+                    if (this.checked) {
+                        reflexes = jQuery(this).val();
+                        total_reflexes = parseInt(total_reflexes) + parseInt(reflexes);
+                    }
+                });
+                $('.coloration_peau{{loop.index}}').each(function () {
+                    if (this.checked) {
+                        coloration_peau = jQuery(this).val();
+                        total_coloration_peau = parseInt(total_coloration_peau) + parseInt(coloration_peau);
+                    }
+                });
+            {#                total = parseInt(total_pouls) + parseInt(total_respiration) + parseInt(total_tonus);#}
+                    total = parseInt(total_pouls) + parseInt(total_respiration) + parseInt(total_tonus) + parseInt(total_reflexes) + parseInt(total_coloration_peau);
+                    $('#total{{loop.index}}').val(total);
+                });
+
+
+        {% endfor %}
+
+
+    </script>
+{% endblock %}

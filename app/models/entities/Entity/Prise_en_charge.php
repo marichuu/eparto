@@ -49,6 +49,13 @@ class Prise_en_charge {
     /**
      * @var String
      *
+     * @Column(name="poids", type="string", nullable=true)
+     */
+    private $poids;
+
+    /**
+     * @var String
+     *
      * @Column(name="temperature", type="string", nullable=true)
      */
     private $temperature;
@@ -65,7 +72,7 @@ class Prise_en_charge {
      *
      * @Column(name="coloration_peau", type="string", nullable=true)
      */
-    private $coloration_peau;
+    private $colorationPeau;
 
     /**
      * @var boolean
@@ -79,7 +86,7 @@ class Prise_en_charge {
      *
      * @Column(name="mise_au_sein", type="boolean")
      */
-    private $mise_au_sein;
+    private $miseAuSein;
     
     /**
      * @var boolean
@@ -93,7 +100,7 @@ class Prise_en_charge {
      *
      * @Column(name="type_malformation", type="string", nullable=true)
      */
-    private $type_malformation;
+    private $typeMalformation;
     
     /**
      * @var String
@@ -107,7 +114,7 @@ class Prise_en_charge {
      *
      * @Column(name="perimetre_cranien", type="string", nullable=true)
      */
-    private $perimetre_cranien;
+    private $perimetreCranien;
     
     /**
      * @var String
@@ -135,7 +142,7 @@ class Prise_en_charge {
      *
      * @Column(name="tetra_oph", type="boolean")
      */
-    private $tetra_oph;
+    private $tetraOph;
     
     /**
      * @var boolean
@@ -144,9 +151,6 @@ class Prise_en_charge {
      */
     private $chlorexidinedigluconate;
     
-    
-
-
     /**
      * Get id
      *
@@ -238,7 +242,7 @@ class Prise_en_charge {
      */
     public function setColorationPeau($colorationPeau)
     {
-        $this->coloration_peau = $colorationPeau;
+        $this->colorationPeau = $colorationPeau;
     
         return $this;
     }
@@ -250,7 +254,7 @@ class Prise_en_charge {
      */
     public function getColorationPeau()
     {
-        return $this->coloration_peau;
+        return $this->colorationPeau;
     }
 
     /**
@@ -286,7 +290,7 @@ class Prise_en_charge {
      */
     public function setMiseAuSein($miseAuSein)
     {
-        $this->mise_au_sein = $miseAuSein;
+        $this->miseAuSein = $miseAuSein;
     
         return $this;
     }
@@ -298,7 +302,7 @@ class Prise_en_charge {
      */
     public function getMiseAuSein()
     {
-        return $this->mise_au_sein;
+        return $this->miseAuSein;
     }
 
     /**
@@ -334,7 +338,7 @@ class Prise_en_charge {
      */
     public function setTypeMalformation($typeMalformation)
     {
-        $this->type_malformation = $typeMalformation;
+        $this->typeMalformation = $typeMalformation;
     
         return $this;
     }
@@ -346,7 +350,7 @@ class Prise_en_charge {
      */
     public function getTypeMalformation()
     {
-        return $this->type_malformation;
+        return $this->typeMalformation;
     }
 
     /**
@@ -382,7 +386,7 @@ class Prise_en_charge {
      */
     public function setPerimetreCranien($perimetreCranien)
     {
-        $this->perimetre_cranien = $perimetreCranien;
+        $this->perimetreCranien = $perimetreCranien;
     
         return $this;
     }
@@ -394,7 +398,7 @@ class Prise_en_charge {
      */
     public function getPerimetreCranien()
     {
-        return $this->perimetre_cranien;
+        return $this->perimetreCranien;
     }
 
     /**
@@ -478,7 +482,7 @@ class Prise_en_charge {
      */
     public function setTetraOph($tetraOph)
     {
-        $this->tetra_oph = $tetraOph;
+        $this->tetraOph = $tetraOph;
     
         return $this;
     }
@@ -490,7 +494,7 @@ class Prise_en_charge {
      */
     public function getTetraOph()
     {
-        return $this->tetra_oph;
+        return $this->tetraOph;
     }
 
     /**
@@ -563,5 +567,29 @@ class Prise_en_charge {
     public function getNouveauNe()
     {
         return $this->nouveauNe;
+    }
+
+    /**
+     * Set poids
+     *
+     * @param string $poids
+     *
+     * @return Prise_en_charge
+     */
+    public function setPoids($poids)
+    {
+        $this->poids = $poids;
+    
+        return $this;
+    }
+
+    /**
+     * Get poids
+     *
+     * @return string
+     */
+    public function getPoids()
+    {
+        return $this->poids;
     }
 }
