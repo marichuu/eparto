@@ -43,6 +43,8 @@ class Users extends CI_Controller {
                 forme_rules('email', 'email', 'trim|required'),
                 forme_rules('password', 'password', 'trim|required'),
                 forme_rules('password1', 'password1', 'trim|required'),
+//                forme_rules('password', 'Mot de passe', 'trim|required|min_length[6]|password_format|xss_clean'),
+//                forme_rules('password1', 'Confirmation mot de passe', 'trim|required|min_length[6]|xss_clean'),
                 forme_rules('firstName', 'firstName', 'required'),
                 forme_rules('lastName', 'lastName', 'trim|required'),
                // forme_rules('profil', 'Profil', 'trim|required'),

@@ -5,7 +5,7 @@
 {% for f in femmes %}
     <div class="well invoice">
         <div class="invoice-head">
-            <a href="#" title="invoice" class="invoice-logo">{{f.prenom}} {{f.nom}}</a>
+            <a href="{{site_url('home/home/addData')}}/?xl={{ f.id|crypter }}" title="invoice" class="invoice-logo">{{f.prenom}} {{f.nom}}</a>
             <ul class="pull-right minus-list invoice-data">
                 <li>Entrée: <strong class="text-info pull-right">{{f.dateEntree|date}}</strong></li>
                 <li>age: <span class="pull-right">{{f.age}}</span></li>

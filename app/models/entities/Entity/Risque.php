@@ -59,20 +59,20 @@ class Risque
      /**
      * @var boolean
      *
-     * @Column(name="cesarienne_dernier_accouchement", type="boolean")
+     * @Column(name="cesarienne_dernier_accouchement", type="boolean", nullable=true)
      */
     private $cesarienneDernierAccouchement;
       /**
      * @var boolean
      *
-     * @Column(name="presentation", type="boolean")
+     * @Column(name="presentation", type="boolean", nullable=true)
      */
     private $presentation;
     
      /**
      * @var boolean
      *
-     * @Column(name="dernier_enfant", type="boolean")
+     * @Column(name="dernier_enfant", type="boolean", nullable=true)
      */
     private $dernierEnfant;
     

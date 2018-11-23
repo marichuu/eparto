@@ -9,7 +9,7 @@
                 {{ getMessages()|raw }}
             </div>
             <div class="widget">
-                <div class="navbar"><div class="navbar-inner"><h6>{{"Examen"}} / {{"Nouveau"}}</h6></div></div>
+                <div class="navbar"><div class="navbar-inner"><h6>{{"Examens"}} ( {{femme.prenom}} {{femme.nom}} )</h6></div></div>
                 <div class="well row-fluid">
                     <form id="validate" class="form-horizontal" action="{{ site_url("examen/create") }}" method="post"> 
 
@@ -29,7 +29,7 @@
                         <div class="control-group">
                             <label class="control-label">{{"Température"}}: <span class="text-error">*</span></label>
                             <div class="controls">
-                                <input type="text" value="{{set_value('temp')}}" class="span2" name="temp" id="temp"/>
+                                <input type="text" value="{{set_value('temp')}}" class="span2" name="temp" id="temp" data-mask="99.99"/>
                             </div>
                         </div>
                         <div class="control-group">
@@ -78,7 +78,7 @@
                                     {% else %}
                                          <!-- Default table -->
                 <div class="widget">
-                	<div class="navbar"><div class="navbar-inner"><h6> Risques ( {{femme.prenom}} {{femme.nom}} )</h6></div></div>
+                	<div class="navbar"><div class="navbar-inner"><h6> Examens ( {{femme.prenom}} {{femme.nom}} )</h6></div></div>
                     <div class="table-overflow">
                         <table class="table">
                             <tbody>
