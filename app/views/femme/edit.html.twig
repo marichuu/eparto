@@ -1,74 +1,156 @@
 {% extends "themes/default/layout.html.twig" %}
 {% block title %}
-{{Etudiant}}  {{ parent() }}
+    {{Femme}}  {{ parent() }}
 {% endblock %}
 {% block breadcrumb %}  
-        <li class="active"><a href="{{ site_url("etudiant") }}" title="">{{"Etudiant"}}</a></li> 
-{% endblock %}
+    <li class="active"><a href="{{ site_url("femme") }}" title="">{{"Femme"}}</a></li> 
+    {% endblock %}
 
 {% block content %}
-<div class="wrapper"> 
-    <br>
-    
-    <div class="row">
-        {{ getMessages()|raw }}
-    </div>
-    <div class="widget">
-        <div class="navbar"><div class="navbar-inner"><h6>{{"Etudiant"}} / {{"Nouveau"}}</h6></div></div>
-        <div class="well row-fluid">
-            <form id="validate" class="form-horizontal" action="{{ site_url("etudiant/update") }}" method="post"> 
-               
-                <div class="control-group">
-                    <label class="control-label">{{"Matricule"}}: <span class="text-error">*</span></label>
-                    <div class="controls">
-                        <input type="text" value="{{etudiant.matricule}}" class="validate[required] span4" name="matricule" id="matricule" readonly/>
-			<input type="hidden" value="{{ etudiant.id }}"  name="id" id="id"/>
-                        <input type="hidden" value="{{ etudiant.matricule }}"  name="matricule_old"/>
-                    </div>
-                </div>
- 		<div class="control-group">
-                    <label class="control-label">{{"Nom"}}: <span class="text-error">*</span></label>
-                    <div class="controls">
-                        <input type="text" value="{{etudiant.nom}}" class="validate[required] span4" name="nom" id="nom"/>
-                    </div>
-                </div>
- 		<div class="control-group">
-                    <label class="control-label">{{"Prenom"}}: <span class="text-error">*</span></label>
-                    <div class="controls">
-                        <input type="text" value="{{etudiant.prenom}}" class="validate[required] span4" name="prenom" id="prenom"/>
-                    </div>
-                </div>
-		<div class="control-group">
-                    <label class="control-label">Classe</label>
-                    <div class="controls">
-                        <select data-placeholder="Choose a classe..." id="clear-results" name="classe" class="">
-                            <option value=""></option> 
-                        {% for classe in classes %}
-                            <option value="{{ classe.id }}" {% if etudiant.classe.id == classe.id%} selected=selected{%endif%}>{{ classe.libelle }}</option>
-                        {% endfor %} 
-                        </select>
-                    </div>             
-                </div>
-		<div class="control-group">
-                    <label class="control-label">Filière</label>
-                    <div class="controls">
-                        <select data-placeholder="Choose a filiere..." id="clear-results" name="filiere" class="">
-                            <option value=""></option> 
-                        {% for filiere in filieres %}
-                            <option value="{{ filiere.id }}" {% if etudiant.filiere.id == filiere.id%} selected=selected{%endif%}>{{ filiere.libelle }}</option>
-                        {% endfor %} 
-                        </select>
-                    </div>             
-                </div>
-                <div class="form-actions align-right">
-                    <button type="submit" class="btn btn-info"><i class="fam-accept"></i>Enregistrer</button>
-                    <a class="btn btn-inverse" href="{{ site_url("etudiant") }}"><i class="fam-table"></i>{{"Liste des matières"}}</a>
-                </div>
-            </form>  
-        </div> 
-    </div>
-</div>     
+    <div class="wrapper"> 
+        <br>
 
+        <div class="row">
+            {{ getMessages()|raw }}
+        </div>
+        <div class="widget">
+            <div class="navbar"><div class="navbar-inner"><h6>{{"Femme"}} / {{"Modification"}}</h6></div></div>
+            <div class="well row-fluid">
+                <form id="validate" class="form-horizontal" action="{{ site_url("femme/update") }}" method="post"> 
+
+                    <div class="control-group">
+                        <label class="control-label">{{"Prenom"}}: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="text" value="{{femme.heureRuptureMembrane|date('d/m/Y')}}" class="validate[required] span4" name="prenom" id="prenom"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">{{"Nom"}}: <span class="text-error">*</span></label>
+                        <div class="controls">
+                            <input type="text" value="{{femme.nom}}" class="validate[required] span4" name="nom" id="nom"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                            <label class="control-label">{{"Age"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="number" value="{{femme.age}}" class="span2" name="age" id="age"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"Nom du mari"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="text" value="{{femme.mari}}" class="span4" name="nom_mari" id="mari"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"Village"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="text" value="{{femme.village}}" class="span4" name="village" id="mari"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Antécédants:</label>
+                            <div class="controls">
+                                <div class="row-fluid">
+                                    <div class="span2">
+                                        <input type="number" value="{{femme.nbGrossesse}}" name="nb_grossesse" class="span12" /><span class="help-block align-center">Grossesse</span>
+                                    </div>
+                                    <div class="span2">
+                                        <input type="number" value="{{femme.nbParite}}" name="nb_parite" class="span12" /><span class="help-block align-center">Parité</span>
+                                    </div>
+                                    <div class="span2">
+                                        <input type="number" value="{{femme.nbEnfantVivant}}" name="nb_enfant_vivant" class="span12" /><span class="help-block align-center">Vivant</span>
+                                    </div>
+                                    <div class="span2">
+                                        <input type="number" value="{{femme.nbAvortement}}" name="nb_avortement" class="span12" /><span class="help-block align-center">Avortement</span>
+                                    </div>
+                                    <div class="span2">
+                                        <input type="number" value="{{femme.nbIig}}" name="nb_iig" class="span12" /><span class="help-block align-center">IIG</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"Motif"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <input type="text" value="{{femme.motif}}" class="span4" name="motif" id="motif"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Entrée à la maternité: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <ul class="dates-range no-append">
+                                    <li><input type="date" placeholder="date..." id="date" value="{{femme.dateEntree|date("m/d/Y")}}" class="validate[required]" name="date_entree" ></li>
+                                    <li class="sep">-</li>
+                                    <li><input class="span12 validate[required]" type="time" name="heure_entree" value="{{femme.dateEntree|date('h:i')}}"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"Debut travail"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+                                <ul class="dates-range no-append">
+                                    <li><input type="date" placeholder="date..." id="date_travail" class="validate[required]" name="date_travail" value="{{femme.dateDebutTravail|date()}}" ></li>
+                                    <li class="sep">-</li>
+                                    <li><input class="span12 validate[required]" type="time" name="heure_travail" value="{{femme.dateDebutTravail|date('h:i')}}" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">{{"Rupture des membranes"}}: <span class="text-error">*</span></label>
+                            <div class="controls">
+
+                                <label class="radio inline">
+                                    <input class="styled" type="radio" name="rupture_membrane" id="rupture_membrane1" {% if femme.heureRuptureMembrane is not null %} checked {% endif %} value="1" data-prompt-position="topLeft:-1,-5"/>
+                                    Oui
+                                </label>
+                                <label class="radio inline">
+                                    <input class="styled" type="radio" name="rupture_membrane" id="rupture_membrane2" {% if femme.heureRuptureMembrane is null %} checked {% endif %} value="0" data-prompt-position="topLeft:-1,-5"/>
+                                    Non
+                                </label>
+                                {% if femme.heureRuptureMembrane is not null %}    
+                                <label class=" inline rupture">
+                                    <ul class="dates-range no-append">
+                                        <li><input type="date" placeholder="date..." id="date_rupture" class="span12" name="date_rupture" value="{{femme.heureRuptureMembrane|date('d/m/Y')}}"></li>
+                                        <li class="sep">-</li>
+                                        <li><input class="span12" type="time" name="heure_rupture" value="{{femme.heureRuptureMembrane|date('h:i')}}"/></li>
+                                    </ul>
+                                    <select  id="pde"  name="pde" class="validate[required]">
+                                        <option value="">-- Choisir le PDE --</option> 
+                                        <option value="1" alt="" {{ set_select('1')}} {% if femme.pde == 1 %} selected {% endif %}>Intacte ou liq. clair</option>
+                                        <option value="2" alt="" {{ set_select('2')}} {% if femme.pde == 2 %} selected {% endif %}>Liq. teinté</option>
+                                        <option value="3" alt="" {{ set_select('3')}} {% if femme.pde == 3 %} selected {% endif %}>Rompue 12H</option>
+                                    </select>
+                                </label>
+                                    {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-actions align-right">
+                            <button type="submit" class="btn btn-success"><i class="fam-accept"></i>Enregistrer</button>
+                           <!-- <a class="btn btn-inverse" href="{{ site_url("femme") }}"><i class="fam-table"></i>{{"Liste des matières"}}</a>-->
+                        </div>
+                </form>  
+            </div> 
+        </div>
+    </div>     
+<script src="{{ js_url('files/ajax.jquery.min') }}"></script>
+    <script type="text/javascript">
+
+        $('#rupture_membrane1').click(function () {
+            if (this.checked) {
+                $(".rupture").show();
+                // alert("Oui");
+            }
+        });
+        $('#rupture_membrane2').click(function () {
+            if (this.checked) {
+                $("#date_rupture").val('');
+                $(".rupture").hide();
+                // alert("Non");
+            }
+        });
+       // $(".rupture").hide();
+    </script>
 {% endblock %}
-                        
-                   
+
+

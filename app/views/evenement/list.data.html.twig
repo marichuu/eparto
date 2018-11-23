@@ -1,58 +1,99 @@
 
 {% block content %}
+
+    <bod onload="blink_show()">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th><a href="{{site_url('risque/add')}}/?xl={{ femme.id|crypter }}"><i class="icon-exclamation-sign"></i> &nbsp; Risque </a></th>
+                <td align="center"> {% if nb_risque ==1 %} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(bcf.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th><a href="{{site_url('examen/add')}}/?xl={{ femme.id|crypter }}"><i class="icon-beaker"></i> &nbsp;1er Examen</a></li></th>
+                <td align="center"> {% if nb_exam ==1 %} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(bcf.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th><a href="{{site_url('evenement/add_bcf')}}/?xl={{ femme.id|crypter }}"><i class="icon-volume-down"></i> &nbsp;Bruits du coeur foetal </a></th>
+                <td align="center"> {% if bcf|length == 1 and date_interval(bcf.createdDate|date()) < 10  %} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(bcf.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th><a href="{{site_url('evenement/add_pde')}}/?xl={{ femme.id|crypter }}"><i class="icon-tint"></i> &nbsp;Liquide amniotique / Chevauchement</a></th>
+                <td align="center"> {% if pde|length == 1 and date_interval(pde.createdDate|date()) < 60 %} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(pde.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th><a href="{{site_url('evenement/add_col')}}/?xl={{ femme.id|crypter }}"><i class="icon-resize-vertical"></i>&nbsp; Col et descente de la tête</a></th>
+                <td align="center"> {% if col|length == 1 and date_interval(col.createdDate|date()) < 60 %} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(col.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th><a href="{{site_url('evenement/add_contraction')}}/?xl={{ femme.id|crypter }}"><i class="icon-sort"></i> &nbsp;Contraction par 10 minutes</a></th>
+                <td align="center"> {% if contraction|length == 1 and date_interval(contraction.createdDate|date()) < 10%} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(contraction.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th><a href="{{site_url('evenement/add_ocytocine')}}/?xl={{ femme.id|crypter }}"><i class="icon-underline"></i>&nbsp;  Unité d'ocytocine par litre </a></th>
+                <td align="center"> {% if ocytocine|length == 1 and date_interval(ocytocine.createdDate|date()) < 60 %} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(ocytocine.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th><a href="{{site_url('evenement/add_medicament')}}/?xl={{ femme.id|crypter }}"><i class="icon-edit"></i>&nbsp;   Medicaments prescrits </a></th>
+                <td align="center"> {% if medicament|length == 1 and date_interval(medicamenet.createdDate|date()) < 60 %} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(medicament.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th><a href="{{site_url('evenement/add_pouls_ta')}}/?xl={{ femme.id|crypter }}"><i class="icon-zoom-in"></i>&nbsp;&nbsp; Pouls / TA </a></th>
+                <td align="center"> {% if poulsta|length == 1 and date_interval(poulsta.createdDate|date()) < 60 %} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(poulsta.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th><a href="{{site_url('evenement/add_temperature')}}/?xl={{ femme.id|crypter }}"><i class="icon-text-height"></i>&nbsp;  Temperature</a></th>
+                <td align="center"> {% if temp|length == 1 and date_interval(temp.createdDate|date()) < 60 %} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(temp.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th><a href="{{site_url('evenement/add_urine')}}/?xl={{ femme.id|crypter }}"><i class="icon-magnet"></i>&nbsp;  Urine </a></th>
+                <td align="center"> {% if urine|length == 1 and date_interval(urine.createdDate|date()) < 60%} <i class="fam-tick"></i><span class="help-block">Il y a {{date_interval(urine.createdDate|date())}} minutes</span> {% else %}<i class="fam-bell"> </i><span class="help-block">Vous devez saisir les données</span>{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<div id="popup"></div>
+
+
+</div>   
+<style>
     
-    <div class="wrapper"> 
-        <div class="wrapper_small"> 
-           
-            <div class="widget">
-                <div class="tab-pane active" id="glyphs">
-                            <ul class="clearfix">
-                                <li><a href="{{site_url('risque/add')}}/?xl={{ femme.id|crypter }}"><i class="fam-tag-red"></i> &nbsp; Risque</a></li>
-                                <li><a href="{{site_url('examen/add')}}/?xl={{ femme.id|crypter }}"><i class="icon-beaker"></i> 1er Examen</a></li>
-                                <li><a href="{{site_url('evenement/add_bcf')}}/?xl={{ femme.id|crypter }}"><i class="icon-volume-down"></i> Bruits du coeur foetal</a></li>
-                                <li><a href="{{site_url('evenement/add_pde')}}/?xl={{ femme.id|crypter }}"><i class="icon-tint"></i> Liquide amniotique / Chevauchement</a></li>
-                                <li><a href="{{site_url('evenement/add_col')}}/?xl={{ femme.id|crypter }}"><i class="icon-resize-vertical"></i> Col et descente de la tête</a></li>
-                                <li><a href="{{site_url('evenement/add_contraction')}}/?xl={{ femme.id|crypter }}"><i class="icon-sort"></i> Contraction par 10 minutes</a></li>
-                                <li><a href="{{site_url('evenement/add_ocytocine')}}/?xl={{ femme.id|crypter }}"><i class="fam-contrast-high"></i>&nbsp;  Unité d'ocytocine par litre </a></li>
-                                <li><a href="{{site_url('evenement/add_medicament')}}/?xl={{ femme.id|crypter }}"><i class="fam-report-edit"></i>&nbsp;   Medicaments prescrits </a></li>
-                                <li><a href="{{site_url('evenement/add_pouls_ta')}}/?xl={{ femme.id|crypter }}"><i class="ico-search"></i>&nbsp;&nbsp; Pouls / TA </a></li>
-                                <li><a href="{{site_url('evenement/add_temperature')}}/?xl={{ femme.id|crypter }}"><i class="icon-text-height"></i>  Temperature</a></li>
-                                <li><a href="{{site_url('evenement/add_urine')}}/?xl={{ femme.id|crypter }}"><i class="icon-magnet"></i>  Urine </a></li>
-                                
-                            </ul>    
-                </div>
-            </div>
-                                 <div id="popup"></div>
-	 
-        </div>     
-    </div>   
-                            <script src="{{ js_url('files/ajax.jquery.min') }}"></script>
-    <script type="text/javascript"> 
-       
-         $('#cpn1').click(function () {
-            if (this.checked) {
-                $(".nb_cpn").show();
-               // alert("Oui");
+      
+</style>
+<script src="{{ js_url('files/ajax.jquery.min') }}"></script>
+<script type="text/javascript">
+ function blinker() {
+        $('.fam-bell').fadeOut(500).fadeIn(500);
+    }
+     
+    setInterval(blinker, 1000);
+    
+    $('#cpn1').click(function () {
+        if (this.checked) {
+            $(".nb_cpn").show();
+            // alert("Oui");
+        }
+    });
+    $('#cpn2').click(function () {
+        if (this.checked) {
+            $("#nb_cpn").val('');
+            $(".nb_cpn").hide();
+            // alert("Non");
+        }
+    });
+    $(".nb_cpn").hide();
+    $(".bcf").click(function () {
+        $.ajax({
+            url: "../../../evenement/bcf",
+            type: "GET",
+            async: false,
+            success: function (response) {
+                $("#popup").empty().append(response);
+                // $(".div_documentbudget").empty().append(response);
             }
         });
-        $('#cpn2').click(function () {
-            if (this.checked) {
-                $("#nb_cpn").val('');
-                $(".nb_cpn").hide();
-                // alert("Non");
-            }
-        });
-         $(".nb_cpn").hide();
-          $(".bcf").click(function() {
-                              $.ajax({
-                                  url: "../../../evenement/bcf",
-                                  type: "GET",
-                                  async: false,
-                                  success: function(response) {
-                                      $("#popup").empty().append(response);
-                                     // $(".div_documentbudget").empty().append(response);
-                                  }
-                              });
-                          });
-    </script>
+    });
+    
+  
+</script>
 {% endblock %}

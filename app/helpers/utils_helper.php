@@ -594,98 +594,133 @@ if (!function_exists('IsAllBudgetOk')) {
 }
 
 if (!function_exists('tauxAssiduiteFille')) {
-	function tauxAssiduiteFille($annee, $trimestre){
-	$doctrine = new Doctrine();
-	$taux_moyen_fille = 0;
-		$rapportCaps = $doctrine->em->getRepository('Entity\\RapportCap')->findBy(array('anneeScolaire' => $annee, 'trimestre' => $trimestre), array('id' => 'asc'));
-		if($rapportCaps){
-    	$taux = $doctrine->em->getRepository('Entity\\TauxAssiduite')->findBy(array('rapportCap' =>$rapportCaps ), array('id' => 'asc'));
-    	$taux_fille = 0;
-    	foreach ($taux as $t) {
-    		$taux_fille += $t->getAssiduiteFille();
-    	}
-    	if (count($taux) > 0) $taux_moyen_fille = $taux_fille/count($taux);
-    	}
-    	return($taux_moyen_fille);
-	}
+
+    function tauxAssiduiteFille($annee, $trimestre) {
+        $doctrine = new Doctrine();
+        $taux_moyen_fille = 0;
+        $rapportCaps = $doctrine->em->getRepository('Entity\\RapportCap')->findBy(array('anneeScolaire' => $annee, 'trimestre' => $trimestre), array('id' => 'asc'));
+        if ($rapportCaps) {
+            $taux = $doctrine->em->getRepository('Entity\\TauxAssiduite')->findBy(array('rapportCap' => $rapportCaps), array('id' => 'asc'));
+            $taux_fille = 0;
+            foreach ($taux as $t) {
+                $taux_fille += $t->getAssiduiteFille();
+            }
+            if (count($taux) > 0)
+                $taux_moyen_fille = $taux_fille / count($taux);
+        }
+        return($taux_moyen_fille);
+    }
+
 }
 
 if (!function_exists('tauxAssiduiteGarcon')) {
-	function tauxAssiduiteGarcon($annee, $trimestre){
-	$doctrine = new Doctrine();
-	$taux_moyen_garcon = 0;
-		$rapportCaps = $doctrine->em->getRepository('Entity\\RapportCap')->findBy(array('anneeScolaire' => $annee, 'trimestre' => $trimestre), array('id' => 'asc'));
-    	if($rapportCaps){
-    	$taux = $doctrine->em->getRepository('Entity\\TauxAssiduite')->findBy(array('rapportCap' =>$rapportCaps ), array('id' => 'asc'));
-    	$taux_garcon = 0;
-    	foreach ($taux as $t) {
-    		$taux_garcon += $t->getAssiduiteGarcon();
-    	}
-    	if (count($taux) > 0) $taux_moyen_garcon = $taux_garcon/count($taux);
-    	}
-    	return($taux_moyen_garcon);
-	}
+
+    function tauxAssiduiteGarcon($annee, $trimestre) {
+        $doctrine = new Doctrine();
+        $taux_moyen_garcon = 0;
+        $rapportCaps = $doctrine->em->getRepository('Entity\\RapportCap')->findBy(array('anneeScolaire' => $annee, 'trimestre' => $trimestre), array('id' => 'asc'));
+        if ($rapportCaps) {
+            $taux = $doctrine->em->getRepository('Entity\\TauxAssiduite')->findBy(array('rapportCap' => $rapportCaps), array('id' => 'asc'));
+            $taux_garcon = 0;
+            foreach ($taux as $t) {
+                $taux_garcon += $t->getAssiduiteGarcon();
+            }
+            if (count($taux) > 0)
+                $taux_moyen_garcon = $taux_garcon / count($taux);
+        }
+        return($taux_moyen_garcon);
+    }
+
 }
 
 if (!function_exists('tmas')) {
-	function tmas($annee, $trimestre){
-	$doctrine = new Doctrine();
-	$tmas = 0;
-		$rapportCaps = $doctrine->em->getRepository('Entity\\RapportCap')->findBy(array('anneeScolaire' => $annee, 'trimestre' => $trimestre), array('id' => 'asc'));
-    	if($rapportCaps){
-    	$taux = $doctrine->em->getRepository('Entity\\TauxMensuel')->findBy(array('rapportCap' =>$rapportCaps ), array('id' => 'asc'));
-    	$tmas = 0;
-    	foreach ($taux as $t) {
-    		$tmas += $t->getTmas();
-    	}
-    	if (count($taux) > 0) $tmas_moyen = $tmas/count($taux);
-    	}
-    	return($tmas);
-	}
+
+    function tmas($annee, $trimestre) {
+        $doctrine = new Doctrine();
+        $tmas = 0;
+        $rapportCaps = $doctrine->em->getRepository('Entity\\RapportCap')->findBy(array('anneeScolaire' => $annee, 'trimestre' => $trimestre), array('id' => 'asc'));
+        if ($rapportCaps) {
+            $taux = $doctrine->em->getRepository('Entity\\TauxMensuel')->findBy(array('rapportCap' => $rapportCaps), array('id' => 'asc'));
+            $tmas = 0;
+            foreach ($taux as $t) {
+                $tmas += $t->getTmas();
+            }
+            if (count($taux) > 0)
+                $tmas_moyen = $tmas / count($taux);
+        }
+        return($tmas);
+    }
+
 }
 if (!function_exists('vivreFourni')) {
-	function vivreFourni($annee, $produit){
-	$doctrine = new Doctrine();
-	$vivreFourni = 0;
-		$rapportSuivi = $doctrine->em->getRepository('Entity\\RapportSuivi')->findBy(array('anneeScolaire' => $annee), array('id' => 'asc'));
-    	if($rapportSuivi){
-    	$taux = $doctrine->em->getRepository('Entity\\VivreFourni')->findBy(array('rapportSuivi' =>$rapportSuivi, 'produit'=> $produit ), array('id' => 'asc'));
-    		foreach ($taux as $t) {
-    			$vivreFourni += $t->getQte();
-    		}
-    	}
-    	return($vivreFourni);
-	}
+
+    function vivreFourni($annee, $produit) {
+        $doctrine = new Doctrine();
+        $vivreFourni = 0;
+        $rapportSuivi = $doctrine->em->getRepository('Entity\\RapportSuivi')->findBy(array('anneeScolaire' => $annee), array('id' => 'asc'));
+        if ($rapportSuivi) {
+            $taux = $doctrine->em->getRepository('Entity\\VivreFourni')->findBy(array('rapportSuivi' => $rapportSuivi, 'produit' => $produit), array('id' => 'asc'));
+            foreach ($taux as $t) {
+                $vivreFourni += $t->getQte();
+            }
+        }
+        return($vivreFourni);
+    }
+
 }
 if (!function_exists('eleveNourri')) {
-	function eleveNourri($annee){
-	$doctrine = new Doctrine();
-	$eleveNourri = 0;
-		$rapportSuivi = $doctrine->em->getRepository('Entity\\RapportSuivi')->findBy(array('anneeScolaire' => $annee), array('id' => 'asc'));
-    	foreach ($rapportSuivi as $rs) {
-    		$eleveNourri += $rs->getEleveNourri();	
-    	}
-    	return($eleveNourri);
-	}
+
+    function eleveNourri($annee) {
+        $doctrine = new Doctrine();
+        $eleveNourri = 0;
+        $rapportSuivi = $doctrine->em->getRepository('Entity\\RapportSuivi')->findBy(array('anneeScolaire' => $annee), array('id' => 'asc'));
+        foreach ($rapportSuivi as $rs) {
+            $eleveNourri += $rs->getEleveNourri();
+        }
+        return($eleveNourri);
+    }
+
 }
 
 if (!function_exists('eleveNonNourri')) {
-	function eleveNonNourri($annee){
-	$doctrine = new Doctrine();
-	$eleveNonNourri = 0;
-		$rapportSuivi = $doctrine->em->getRepository('Entity\\RapportSuivi')->findBy(array('anneeScolaire' => $annee), array('id' => 'asc'));
-    	foreach ($rapportSuivi as $rs) {
-    		$eleveNonNourri += $rs->getEleveNonNourri();	
-    	}
-    	return($eleveNonNourri);
-	}
+
+    function eleveNonNourri($annee) {
+        $doctrine = new Doctrine();
+        $eleveNonNourri = 0;
+        $rapportSuivi = $doctrine->em->getRepository('Entity\\RapportSuivi')->findBy(array('anneeScolaire' => $annee), array('id' => 'asc'));
+        foreach ($rapportSuivi as $rs) {
+            $eleveNonNourri += $rs->getEleveNonNourri();
+        }
+        return($eleveNonNourri);
+    }
+
 }
 
 if (!function_exists('is_refer')) {
-	function is_refer($femme_id){
-	$doctrine = new Doctrine();
-	$femme = $doctrine->em->find('Entity\\Femme', $femme_id);
-        $refer = $doctrine->em->getRepository('Entity\\Reference')->findOneBy(array('femme'=>$femme->getId()));
-    	return($refer);
-	}
+
+    function is_refer($femme_id) {
+        $doctrine = new Doctrine();
+        $femme = $doctrine->em->find('Entity\\Femme', $femme_id);
+        $refer = $doctrine->em->getRepository('Entity\\Reference')->findOneBy(array('femme' => $femme->getId()));
+        return($refer);
+    }
+
+}
+
+if (!function_exists('date_interval')) {
+
+    function date_interval($d) {
+        $d2 = new DateTime();
+        $d1 = new DateTime($d);
+        $diff = $d1->diff($d2);
+
+        $nb_minutes = $diff->i;
+        $nb_heures = $diff->h;
+        if($nb_heures > 0 )
+            $nb = $nb_heures." h et ".$nb_minutes;
+        else
+            $nb = $nb_minutes;
+        return($nb);
+    }
+
 }

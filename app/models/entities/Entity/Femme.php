@@ -145,6 +145,13 @@ class Femme {
      */
     private $heureRuptureMembrane;
 
+     /**
+     * @var integer
+     *
+     * @Column(name="pde", type="integer", nullable=true)
+     */
+    private $pde;
+    
     /**
      * Get id
      *
@@ -517,5 +524,29 @@ class Femme {
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set pde
+     *
+     * @param integer $pde
+     *
+     * @return Femme
+     */
+    public function setPde($pde)
+    {
+        $this->pde = $pde;
+    
+        return $this;
+    }
+
+    /**
+     * Get pde
+     *
+     * @return integer
+     */
+    public function getPde()
+    {
+        return $this->pde;
     }
 }

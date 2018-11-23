@@ -150,6 +150,7 @@ class Twig {
         $this->add_function('vivreFourni');
         $this->add_function('eleveNourri');
         $this->add_function('eleveNonNourri');
+        $this->add_function('date_interval');
     }
 
     public function ci_function_init_one($twig_name, $callable)
